@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@shopify/app-bridge-utils": "^3.5.1"
+  }
+}
