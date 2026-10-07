@@ -1,0 +1,6 @@
+api_version = "2024-10"
+
+uid = "912dd6d6-a1ad-f7d7-57f6-f86c285209bccd3f5279"
+
+type = "theme_app_extension"
+name = "ai-recommendations"

@@ -1,0 +1,54 @@
+.main-page-box .Polaris-InlineStack {
+    display: flex;
+    width: 100%;
+}
+
+.main-page-box .Polaris-Banner__text--success {
+    width: 20%;
+}
+
+div[class*="product-grid__item.product-grid__item--1"] {
+    width: 300px;
+}
+
+.InlineStack-buttons>div {
+    display: flex;
+    gap: 20px;
+}
+
+.InlineStack-summary>div {
+    display: flex;
+    gap: 20px;
+}
+
+.InlineStack-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
+    display: grid !important;
+}
+
+.Polaris-IndexTable__LoadingPanel {
+    display: none;
+}
+.Polaris-IndexTable__StickyTable {
+    display: none;
+}
+
+/* .Polaris-Page-Header__BreadcrumbWrapper {
+    display: none;
+}
+.Polaris-IndexTable__LoadingPanel{
+    display: none;
+} */
+
+/* .InlineStack-buttons .Polaris-InlineStack .Polaris-Button {
+    background-color: white;
+    border: 1px solid black;
+    padding: 4px 8px;
+    border-radius: 4px;
+} */

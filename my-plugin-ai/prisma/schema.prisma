@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Note that some adapters may set a maximum length for the String type by default, please ensure your strings are long
+// enough when changing adapters.
+// See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
+
+// Adding here:
+model RecommendationRule {
+  id            Int       @id @default(autoincrement())
+  shop          String    // Shop domain
+  cartProducts  String    // JSON array: ["productId1", "productId2"]
+  cartSize      Int       // Số sản phẩm trong cart (1 hoặc 2)
+  suggestProduct String   // Product ID gợi ý
+  confidence    Float     // Confidence (0-1)
+  support       Int       // Số orders có rule này
+  updatedAt     DateTime  @updatedAt
+
+  @@index([shop, cartSize])
+}
+
+// Order history for training (imported from CSV + real Shopify orders)
+model OrderHistory {
+  id            Int       @id @default(autoincrement())
+  shop          String    // Shop domain
+  orderId       String    // Invoice/Order ID (from CSV or Shopify)
+  productIds    String    // JSON array of product IDs in this order
+  source        String    @default("shopify") // "csv_import" or "shopify"
+  orderDate     DateTime? // Original order date
+  createdAt     DateTime  @default(now())
+
+  @@unique([shop, orderId])
+  @@index([shop])
+}

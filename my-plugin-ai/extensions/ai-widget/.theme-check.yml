@@ -1,0 +1,10 @@
+extends: :theme-app-extension
+
+MatchingSchemaTranslations:
+  enabled: false
+
+ValidSchema:
+  enabled: false
+
+ParserBlockingJavaScript:
+  enabled: false
