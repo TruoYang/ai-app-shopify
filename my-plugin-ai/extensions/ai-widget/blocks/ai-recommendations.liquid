@@ -1,0 +1,16 @@
+<div id="ai-widget-container" style="display:none; border: 2px solid #008061; padding: 15px; margin-top: 20px; border-radius: 5px; background-color: #f4fbf9;">
+  <h3 style="margin-bottom: 10px; color: #008060;">Product Recommendations for You</h3>
+  <div id="ai-product-content" style="display: flex; gap: 15px; align-items:center; flex-wrap: wrap;">
+    <p>Loading recommendations...</p>
+  </div>
+</div>
+
+<script src="{{ 'recommendations.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "AI recommendations",
+  "target": "section",
+  "settings": []
+}
+{% endschema %}

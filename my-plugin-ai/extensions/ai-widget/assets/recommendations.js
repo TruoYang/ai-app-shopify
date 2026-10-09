@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Dev URL - set null to use production
   let DEV_URL = null;
   // Uncomment and update when testing locally:
-  DEV_URL = 'https://shannon-paint-agents-dana.trycloudflare.com';
+  DEV_URL = 'https://ted-obviously-computed-freedom.trycloudflare.com';
   
   const APP_URL = DEV_URL || PRODUCTION_URL;
 
