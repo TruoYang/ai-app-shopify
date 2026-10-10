@@ -20,9 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  const setStatus = (message) => {
+    contentContainer.innerHTML = `<p style="margin: 0; color: #666;">${message}</p>`;
+    widgetContainer.style.display = 'block';
+  };
+
   const shopDomain = window.Shopify?.shop;
   if (!shopDomain) {
     console.error('Shopify.shop not available');
+    setStatus('We could not identify this store yet.');
     return;
   }
   
@@ -32,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Cart:', cart);
       
       if (cart.item_count === 0) {
-        console.log('ℹCart is empty');
+        setStatus('Add a product to your cart to see suggestions.');
         return;
       }
 
@@ -59,7 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return res.json();
     })
     .then(data => {
-      if (!data) return;
+      if (!data) {
+        setStatus('Recommendations are temporarily unavailable.');
+        return;
+      }
       
       console.log('AI Response:', data);
 
@@ -89,7 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Widget displayed!');
       } else {
         console.log('ℹNo recommendation:', data.message);
+        setStatus("Oops, we don't have any products to suggest right now.");
       }
     })
-    .catch(err => console.error('Widget Error:', err));
+    .catch(err => {
+      console.error('Widget Error:', err);
+      setStatus('Recommendations are temporarily unavailable.');
+    });
 });
