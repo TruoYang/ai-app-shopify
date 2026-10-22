@@ -39,6 +39,16 @@ div[class*="product-grid__item.product-grid__item--1"] {
     display: none;
 }
 
+.Polaris-Modal-Dialog__Modal {
+    width: min(960px, calc(100vw - 48px)) !important;
+    min-width: min(960px, calc(100vw - 48px)) !important;
+    max-width: min(960px, calc(100vw - 48px)) !important;
+}
+
+.Polaris-Modal__Body {
+    max-height: calc(100vh - 180px);
+}
+
 /* .Polaris-Page-Header__BreadcrumbWrapper {
     display: none;
 }

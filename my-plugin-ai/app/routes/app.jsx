@@ -15,10 +15,13 @@ export const loader = async ({ request }) => {
 };
 
 export default function App() {
-  const data = useLoaderData();
+  useLoaderData();
 
   return (
     <PolarisAppProvider i18n={translations}>
+      <ui-nav-menu>
+        <a href="/app">Recommendations</a>
+      </ui-nav-menu>
       <Outlet/>
     </PolarisAppProvider>
   );

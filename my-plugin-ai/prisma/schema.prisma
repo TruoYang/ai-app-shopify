@@ -40,9 +40,13 @@ model RecommendationRule {
   suggestProduct String   // Product ID gợi ý
   confidence    Float     // Confidence (0-1)
   support       Int       // Số orders có rule này
+  source        String    @default("model") // "model" or "merchant"
+  status        String    @default("active") // "active" or "disabled"
+  priority      Int       @default(0)
+  discountPercent Float?
   updatedAt     DateTime  @updatedAt
 
-  @@index([shop, cartSize])
+  @@index([shop, status, cartSize])
 }
 
 // Order history for training (imported from CSV + real Shopify orders)

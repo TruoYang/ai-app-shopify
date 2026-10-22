@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useLoaderData, useNavigate, useSearchParams } from "react-router";
+import { useFetcher, useLoaderData, useNavigate, useSearchParams } from "react-router";
 import {
   Page,
   Card,
@@ -8,6 +8,7 @@ import {
   Badge,
   InlineStack,
   Button,
+  TextField,
 } from "@shopify/polaris";
 import "../styles.css";
 
@@ -137,12 +138,7 @@ export const loader = async ({ request }) => {
 
   const skip = (page - 1) * pageSize;
 
-  const where = {
-    OR: [
-      { shop: session.shop },
-      { shop: "my-ai-shop-test.myshopify.com" },
-    ],
-  };
+  const where = { shop: session.shop };
 
   const [allRules, shopifyOrderSkus] = await Promise.all([
     prisma.recommendationRule.findMany({
@@ -197,11 +193,66 @@ export const loader = async ({ request }) => {
   };
 };
 
+export const action = async ({ request }) => {
+  const { session } = await authenticate.admin(request);
+  const formData = await request.formData();
+  const actionType = String(formData.get("action") ?? "");
+
+  if (actionType === "delete") {
+    const id = Number.parseInt(String(formData.get("id") ?? ""), 10);
+    if (!Number.isInteger(id)) {
+      return Response.json({ success: false, error: "Invalid rule id" }, { status: 400 });
+    }
+
+    await prisma.recommendationRule.deleteMany({ where: { id, shop: session.shop } });
+    return Response.json({ success: true });
+  }
+
+  if (actionType === "create") {
+    const cartProducts = String(formData.get("cartProducts") ?? "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+    const suggestProduct = String(formData.get("suggestProduct") ?? "").trim();
+    const priority = Number.parseInt(String(formData.get("priority") ?? "0"), 10);
+    const discountValue = Number.parseFloat(String(formData.get("discountPercent") ?? ""));
+
+    if (cartProducts.length === 0 || !suggestProduct) {
+      return Response.json({ success: false, error: "Cart products and suggestion are required" }, { status: 400 });
+    }
+    if (cartProducts.includes(suggestProduct)) {
+      return Response.json({ success: false, error: "Suggested product must not be in the cart" }, { status: 400 });
+    }
+    if (Number.isFinite(discountValue) && (discountValue < 0 || discountValue > 100)) {
+      return Response.json({ success: false, error: "Discount must be between 0 and 100" }, { status: 400 });
+    }
+
+    await prisma.recommendationRule.create({
+      data: {
+        shop: session.shop,
+        cartProducts: JSON.stringify([...new Set(cartProducts)].sort()),
+        cartSize: cartProducts.length,
+        suggestProduct,
+        confidence: 1,
+        support: 0,
+        source: "merchant",
+        status: "active",
+        priority: Number.isFinite(priority) ? priority : 0,
+        discountPercent: Number.isFinite(discountValue) ? discountValue : null,
+      },
+    });
+    return Response.json({ success: true });
+  }
+
+  return Response.json({ success: false, error: "Unsupported action" }, { status: 400 });
+};
+
 export default function RulesPage() {
   const { shop, total, page, pageSize, rules, source, skuTitleMap } =
     useLoaderData();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const ruleFetcher = useFetcher();
 
   const hasPrev = page > 1;
   const hasNext = page * pageSize < total;
@@ -266,6 +317,27 @@ export default function RulesPage() {
       backAction={{ content: "Back", onAction: () => navigate("/app") }}
     >
       <Card>
+        <ruleFetcher.Form method="post">
+          <TextField
+            label="Cart products (comma-separated SKU)"
+            name="cartProducts"
+            placeholder="SKU-A, SKU-B"
+            autoComplete="off"
+          />
+          <TextField
+            label="Suggested SKU"
+            name="suggestProduct"
+            placeholder="SKU-C"
+            autoComplete="off"
+          />
+          <InlineStack gap="300" blockAlign="end">
+            <TextField label="Priority" name="priority" type="number" defaultValue="0" autoComplete="off" />
+            <TextField label="Discount %" name="discountPercent" type="number" min={0} max={100} autoComplete="off" />
+            <input type="hidden" name="action" value="create" />
+            <Button submit variant="primary">Add rule</Button>
+          </InlineStack>
+        </ruleFetcher.Form>
+
         <InlineStack align="space-between" blockAlign="center" gap="300">
           <div className="InlineStack-summary">
             <InlineStack gap="200" blockAlign="center">
@@ -319,6 +391,7 @@ export default function RulesPage() {
               { title: "Confidence" },
               { title: "Support" },
               { title: "Updated" },
+              { title: "Actions" },
             ]}
             selectable={false}
           >
@@ -327,6 +400,13 @@ export default function RulesPage() {
                 {row.map((cell, cellIndex) => (
                   <IndexTable.Cell key={cellIndex}>{cell}</IndexTable.Cell>
                 ))}
+                <IndexTable.Cell>
+                  <ruleFetcher.Form method="post">
+                    <input type="hidden" name="action" value="delete" />
+                    <input type="hidden" name="id" value={rules[index].id} />
+                    <Button submit tone="critical">Delete</Button>
+                  </ruleFetcher.Form>
+                </IndexTable.Cell>
               </IndexTable.Row>
             ))}
           </IndexTable>
