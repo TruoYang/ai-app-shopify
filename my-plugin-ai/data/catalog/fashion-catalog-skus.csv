@@ -1,0 +1,932 @@
+sku,base_sku,title,option,product_type,department,gender,color,price
+AUR-TOP-47280-S,AUR-TOP-47280,Black T-Shirt,S,T-Shirts,Tops,Men,Black,30.99
+AUR-TOP-47280-M,AUR-TOP-47280,Black T-Shirt,M,T-Shirts,Tops,Men,Black,30.99
+AUR-TOP-47280-L,AUR-TOP-47280,Black T-Shirt,L,T-Shirts,Tops,Men,Black,30.99
+AUR-TOP-47280-XL,AUR-TOP-47280,Black T-Shirt,XL,T-Shirts,Tops,Men,Black,30.99
+AUR-TOP-47280-XXL,AUR-TOP-47280,Black T-Shirt,XXL,T-Shirts,Tops,Men,Black,30.99
+AUR-TOP-47281-S,AUR-TOP-47281,Yellow T-Shirt,S,T-Shirts,Tops,Men,Yellow,29.99
+AUR-TOP-47281-M,AUR-TOP-47281,Yellow T-Shirt,M,T-Shirts,Tops,Men,Yellow,29.99
+AUR-TOP-47281-L,AUR-TOP-47281,Yellow T-Shirt,L,T-Shirts,Tops,Men,Yellow,29.99
+AUR-TOP-47281-XL,AUR-TOP-47281,Yellow T-Shirt,XL,T-Shirts,Tops,Men,Yellow,29.99
+AUR-TOP-47281-XXL,AUR-TOP-47281,Yellow T-Shirt,XXL,T-Shirts,Tops,Men,Yellow,29.99
+AUR-TOP-47282-S,AUR-TOP-47282,Pink T-Shirt,S,T-Shirts,Tops,Men,Pink,29.99
+AUR-TOP-47282-M,AUR-TOP-47282,Pink T-Shirt,M,T-Shirts,Tops,Men,Pink,29.99
+AUR-TOP-47282-L,AUR-TOP-47282,Pink T-Shirt,L,T-Shirts,Tops,Men,Pink,29.99
+AUR-TOP-47282-XL,AUR-TOP-47282,Pink T-Shirt,XL,T-Shirts,Tops,Men,Pink,29.99
+AUR-TOP-47282-XXL,AUR-TOP-47282,Pink T-Shirt,XXL,T-Shirts,Tops,Men,Pink,29.99
+AUR-TOP-47283-S,AUR-TOP-47283,Purple T-Shirt,S,T-Shirts,Tops,Men,Purple,28.99
+AUR-TOP-47283-M,AUR-TOP-47283,Purple T-Shirt,M,T-Shirts,Tops,Men,Purple,28.99
+AUR-TOP-47283-L,AUR-TOP-47283,Purple T-Shirt,L,T-Shirts,Tops,Men,Purple,28.99
+AUR-TOP-47283-XL,AUR-TOP-47283,Purple T-Shirt,XL,T-Shirts,Tops,Men,Purple,28.99
+AUR-TOP-47283-XXL,AUR-TOP-47283,Purple T-Shirt,XXL,T-Shirts,Tops,Men,Purple,28.99
+AUR-TOP-13296-S,AUR-TOP-13296,Printed White T-Shirt,S,T-Shirts,Tops,Men,White,24.99
+AUR-TOP-13296-M,AUR-TOP-13296,Printed White T-Shirt,M,T-Shirts,Tops,Men,White,24.99
+AUR-TOP-13296-L,AUR-TOP-13296,Printed White T-Shirt,L,T-Shirts,Tops,Men,White,24.99
+AUR-TOP-13296-XL,AUR-TOP-13296,Printed White T-Shirt,XL,T-Shirts,Tops,Men,White,24.99
+AUR-TOP-13296-XXL,AUR-TOP-13296,Printed White T-Shirt,XXL,T-Shirts,Tops,Men,White,24.99
+AUR-TOP-13238-S,AUR-TOP-13238,Printed Brown T-Shirt,S,T-Shirts,Tops,Men,Brown,21.99
+AUR-TOP-13238-M,AUR-TOP-13238,Printed Brown T-Shirt,M,T-Shirts,Tops,Men,Brown,21.99
+AUR-TOP-13238-L,AUR-TOP-13238,Printed Brown T-Shirt,L,T-Shirts,Tops,Men,Brown,21.99
+AUR-TOP-13238-XL,AUR-TOP-13238,Printed Brown T-Shirt,XL,T-Shirts,Tops,Men,Brown,21.99
+AUR-TOP-13238-XXL,AUR-TOP-13238,Printed Brown T-Shirt,XXL,T-Shirts,Tops,Men,Brown,21.99
+AUR-TOP-6933-S,AUR-TOP-6933,Maroon T-Shirt,S,T-Shirts,Tops,Men,Maroon,27.99
+AUR-TOP-6933-M,AUR-TOP-6933,Maroon T-Shirt,M,T-Shirts,Tops,Men,Maroon,27.99
+AUR-TOP-6933-L,AUR-TOP-6933,Maroon T-Shirt,L,T-Shirts,Tops,Men,Maroon,27.99
+AUR-TOP-6933-XL,AUR-TOP-6933,Maroon T-Shirt,XL,T-Shirts,Tops,Men,Maroon,27.99
+AUR-TOP-6933-XXL,AUR-TOP-6933,Maroon T-Shirt,XXL,T-Shirts,Tops,Men,Maroon,27.99
+AUR-TOP-13292-S,AUR-TOP-13292,Printed Green T-Shirt,S,T-Shirts,Tops,Men,Green,19.99
+AUR-TOP-13292-M,AUR-TOP-13292,Printed Green T-Shirt,M,T-Shirts,Tops,Men,Green,19.99
+AUR-TOP-13292-L,AUR-TOP-13292,Printed Green T-Shirt,L,T-Shirts,Tops,Men,Green,19.99
+AUR-TOP-13292-XL,AUR-TOP-13292,Printed Green T-Shirt,XL,T-Shirts,Tops,Men,Green,19.99
+AUR-TOP-13292-XXL,AUR-TOP-13292,Printed Green T-Shirt,XXL,T-Shirts,Tops,Men,Green,19.99
+AUR-TOP-6932-S,AUR-TOP-6932,Grey T-Shirt,S,T-Shirts,Tops,Men,Grey,18.99
+AUR-TOP-6932-M,AUR-TOP-6932,Grey T-Shirt,M,T-Shirts,Tops,Men,Grey,18.99
+AUR-TOP-6932-L,AUR-TOP-6932,Grey T-Shirt,L,T-Shirts,Tops,Men,Grey,18.99
+AUR-TOP-6932-XL,AUR-TOP-6932,Grey T-Shirt,XL,T-Shirts,Tops,Men,Grey,18.99
+AUR-TOP-6932-XXL,AUR-TOP-6932,Grey T-Shirt,XXL,T-Shirts,Tops,Men,Grey,18.99
+AUR-TOP-6931-S,AUR-TOP-6931,Red T-Shirt,S,T-Shirts,Tops,Men,Red,33.99
+AUR-TOP-6931-M,AUR-TOP-6931,Red T-Shirt,M,T-Shirts,Tops,Men,Red,33.99
+AUR-TOP-6931-L,AUR-TOP-6931,Red T-Shirt,L,T-Shirts,Tops,Men,Red,33.99
+AUR-TOP-6931-XL,AUR-TOP-6931,Red T-Shirt,XL,T-Shirts,Tops,Men,Red,33.99
+AUR-TOP-6931-XXL,AUR-TOP-6931,Red T-Shirt,XXL,T-Shirts,Tops,Men,Red,33.99
+AUR-TOP-16923-S,AUR-TOP-16923,Black Shirt,S,Shirts,Tops,Men,Black,44.99
+AUR-TOP-16923-M,AUR-TOP-16923,Black Shirt,M,Shirts,Tops,Men,Black,44.99
+AUR-TOP-16923-L,AUR-TOP-16923,Black Shirt,L,Shirts,Tops,Men,Black,44.99
+AUR-TOP-16923-XL,AUR-TOP-16923,Black Shirt,XL,Shirts,Tops,Men,Black,44.99
+AUR-TOP-16923-XXL,AUR-TOP-16923,Black Shirt,XXL,Shirts,Tops,Men,Black,44.99
+AUR-TOP-11052-S,AUR-TOP-11052,Check White Shirt,S,Shirts,Tops,Men,White,39.99
+AUR-TOP-11052-M,AUR-TOP-11052,Check White Shirt,M,Shirts,Tops,Men,White,39.99
+AUR-TOP-11052-L,AUR-TOP-11052,Check White Shirt,L,Shirts,Tops,Men,White,39.99
+AUR-TOP-11052-XL,AUR-TOP-11052,Check White Shirt,XL,Shirts,Tops,Men,White,39.99
+AUR-TOP-11052-XXL,AUR-TOP-11052,Check White Shirt,XXL,Shirts,Tops,Men,White,39.99
+AUR-TOP-11053-S,AUR-TOP-11053,Check Blue Shirt,S,Shirts,Tops,Men,Blue,48.99
+AUR-TOP-11053-M,AUR-TOP-11053,Check Blue Shirt,M,Shirts,Tops,Men,Blue,48.99
+AUR-TOP-11053-L,AUR-TOP-11053,Check Blue Shirt,L,Shirts,Tops,Men,Blue,48.99
+AUR-TOP-11053-XL,AUR-TOP-11053,Check Blue Shirt,XL,Shirts,Tops,Men,Blue,48.99
+AUR-TOP-11053-XXL,AUR-TOP-11053,Check Blue Shirt,XXL,Shirts,Tops,Men,Blue,48.99
+AUR-TOP-11050-S,AUR-TOP-11050,Check Red Shirt,S,Shirts,Tops,Men,Red,43.99
+AUR-TOP-11050-M,AUR-TOP-11050,Check Red Shirt,M,Shirts,Tops,Men,Red,43.99
+AUR-TOP-11050-L,AUR-TOP-11050,Check Red Shirt,L,Shirts,Tops,Men,Red,43.99
+AUR-TOP-11050-XL,AUR-TOP-11050,Check Red Shirt,XL,Shirts,Tops,Men,Red,43.99
+AUR-TOP-11050-XXL,AUR-TOP-11050,Check Red Shirt,XXL,Shirts,Tops,Men,Red,43.99
+AUR-TOP-11057-S,AUR-TOP-11057,Check Purple Shirt,S,Shirts,Tops,Men,Purple,47.99
+AUR-TOP-11057-M,AUR-TOP-11057,Check Purple Shirt,M,Shirts,Tops,Men,Purple,47.99
+AUR-TOP-11057-L,AUR-TOP-11057,Check Purple Shirt,L,Shirts,Tops,Men,Purple,47.99
+AUR-TOP-11057-XL,AUR-TOP-11057,Check Purple Shirt,XL,Shirts,Tops,Men,Purple,47.99
+AUR-TOP-11057-XXL,AUR-TOP-11057,Check Purple Shirt,XXL,Shirts,Tops,Men,Purple,47.99
+AUR-TOP-11059-S,AUR-TOP-11059,Check Green Shirt,S,Shirts,Tops,Men,Green,59.99
+AUR-TOP-11059-M,AUR-TOP-11059,Check Green Shirt,M,Shirts,Tops,Men,Green,59.99
+AUR-TOP-11059-L,AUR-TOP-11059,Check Green Shirt,L,Shirts,Tops,Men,Green,59.99
+AUR-TOP-11059-XL,AUR-TOP-11059,Check Green Shirt,XL,Shirts,Tops,Men,Green,59.99
+AUR-TOP-11059-XXL,AUR-TOP-11059,Check Green Shirt,XXL,Shirts,Tops,Men,Green,59.99
+AUR-TOP-11117-S,AUR-TOP-11117,Solid Grey Shirt,S,Shirts,Tops,Men,Grey,55.99
+AUR-TOP-11117-M,AUR-TOP-11117,Solid Grey Shirt,M,Shirts,Tops,Men,Grey,55.99
+AUR-TOP-11117-L,AUR-TOP-11117,Solid Grey Shirt,L,Shirts,Tops,Men,Grey,55.99
+AUR-TOP-11117-XL,AUR-TOP-11117,Solid Grey Shirt,XL,Shirts,Tops,Men,Grey,55.99
+AUR-TOP-11117-XXL,AUR-TOP-11117,Solid Grey Shirt,XXL,Shirts,Tops,Men,Grey,55.99
+AUR-TOP-13312-S,AUR-TOP-13312,Solid Navy Blue Shirt,S,Shirts,Tops,Men,Navy Blue,61.99
+AUR-TOP-13312-M,AUR-TOP-13312,Solid Navy Blue Shirt,M,Shirts,Tops,Men,Navy Blue,61.99
+AUR-TOP-13312-L,AUR-TOP-13312,Solid Navy Blue Shirt,L,Shirts,Tops,Men,Navy Blue,61.99
+AUR-TOP-13312-XL,AUR-TOP-13312,Solid Navy Blue Shirt,XL,Shirts,Tops,Men,Navy Blue,61.99
+AUR-TOP-13312-XXL,AUR-TOP-13312,Solid Navy Blue Shirt,XXL,Shirts,Tops,Men,Navy Blue,61.99
+AUR-TOP-13326-S,AUR-TOP-13326,Printed Brown Shirt,S,Shirts,Tops,Men,Brown,36.99
+AUR-TOP-13326-M,AUR-TOP-13326,Printed Brown Shirt,M,Shirts,Tops,Men,Brown,36.99
+AUR-TOP-13326-L,AUR-TOP-13326,Printed Brown Shirt,L,Shirts,Tops,Men,Brown,36.99
+AUR-TOP-13326-XL,AUR-TOP-13326,Printed Brown Shirt,XL,Shirts,Tops,Men,Brown,36.99
+AUR-TOP-13326-XXL,AUR-TOP-13326,Printed Brown Shirt,XXL,Shirts,Tops,Men,Brown,36.99
+AUR-TOP-13320-S,AUR-TOP-13320,Striped Pink Shirt,S,Shirts,Tops,Men,Pink,35.99
+AUR-TOP-13320-M,AUR-TOP-13320,Striped Pink Shirt,M,Shirts,Tops,Men,Pink,35.99
+AUR-TOP-13320-L,AUR-TOP-13320,Striped Pink Shirt,L,Shirts,Tops,Men,Pink,35.99
+AUR-TOP-13320-XL,AUR-TOP-13320,Striped Pink Shirt,XL,Shirts,Tops,Men,Pink,35.99
+AUR-TOP-13320-XXL,AUR-TOP-13320,Striped Pink Shirt,XXL,Shirts,Tops,Men,Pink,35.99
+AUR-TOP-13289-S,AUR-TOP-13289,Printed Black Sweatshirt,S,Sweatshirts,Tops,Men,Black,40.99
+AUR-TOP-13289-M,AUR-TOP-13289,Printed Black Sweatshirt,M,Sweatshirts,Tops,Men,Black,40.99
+AUR-TOP-13289-L,AUR-TOP-13289,Printed Black Sweatshirt,L,Sweatshirts,Tops,Men,Black,40.99
+AUR-TOP-13289-XL,AUR-TOP-13289,Printed Black Sweatshirt,XL,Sweatshirts,Tops,Men,Black,40.99
+AUR-TOP-13289-XXL,AUR-TOP-13289,Printed Black Sweatshirt,XXL,Sweatshirts,Tops,Men,Black,40.99
+AUR-TOP-13317-S,AUR-TOP-13317,Printed Grey Sweatshirt,S,Sweatshirts,Tops,Men,Grey,49.99
+AUR-TOP-13317-M,AUR-TOP-13317,Printed Grey Sweatshirt,M,Sweatshirts,Tops,Men,Grey,49.99
+AUR-TOP-13317-L,AUR-TOP-13317,Printed Grey Sweatshirt,L,Sweatshirts,Tops,Men,Grey,49.99
+AUR-TOP-13317-XL,AUR-TOP-13317,Printed Grey Sweatshirt,XL,Sweatshirts,Tops,Men,Grey,49.99
+AUR-TOP-13317-XXL,AUR-TOP-13317,Printed Grey Sweatshirt,XXL,Sweatshirts,Tops,Men,Grey,49.99
+AUR-TOP-16910-S,AUR-TOP-16910,Printed Blue Sweatshirt,S,Sweatshirts,Tops,Men,Blue,61.99
+AUR-TOP-16910-M,AUR-TOP-16910,Printed Blue Sweatshirt,M,Sweatshirts,Tops,Men,Blue,61.99
+AUR-TOP-16910-L,AUR-TOP-16910,Printed Blue Sweatshirt,L,Sweatshirts,Tops,Men,Blue,61.99
+AUR-TOP-16910-XL,AUR-TOP-16910,Printed Blue Sweatshirt,XL,Sweatshirts,Tops,Men,Blue,61.99
+AUR-TOP-16910-XXL,AUR-TOP-16910,Printed Blue Sweatshirt,XXL,Sweatshirts,Tops,Men,Blue,61.99
+AUR-TOP-16911-S,AUR-TOP-16911,Printed White Sweatshirt,S,Sweatshirts,Tops,Men,White,52.99
+AUR-TOP-16911-M,AUR-TOP-16911,Printed White Sweatshirt,M,Sweatshirts,Tops,Men,White,52.99
+AUR-TOP-16911-L,AUR-TOP-16911,Printed White Sweatshirt,L,Sweatshirts,Tops,Men,White,52.99
+AUR-TOP-16911-XL,AUR-TOP-16911,Printed White Sweatshirt,XL,Sweatshirts,Tops,Men,White,52.99
+AUR-TOP-16911-XXL,AUR-TOP-16911,Printed White Sweatshirt,XXL,Sweatshirts,Tops,Men,White,52.99
+AUR-TOP-16905-S,AUR-TOP-16905,Solid Green Sweatshirt,S,Sweatshirts,Tops,Men,Green,38.99
+AUR-TOP-16905-M,AUR-TOP-16905,Solid Green Sweatshirt,M,Sweatshirts,Tops,Men,Green,38.99
+AUR-TOP-16905-L,AUR-TOP-16905,Solid Green Sweatshirt,L,Sweatshirts,Tops,Men,Green,38.99
+AUR-TOP-16905-XL,AUR-TOP-16905,Solid Green Sweatshirt,XL,Sweatshirts,Tops,Men,Green,38.99
+AUR-TOP-16905-XXL,AUR-TOP-16905,Solid Green Sweatshirt,XXL,Sweatshirts,Tops,Men,Green,38.99
+AUR-OUT-18518-S,AUR-OUT-18518,Navy Blue Jacket,S,Jackets,Outerwear,Men,Navy Blue,130.99
+AUR-OUT-18518-M,AUR-OUT-18518,Navy Blue Jacket,M,Jackets,Outerwear,Men,Navy Blue,130.99
+AUR-OUT-18518-L,AUR-OUT-18518,Navy Blue Jacket,L,Jackets,Outerwear,Men,Navy Blue,130.99
+AUR-OUT-18518-XL,AUR-OUT-18518,Navy Blue Jacket,XL,Jackets,Outerwear,Men,Navy Blue,130.99
+AUR-OUT-18518-XXL,AUR-OUT-18518,Navy Blue Jacket,XXL,Jackets,Outerwear,Men,Navy Blue,130.99
+AUR-OUT-18509-S,AUR-OUT-18509,Black Jacket,S,Jackets,Outerwear,Men,Black,142.99
+AUR-OUT-18509-M,AUR-OUT-18509,Black Jacket,M,Jackets,Outerwear,Men,Black,142.99
+AUR-OUT-18509-L,AUR-OUT-18509,Black Jacket,L,Jackets,Outerwear,Men,Black,142.99
+AUR-OUT-18509-XL,AUR-OUT-18509,Black Jacket,XL,Jackets,Outerwear,Men,Black,142.99
+AUR-OUT-18509-XXL,AUR-OUT-18509,Black Jacket,XXL,Jackets,Outerwear,Men,Black,142.99
+AUR-OUT-18512-S,AUR-OUT-18512,Red Jacket,S,Jackets,Outerwear,Men,Red,100.99
+AUR-OUT-18512-M,AUR-OUT-18512,Red Jacket,M,Jackets,Outerwear,Men,Red,100.99
+AUR-OUT-18512-L,AUR-OUT-18512,Red Jacket,L,Jackets,Outerwear,Men,Red,100.99
+AUR-OUT-18512-XL,AUR-OUT-18512,Red Jacket,XL,Jackets,Outerwear,Men,Red,100.99
+AUR-OUT-18512-XXL,AUR-OUT-18512,Red Jacket,XXL,Jackets,Outerwear,Men,Red,100.99
+AUR-OUT-13241-S,AUR-OUT-13241,Solid White Jacket,S,Jackets,Outerwear,Men,White,80.99
+AUR-OUT-13241-M,AUR-OUT-13241,Solid White Jacket,M,Jackets,Outerwear,Men,White,80.99
+AUR-OUT-13241-L,AUR-OUT-13241,Solid White Jacket,L,Jackets,Outerwear,Men,White,80.99
+AUR-OUT-13241-XL,AUR-OUT-13241,Solid White Jacket,XL,Jackets,Outerwear,Men,White,80.99
+AUR-OUT-13241-XXL,AUR-OUT-13241,Solid White Jacket,XXL,Jackets,Outerwear,Men,White,80.99
+AUR-OUT-18517-S,AUR-OUT-18517,Everyday Black Jacket,S,Jackets,Outerwear,Men,Black,99.99
+AUR-OUT-18517-M,AUR-OUT-18517,Everyday Black Jacket,M,Jackets,Outerwear,Men,Black,99.99
+AUR-OUT-18517-L,AUR-OUT-18517,Everyday Black Jacket,L,Jackets,Outerwear,Men,Black,99.99
+AUR-OUT-18517-XL,AUR-OUT-18517,Everyday Black Jacket,XL,Jackets,Outerwear,Men,Black,99.99
+AUR-OUT-18517-XXL,AUR-OUT-18517,Everyday Black Jacket,XXL,Jackets,Outerwear,Men,Black,99.99
+AUR-TOP-16916-S,AUR-TOP-16916,Striped White Sweater,S,Sweaters,Tops,Men,White,58.99
+AUR-TOP-16916-M,AUR-TOP-16916,Striped White Sweater,M,Sweaters,Tops,Men,White,58.99
+AUR-TOP-16916-L,AUR-TOP-16916,Striped White Sweater,L,Sweaters,Tops,Men,White,58.99
+AUR-TOP-16916-XL,AUR-TOP-16916,Striped White Sweater,XL,Sweaters,Tops,Men,White,58.99
+AUR-TOP-16916-XXL,AUR-TOP-16916,Striped White Sweater,XXL,Sweaters,Tops,Men,White,58.99
+AUR-TOP-16915-S,AUR-TOP-16915,Black Sweater,S,Sweaters,Tops,Men,Black,58.99
+AUR-TOP-16915-M,AUR-TOP-16915,Black Sweater,M,Sweaters,Tops,Men,Black,58.99
+AUR-TOP-16915-L,AUR-TOP-16915,Black Sweater,L,Sweaters,Tops,Men,Black,58.99
+AUR-TOP-16915-XL,AUR-TOP-16915,Black Sweater,XL,Sweaters,Tops,Men,Black,58.99
+AUR-TOP-16915-XXL,AUR-TOP-16915,Black Sweater,XXL,Sweaters,Tops,Men,Black,58.99
+AUR-TOP-11078-S,AUR-TOP-11078,Striped Grey Sweater,S,Sweaters,Tops,Men,Grey,74.99
+AUR-TOP-11078-M,AUR-TOP-11078,Striped Grey Sweater,M,Sweaters,Tops,Men,Grey,74.99
+AUR-TOP-11078-L,AUR-TOP-11078,Striped Grey Sweater,L,Sweaters,Tops,Men,Grey,74.99
+AUR-TOP-11078-XL,AUR-TOP-11078,Striped Grey Sweater,XL,Sweaters,Tops,Men,Grey,74.99
+AUR-TOP-11078-XXL,AUR-TOP-11078,Striped Grey Sweater,XXL,Sweaters,Tops,Men,Grey,74.99
+AUR-BTM-16921-30,AUR-BTM-16921,Blue Jeans,30,Jeans,Bottoms,Men,Blue,88.99
+AUR-BTM-16921-32,AUR-BTM-16921,Blue Jeans,32,Jeans,Bottoms,Men,Blue,88.99
+AUR-BTM-16921-34,AUR-BTM-16921,Blue Jeans,34,Jeans,Bottoms,Men,Blue,88.99
+AUR-BTM-16921-36,AUR-BTM-16921,Blue Jeans,36,Jeans,Bottoms,Men,Blue,88.99
+AUR-BTM-16921-38,AUR-BTM-16921,Blue Jeans,38,Jeans,Bottoms,Men,Blue,88.99
+AUR-BTM-16920-30,AUR-BTM-16920,Navy Blue Jeans,30,Jeans,Bottoms,Men,Navy Blue,79.99
+AUR-BTM-16920-32,AUR-BTM-16920,Navy Blue Jeans,32,Jeans,Bottoms,Men,Navy Blue,79.99
+AUR-BTM-16920-34,AUR-BTM-16920,Navy Blue Jeans,34,Jeans,Bottoms,Men,Navy Blue,79.99
+AUR-BTM-16920-36,AUR-BTM-16920,Navy Blue Jeans,36,Jeans,Bottoms,Men,Navy Blue,79.99
+AUR-BTM-16920-38,AUR-BTM-16920,Navy Blue Jeans,38,Jeans,Bottoms,Men,Navy Blue,79.99
+AUR-BTM-16520-30,AUR-BTM-16520,Grey Jeans,30,Jeans,Bottoms,Men,Grey,62.99
+AUR-BTM-16520-32,AUR-BTM-16520,Grey Jeans,32,Jeans,Bottoms,Men,Grey,62.99
+AUR-BTM-16520-34,AUR-BTM-16520,Grey Jeans,34,Jeans,Bottoms,Men,Grey,62.99
+AUR-BTM-16520-36,AUR-BTM-16520,Grey Jeans,36,Jeans,Bottoms,Men,Grey,62.99
+AUR-BTM-16520-38,AUR-BTM-16520,Grey Jeans,38,Jeans,Bottoms,Men,Grey,62.99
+AUR-BTM-16519-30,AUR-BTM-16519,Black Jeans,30,Jeans,Bottoms,Men,Black,72.99
+AUR-BTM-16519-32,AUR-BTM-16519,Black Jeans,32,Jeans,Bottoms,Men,Black,72.99
+AUR-BTM-16519-34,AUR-BTM-16519,Black Jeans,34,Jeans,Bottoms,Men,Black,72.99
+AUR-BTM-16519-36,AUR-BTM-16519,Black Jeans,36,Jeans,Bottoms,Men,Black,72.99
+AUR-BTM-16519-38,AUR-BTM-16519,Black Jeans,38,Jeans,Bottoms,Men,Black,72.99
+AUR-BTM-13247-30,AUR-BTM-13247,Urban Blue Jeans,30,Jeans,Bottoms,Men,Blue,50.99
+AUR-BTM-13247-32,AUR-BTM-13247,Urban Blue Jeans,32,Jeans,Bottoms,Men,Blue,50.99
+AUR-BTM-13247-34,AUR-BTM-13247,Urban Blue Jeans,34,Jeans,Bottoms,Men,Blue,50.99
+AUR-BTM-13247-36,AUR-BTM-13247,Urban Blue Jeans,36,Jeans,Bottoms,Men,Blue,50.99
+AUR-BTM-13247-38,AUR-BTM-13247,Urban Blue Jeans,38,Jeans,Bottoms,Men,Blue,50.99
+AUR-BTM-13246-30,AUR-BTM-13246,Harbor Blue Jeans,30,Jeans,Bottoms,Men,Blue,76.99
+AUR-BTM-13246-32,AUR-BTM-13246,Harbor Blue Jeans,32,Jeans,Bottoms,Men,Blue,76.99
+AUR-BTM-13246-34,AUR-BTM-13246,Harbor Blue Jeans,34,Jeans,Bottoms,Men,Blue,76.99
+AUR-BTM-13246-36,AUR-BTM-13246,Harbor Blue Jeans,36,Jeans,Bottoms,Men,Blue,76.99
+AUR-BTM-13246-38,AUR-BTM-13246,Harbor Blue Jeans,38,Jeans,Bottoms,Men,Blue,76.99
+AUR-BTM-13288-30,AUR-BTM-13288,Solid Beige Pants,30,Pants,Bottoms,Men,Beige,52.99
+AUR-BTM-13288-32,AUR-BTM-13288,Solid Beige Pants,32,Pants,Bottoms,Men,Beige,52.99
+AUR-BTM-13288-34,AUR-BTM-13288,Solid Beige Pants,34,Pants,Bottoms,Men,Beige,52.99
+AUR-BTM-13288-36,AUR-BTM-13288,Solid Beige Pants,36,Pants,Bottoms,Men,Beige,52.99
+AUR-BTM-13288-38,AUR-BTM-13288,Solid Beige Pants,38,Pants,Bottoms,Men,Beige,52.99
+AUR-BTM-13249-30,AUR-BTM-13249,Solid Brown Pants,30,Pants,Bottoms,Men,Brown,41.99
+AUR-BTM-13249-32,AUR-BTM-13249,Solid Brown Pants,32,Pants,Bottoms,Men,Brown,41.99
+AUR-BTM-13249-34,AUR-BTM-13249,Solid Brown Pants,34,Pants,Bottoms,Men,Brown,41.99
+AUR-BTM-13249-36,AUR-BTM-13249,Solid Brown Pants,36,Pants,Bottoms,Men,Brown,41.99
+AUR-BTM-13249-38,AUR-BTM-13249,Solid Brown Pants,38,Pants,Bottoms,Men,Brown,41.99
+AUR-BTM-13307-30,AUR-BTM-13307,Solid Black Pants,30,Pants,Bottoms,Men,Black,48.99
+AUR-BTM-13307-32,AUR-BTM-13307,Solid Black Pants,32,Pants,Bottoms,Men,Black,48.99
+AUR-BTM-13307-34,AUR-BTM-13307,Solid Black Pants,34,Pants,Bottoms,Men,Black,48.99
+AUR-BTM-13307-36,AUR-BTM-13307,Solid Black Pants,36,Pants,Bottoms,Men,Black,48.99
+AUR-BTM-13307-38,AUR-BTM-13307,Solid Black Pants,38,Pants,Bottoms,Men,Black,48.99
+AUR-BTM-26146-30,AUR-BTM-26146,Striped Charcoal Pants,30,Pants,Bottoms,Men,Charcoal,53.99
+AUR-BTM-26146-32,AUR-BTM-26146,Striped Charcoal Pants,32,Pants,Bottoms,Men,Charcoal,53.99
+AUR-BTM-26146-34,AUR-BTM-26146,Striped Charcoal Pants,34,Pants,Bottoms,Men,Charcoal,53.99
+AUR-BTM-26146-36,AUR-BTM-26146,Striped Charcoal Pants,36,Pants,Bottoms,Men,Charcoal,53.99
+AUR-BTM-26146-38,AUR-BTM-26146,Striped Charcoal Pants,38,Pants,Bottoms,Men,Charcoal,53.99
+AUR-BTM-26145-30,AUR-BTM-26145,Striped Navy Blue Pants,30,Pants,Bottoms,Men,Navy Blue,47.99
+AUR-BTM-26145-32,AUR-BTM-26145,Striped Navy Blue Pants,32,Pants,Bottoms,Men,Navy Blue,47.99
+AUR-BTM-26145-34,AUR-BTM-26145,Striped Navy Blue Pants,34,Pants,Bottoms,Men,Navy Blue,47.99
+AUR-BTM-26145-36,AUR-BTM-26145,Striped Navy Blue Pants,36,Pants,Bottoms,Men,Navy Blue,47.99
+AUR-BTM-26145-38,AUR-BTM-26145,Striped Navy Blue Pants,38,Pants,Bottoms,Men,Navy Blue,47.99
+AUR-BTM-13293-S,AUR-BTM-13293,Solid White Shorts,S,Shorts,Bottoms,Men,White,40.99
+AUR-BTM-13293-M,AUR-BTM-13293,Solid White Shorts,M,Shorts,Bottoms,Men,White,40.99
+AUR-BTM-13293-L,AUR-BTM-13293,Solid White Shorts,L,Shorts,Bottoms,Men,White,40.99
+AUR-BTM-13293-XL,AUR-BTM-13293,Solid White Shorts,XL,Shorts,Bottoms,Men,White,40.99
+AUR-BTM-13293-XXL,AUR-BTM-13293,Solid White Shorts,XXL,Shorts,Bottoms,Men,White,40.99
+AUR-BTM-13285-S,AUR-BTM-13285,Solid Black Shorts,S,Shorts,Bottoms,Men,Black,31.99
+AUR-BTM-13285-M,AUR-BTM-13285,Solid Black Shorts,M,Shorts,Bottoms,Men,Black,31.99
+AUR-BTM-13285-L,AUR-BTM-13285,Solid Black Shorts,L,Shorts,Bottoms,Men,Black,31.99
+AUR-BTM-13285-XL,AUR-BTM-13285,Solid Black Shorts,XL,Shorts,Bottoms,Men,Black,31.99
+AUR-BTM-13285-XXL,AUR-BTM-13285,Solid Black Shorts,XXL,Shorts,Bottoms,Men,Black,31.99
+AUR-BTM-13243-S,AUR-BTM-13243,Solid Beige Shorts,S,Shorts,Bottoms,Men,Beige,34.99
+AUR-BTM-13243-M,AUR-BTM-13243,Solid Beige Shorts,M,Shorts,Bottoms,Men,Beige,34.99
+AUR-BTM-13243-L,AUR-BTM-13243,Solid Beige Shorts,L,Shorts,Bottoms,Men,Beige,34.99
+AUR-BTM-13243-XL,AUR-BTM-13243,Solid Beige Shorts,XL,Shorts,Bottoms,Men,Beige,34.99
+AUR-BTM-13243-XXL,AUR-BTM-13243,Solid Beige Shorts,XXL,Shorts,Bottoms,Men,Beige,34.99
+AUR-BTM-26251-S,AUR-BTM-26251,Grey Melange Shorts,S,Shorts,Bottoms,Men,Grey Melange,34.99
+AUR-BTM-26251-M,AUR-BTM-26251,Grey Melange Shorts,M,Shorts,Bottoms,Men,Grey Melange,34.99
+AUR-BTM-26251-L,AUR-BTM-26251,Grey Melange Shorts,L,Shorts,Bottoms,Men,Grey Melange,34.99
+AUR-BTM-26251-XL,AUR-BTM-26251,Grey Melange Shorts,XL,Shorts,Bottoms,Men,Grey Melange,34.99
+AUR-BTM-26251-XXL,AUR-BTM-26251,Grey Melange Shorts,XXL,Shorts,Bottoms,Men,Grey Melange,34.99
+AUR-BTM-11128-S,AUR-BTM-11128,Solid Beige Joggers,S,Joggers,Bottoms,Men,Beige,41.99
+AUR-BTM-11128-M,AUR-BTM-11128,Solid Beige Joggers,M,Joggers,Bottoms,Men,Beige,41.99
+AUR-BTM-11128-L,AUR-BTM-11128,Solid Beige Joggers,L,Joggers,Bottoms,Men,Beige,41.99
+AUR-BTM-11128-XL,AUR-BTM-11128,Solid Beige Joggers,XL,Joggers,Bottoms,Men,Beige,41.99
+AUR-BTM-11128-XXL,AUR-BTM-11128,Solid Beige Joggers,XXL,Joggers,Bottoms,Men,Beige,41.99
+AUR-BTM-11129-S,AUR-BTM-11129,Solid Blue Joggers,S,Joggers,Bottoms,Men,Blue,47.99
+AUR-BTM-11129-M,AUR-BTM-11129,Solid Blue Joggers,M,Joggers,Bottoms,Men,Blue,47.99
+AUR-BTM-11129-L,AUR-BTM-11129,Solid Blue Joggers,L,Joggers,Bottoms,Men,Blue,47.99
+AUR-BTM-11129-XL,AUR-BTM-11129,Solid Blue Joggers,XL,Joggers,Bottoms,Men,Blue,47.99
+AUR-BTM-11129-XXL,AUR-BTM-11129,Solid Blue Joggers,XXL,Joggers,Bottoms,Men,Blue,47.99
+AUR-BTM-26252-S,AUR-BTM-26252,Grey Melange Joggers,S,Joggers,Bottoms,Men,Grey Melange,39.99
+AUR-BTM-26252-M,AUR-BTM-26252,Grey Melange Joggers,M,Joggers,Bottoms,Men,Grey Melange,39.99
+AUR-BTM-26252-L,AUR-BTM-26252,Grey Melange Joggers,L,Joggers,Bottoms,Men,Grey Melange,39.99
+AUR-BTM-26252-XL,AUR-BTM-26252,Grey Melange Joggers,XL,Joggers,Bottoms,Men,Grey Melange,39.99
+AUR-BTM-26252-XXL,AUR-BTM-26252,Grey Melange Joggers,XXL,Joggers,Bottoms,Men,Grey Melange,39.99
+AUR-SHO-4733-7,AUR-SHO-4733,Black Casual Shoes,7,Casual Shoes,Shoes,Men,Black,95.99
+AUR-SHO-4733-8,AUR-SHO-4733,Black Casual Shoes,8,Casual Shoes,Shoes,Men,Black,95.99
+AUR-SHO-4733-9,AUR-SHO-4733,Black Casual Shoes,9,Casual Shoes,Shoes,Men,Black,95.99
+AUR-SHO-4733-10,AUR-SHO-4733,Black Casual Shoes,10,Casual Shoes,Shoes,Men,Black,95.99
+AUR-SHO-4733-11,AUR-SHO-4733,Black Casual Shoes,11,Casual Shoes,Shoes,Men,Black,95.99
+AUR-SHO-4733-12,AUR-SHO-4733,Black Casual Shoes,12,Casual Shoes,Shoes,Men,Black,95.99
+AUR-SHO-12426-7,AUR-SHO-12426,Brown Casual Shoes,7,Casual Shoes,Shoes,Men,Brown,59.99
+AUR-SHO-12426-8,AUR-SHO-12426,Brown Casual Shoes,8,Casual Shoes,Shoes,Men,Brown,59.99
+AUR-SHO-12426-9,AUR-SHO-12426,Brown Casual Shoes,9,Casual Shoes,Shoes,Men,Brown,59.99
+AUR-SHO-12426-10,AUR-SHO-12426,Brown Casual Shoes,10,Casual Shoes,Shoes,Men,Brown,59.99
+AUR-SHO-12426-11,AUR-SHO-12426,Brown Casual Shoes,11,Casual Shoes,Shoes,Men,Brown,59.99
+AUR-SHO-12426-12,AUR-SHO-12426,Brown Casual Shoes,12,Casual Shoes,Shoes,Men,Brown,59.99
+AUR-SHO-12430-7,AUR-SHO-12430,Blue Casual Shoes,7,Casual Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-12430-8,AUR-SHO-12430,Blue Casual Shoes,8,Casual Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-12430-9,AUR-SHO-12430,Blue Casual Shoes,9,Casual Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-12430-10,AUR-SHO-12430,Blue Casual Shoes,10,Casual Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-12430-11,AUR-SHO-12430,Blue Casual Shoes,11,Casual Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-12430-12,AUR-SHO-12430,Blue Casual Shoes,12,Casual Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-33690-7,AUR-SHO-33690,White Casual Shoes,7,Casual Shoes,Shoes,Men,White,71.99
+AUR-SHO-33690-8,AUR-SHO-33690,White Casual Shoes,8,Casual Shoes,Shoes,Men,White,71.99
+AUR-SHO-33690-9,AUR-SHO-33690,White Casual Shoes,9,Casual Shoes,Shoes,Men,White,71.99
+AUR-SHO-33690-10,AUR-SHO-33690,White Casual Shoes,10,Casual Shoes,Shoes,Men,White,71.99
+AUR-SHO-33690-11,AUR-SHO-33690,White Casual Shoes,11,Casual Shoes,Shoes,Men,White,71.99
+AUR-SHO-33690-12,AUR-SHO-33690,White Casual Shoes,12,Casual Shoes,Shoes,Men,White,71.99
+AUR-SHO-33686-7,AUR-SHO-33686,Teal Casual Shoes,7,Casual Shoes,Shoes,Men,Teal,69.99
+AUR-SHO-33686-8,AUR-SHO-33686,Teal Casual Shoes,8,Casual Shoes,Shoes,Men,Teal,69.99
+AUR-SHO-33686-9,AUR-SHO-33686,Teal Casual Shoes,9,Casual Shoes,Shoes,Men,Teal,69.99
+AUR-SHO-33686-10,AUR-SHO-33686,Teal Casual Shoes,10,Casual Shoes,Shoes,Men,Teal,69.99
+AUR-SHO-33686-11,AUR-SHO-33686,Teal Casual Shoes,11,Casual Shoes,Shoes,Men,Teal,69.99
+AUR-SHO-33686-12,AUR-SHO-33686,Teal Casual Shoes,12,Casual Shoes,Shoes,Men,Teal,69.99
+AUR-SHO-36431-7,AUR-SHO-36431,Beige Casual Shoes,7,Casual Shoes,Shoes,Men,Beige,105.99
+AUR-SHO-36431-8,AUR-SHO-36431,Beige Casual Shoes,8,Casual Shoes,Shoes,Men,Beige,105.99
+AUR-SHO-36431-9,AUR-SHO-36431,Beige Casual Shoes,9,Casual Shoes,Shoes,Men,Beige,105.99
+AUR-SHO-36431-10,AUR-SHO-36431,Beige Casual Shoes,10,Casual Shoes,Shoes,Men,Beige,105.99
+AUR-SHO-36431-11,AUR-SHO-36431,Beige Casual Shoes,11,Casual Shoes,Shoes,Men,Beige,105.99
+AUR-SHO-36431-12,AUR-SHO-36431,Beige Casual Shoes,12,Casual Shoes,Shoes,Men,Beige,105.99
+AUR-SHO-6848-7,AUR-SHO-6848,Blue Running Shoes,7,Running Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-6848-8,AUR-SHO-6848,Blue Running Shoes,8,Running Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-6848-9,AUR-SHO-6848,Blue Running Shoes,9,Running Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-6848-10,AUR-SHO-6848,Blue Running Shoes,10,Running Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-6848-11,AUR-SHO-6848,Blue Running Shoes,11,Running Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-6848-12,AUR-SHO-6848,Blue Running Shoes,12,Running Shoes,Shoes,Men,Blue,83.99
+AUR-SHO-36446-7,AUR-SHO-36446,Black Running Shoes,7,Running Shoes,Shoes,Men,Black,103.99
+AUR-SHO-36446-8,AUR-SHO-36446,Black Running Shoes,8,Running Shoes,Shoes,Men,Black,103.99
+AUR-SHO-36446-9,AUR-SHO-36446,Black Running Shoes,9,Running Shoes,Shoes,Men,Black,103.99
+AUR-SHO-36446-10,AUR-SHO-36446,Black Running Shoes,10,Running Shoes,Shoes,Men,Black,103.99
+AUR-SHO-36446-11,AUR-SHO-36446,Black Running Shoes,11,Running Shoes,Shoes,Men,Black,103.99
+AUR-SHO-36446-12,AUR-SHO-36446,Black Running Shoes,12,Running Shoes,Shoes,Men,Black,103.99
+AUR-SHO-36447-7,AUR-SHO-36447,White Running Shoes,7,Running Shoes,Shoes,Men,White,93.99
+AUR-SHO-36447-8,AUR-SHO-36447,White Running Shoes,8,Running Shoes,Shoes,Men,White,93.99
+AUR-SHO-36447-9,AUR-SHO-36447,White Running Shoes,9,Running Shoes,Shoes,Men,White,93.99
+AUR-SHO-36447-10,AUR-SHO-36447,White Running Shoes,10,Running Shoes,Shoes,Men,White,93.99
+AUR-SHO-36447-11,AUR-SHO-36447,White Running Shoes,11,Running Shoes,Shoes,Men,White,93.99
+AUR-SHO-36447-12,AUR-SHO-36447,White Running Shoes,12,Running Shoes,Shoes,Men,White,93.99
+AUR-SHO-36425-7,AUR-SHO-36425,Grey Running Shoes,7,Running Shoes,Shoes,Men,Grey,100.99
+AUR-SHO-36425-8,AUR-SHO-36425,Grey Running Shoes,8,Running Shoes,Shoes,Men,Grey,100.99
+AUR-SHO-36425-9,AUR-SHO-36425,Grey Running Shoes,9,Running Shoes,Shoes,Men,Grey,100.99
+AUR-SHO-36425-10,AUR-SHO-36425,Grey Running Shoes,10,Running Shoes,Shoes,Men,Grey,100.99
+AUR-SHO-36425-11,AUR-SHO-36425,Grey Running Shoes,11,Running Shoes,Shoes,Men,Grey,100.99
+AUR-SHO-36425-12,AUR-SHO-36425,Grey Running Shoes,12,Running Shoes,Shoes,Men,Grey,100.99
+AUR-SHO-6856-7,AUR-SHO-6856,Green Running Shoes,7,Running Shoes,Shoes,Men,Green,77.99
+AUR-SHO-6856-8,AUR-SHO-6856,Green Running Shoes,8,Running Shoes,Shoes,Men,Green,77.99
+AUR-SHO-6856-9,AUR-SHO-6856,Green Running Shoes,9,Running Shoes,Shoes,Men,Green,77.99
+AUR-SHO-6856-10,AUR-SHO-6856,Green Running Shoes,10,Running Shoes,Shoes,Men,Green,77.99
+AUR-SHO-6856-11,AUR-SHO-6856,Green Running Shoes,11,Running Shoes,Shoes,Men,Green,77.99
+AUR-SHO-6856-12,AUR-SHO-6856,Green Running Shoes,12,Running Shoes,Shoes,Men,Green,77.99
+AUR-SHO-47279-7,AUR-SHO-47279,Brown Dress Shoes,7,Dress Shoes,Shoes,Men,Brown,108.99
+AUR-SHO-47279-8,AUR-SHO-47279,Brown Dress Shoes,8,Dress Shoes,Shoes,Men,Brown,108.99
+AUR-SHO-47279-9,AUR-SHO-47279,Brown Dress Shoes,9,Dress Shoes,Shoes,Men,Brown,108.99
+AUR-SHO-47279-10,AUR-SHO-47279,Brown Dress Shoes,10,Dress Shoes,Shoes,Men,Brown,108.99
+AUR-SHO-47279-11,AUR-SHO-47279,Brown Dress Shoes,11,Dress Shoes,Shoes,Men,Brown,108.99
+AUR-SHO-47279-12,AUR-SHO-47279,Brown Dress Shoes,12,Dress Shoes,Shoes,Men,Brown,108.99
+AUR-SHO-47278-7,AUR-SHO-47278,Black Dress Shoes,7,Dress Shoes,Shoes,Men,Black,131.99
+AUR-SHO-47278-8,AUR-SHO-47278,Black Dress Shoes,8,Dress Shoes,Shoes,Men,Black,131.99
+AUR-SHO-47278-9,AUR-SHO-47278,Black Dress Shoes,9,Dress Shoes,Shoes,Men,Black,131.99
+AUR-SHO-47278-10,AUR-SHO-47278,Black Dress Shoes,10,Dress Shoes,Shoes,Men,Black,131.99
+AUR-SHO-47278-11,AUR-SHO-47278,Black Dress Shoes,11,Dress Shoes,Shoes,Men,Black,131.99
+AUR-SHO-47278-12,AUR-SHO-47278,Black Dress Shoes,12,Dress Shoes,Shoes,Men,Black,131.99
+AUR-SHO-33691-7,AUR-SHO-33691,Brown Leather Dress Shoes,7,Dress Shoes,Shoes,Men,Brown,85.99
+AUR-SHO-33691-8,AUR-SHO-33691,Brown Leather Dress Shoes,8,Dress Shoes,Shoes,Men,Brown,85.99
+AUR-SHO-33691-9,AUR-SHO-33691,Brown Leather Dress Shoes,9,Dress Shoes,Shoes,Men,Brown,85.99
+AUR-SHO-33691-10,AUR-SHO-33691,Brown Leather Dress Shoes,10,Dress Shoes,Shoes,Men,Brown,85.99
+AUR-SHO-33691-11,AUR-SHO-33691,Brown Leather Dress Shoes,11,Dress Shoes,Shoes,Men,Brown,85.99
+AUR-SHO-33691-12,AUR-SHO-33691,Brown Leather Dress Shoes,12,Dress Shoes,Shoes,Men,Brown,85.99
+AUR-SHO-33693-7,AUR-SHO-33693,Black Leather Dress Shoes,7,Dress Shoes,Shoes,Men,Black,140.99
+AUR-SHO-33693-8,AUR-SHO-33693,Black Leather Dress Shoes,8,Dress Shoes,Shoes,Men,Black,140.99
+AUR-SHO-33693-9,AUR-SHO-33693,Black Leather Dress Shoes,9,Dress Shoes,Shoes,Men,Black,140.99
+AUR-SHO-33693-10,AUR-SHO-33693,Black Leather Dress Shoes,10,Dress Shoes,Shoes,Men,Black,140.99
+AUR-SHO-33693-11,AUR-SHO-33693,Black Leather Dress Shoes,11,Dress Shoes,Shoes,Men,Black,140.99
+AUR-SHO-33693-12,AUR-SHO-33693,Black Leather Dress Shoes,12,Dress Shoes,Shoes,Men,Black,140.99
+AUR-SHO-4732-7,AUR-SHO-4732,White Flip-Flops,7,Flip-Flops,Shoes,Men,White,25.99
+AUR-SHO-4732-8,AUR-SHO-4732,White Flip-Flops,8,Flip-Flops,Shoes,Men,White,25.99
+AUR-SHO-4732-9,AUR-SHO-4732,White Flip-Flops,9,Flip-Flops,Shoes,Men,White,25.99
+AUR-SHO-4732-10,AUR-SHO-4732,White Flip-Flops,10,Flip-Flops,Shoes,Men,White,25.99
+AUR-SHO-4732-11,AUR-SHO-4732,White Flip-Flops,11,Flip-Flops,Shoes,Men,White,25.99
+AUR-SHO-4732-12,AUR-SHO-4732,White Flip-Flops,12,Flip-Flops,Shoes,Men,White,25.99
+AUR-SHO-4731-7,AUR-SHO-4731,Black Flip-Flops,7,Flip-Flops,Shoes,Men,Black,20.99
+AUR-SHO-4731-8,AUR-SHO-4731,Black Flip-Flops,8,Flip-Flops,Shoes,Men,Black,20.99
+AUR-SHO-4731-9,AUR-SHO-4731,Black Flip-Flops,9,Flip-Flops,Shoes,Men,Black,20.99
+AUR-SHO-4731-10,AUR-SHO-4731,Black Flip-Flops,10,Flip-Flops,Shoes,Men,Black,20.99
+AUR-SHO-4731-11,AUR-SHO-4731,Black Flip-Flops,11,Flip-Flops,Shoes,Men,Black,20.99
+AUR-SHO-4731-12,AUR-SHO-4731,Black Flip-Flops,12,Flip-Flops,Shoes,Men,Black,20.99
+AUR-SHO-33713-7,AUR-SHO-33713,Red Flip-Flops,7,Flip-Flops,Shoes,Men,Red,28.99
+AUR-SHO-33713-8,AUR-SHO-33713,Red Flip-Flops,8,Flip-Flops,Shoes,Men,Red,28.99
+AUR-SHO-33713-9,AUR-SHO-33713,Red Flip-Flops,9,Flip-Flops,Shoes,Men,Red,28.99
+AUR-SHO-33713-10,AUR-SHO-33713,Red Flip-Flops,10,Flip-Flops,Shoes,Men,Red,28.99
+AUR-SHO-33713-11,AUR-SHO-33713,Red Flip-Flops,11,Flip-Flops,Shoes,Men,Red,28.99
+AUR-SHO-33713-12,AUR-SHO-33713,Red Flip-Flops,12,Flip-Flops,Shoes,Men,Red,28.99
+AUR-HAT-49789,AUR-HAT-49789,Red Cap,One Size,Caps,Hats & Caps,Men,Red,29.99
+AUR-HAT-49788,AUR-HAT-49788,Navy Blue Cap,One Size,Caps,Hats & Caps,Men,Navy Blue,28.99
+AUR-HAT-49787,AUR-HAT-49787,White Cap,One Size,Caps,Hats & Caps,Men,White,28.99
+AUR-HAT-49802,AUR-HAT-49802,Black Cap,One Size,Caps,Hats & Caps,Men,Black,24.99
+AUR-HAT-49804,AUR-HAT-49804,Khaki Cap,One Size,Caps,Hats & Caps,Men,Khaki,19.99
+AUR-HAT-16537,AUR-HAT-16537,Check Blue Cap,One Size,Caps,Hats & Caps,Men,Blue,17.99
+AUR-HAT-49798,AUR-HAT-49798,Green Cap,One Size,Caps,Hats & Caps,Men,Green,21.99
+AUR-HAT-49791,AUR-HAT-49791,Yellow Cap,One Size,Caps,Hats & Caps,Men,Yellow,27.99
+AUR-ACC-10334-S,AUR-ACC-10334,Black Belt,S,Belts,Accessories,Men,Black,40.99
+AUR-ACC-10334-M,AUR-ACC-10334,Black Belt,M,Belts,Accessories,Men,Black,40.99
+AUR-ACC-10334-L,AUR-ACC-10334,Black Belt,L,Belts,Accessories,Men,Black,40.99
+AUR-ACC-10332-S,AUR-ACC-10332,Brown Belt,S,Belts,Accessories,Men,Brown,47.99
+AUR-ACC-10332-M,AUR-ACC-10332,Brown Belt,M,Belts,Accessories,Men,Brown,47.99
+AUR-ACC-10332-L,AUR-ACC-10332,Brown Belt,L,Belts,Accessories,Men,Brown,47.99
+AUR-ACC-10330-S,AUR-ACC-10330,Breeze Black Belt,S,Belts,Accessories,Men,Black,31.99
+AUR-ACC-10330-M,AUR-ACC-10330,Breeze Black Belt,M,Belts,Accessories,Men,Black,31.99
+AUR-ACC-10330-L,AUR-ACC-10330,Breeze Black Belt,L,Belts,Accessories,Men,Black,31.99
+AUR-ACC-10333-S,AUR-ACC-10333,Studio Brown Belt,S,Belts,Accessories,Men,Brown,26.99
+AUR-ACC-10333-M,AUR-ACC-10333,Studio Brown Belt,M,Belts,Accessories,Men,Brown,26.99
+AUR-ACC-10333-L,AUR-ACC-10333,Studio Brown Belt,L,Belts,Accessories,Men,Brown,26.99
+AUR-ACC-12441,AUR-ACC-12441,Black Wallet,One Size,Wallets,Accessories,Men,Black,43.99
+AUR-ACC-12442,AUR-ACC-12442,Brown Wallet,One Size,Wallets,Accessories,Men,Brown,35.99
+AUR-ACC-12443,AUR-ACC-12443,Essential Black Wallet,One Size,Wallets,Accessories,Men,Black,38.99
+AUR-ACC-12444,AUR-ACC-12444,Studio Brown Wallet,One Size,Wallets,Accessories,Men,Brown,47.99
+AUR-BAG-29002,AUR-BAG-29002,Black Backpack,One Size,Backpacks,Bags,Men,Black,80.99
+AUR-BAG-29003,AUR-BAG-29003,Metro Black Backpack,One Size,Backpacks,Bags,Men,Black,47.99
+AUR-BAG-29006,AUR-BAG-29006,Harbor Black Backpack,One Size,Backpacks,Bags,Men,Black,58.99
+AUR-BAG-29007,AUR-BAG-29007,Essential Black Backpack,One Size,Backpacks,Bags,Men,Black,51.99
+AUR-ACC-16843,AUR-ACC-16843,Black Sunglasses,One Size,Sunglasses,Accessories,Men,Black,79.99
+AUR-ACC-16853,AUR-ACC-16853,Green Sunglasses,One Size,Sunglasses,Accessories,Men,Green,50.99
+AUR-ACC-16844,AUR-ACC-16844,Blue Sunglasses,One Size,Sunglasses,Accessories,Men,Blue,83.99
+AUR-ACC-10316,AUR-ACC-10316,Steel Watch,One Size,Watches,Accessories,Men,Steel,170.99
+AUR-ACC-10240,AUR-ACC-10240,Copper Watch,One Size,Watches,Accessories,Men,Copper,200.99
+AUR-ACC-10241,AUR-ACC-10241,Black Watch,One Size,Watches,Accessories,Men,Black,132.99
+AUR-ACC-12435,AUR-ACC-12435,Black Socks (3-Pack),One Size,Socks,Accessories,Men,Black,8.99
+AUR-ACC-12436,AUR-ACC-12436,Blue Socks (3-Pack),One Size,Socks,Accessories,Men,Blue,11.99
+AUR-ACC-12433,AUR-ACC-12433,Grey Socks (3-Pack),One Size,Socks,Accessories,Men,Grey,8.99
+AUR-ACC-12390,AUR-ACC-12390,Striped Blue Tie,One Size,Ties,Accessories,Men,Blue,29.99
+AUR-ACC-12391,AUR-ACC-12391,Printed Lavender Tie,One Size,Ties,Accessories,Men,Lavender,36.99
+AUR-ACC-36370,AUR-ACC-36370,Black Tie,One Size,Ties,Accessories,Men,Black,37.99
+AUR-TOP-11031-XS,AUR-TOP-11031,Check Blue Top,XS,Tops,Tops,Women,Blue,24.99
+AUR-TOP-11031-S,AUR-TOP-11031,Check Blue Top,S,Tops,Tops,Women,Blue,24.99
+AUR-TOP-11031-M,AUR-TOP-11031,Check Blue Top,M,Tops,Tops,Women,Blue,24.99
+AUR-TOP-11031-L,AUR-TOP-11031,Check Blue Top,L,Tops,Tops,Women,Blue,24.99
+AUR-TOP-11031-XL,AUR-TOP-11031,Check Blue Top,XL,Tops,Tops,Women,Blue,24.99
+AUR-TOP-11033-XS,AUR-TOP-11033,Check Red Top,XS,Tops,Tops,Women,Red,32.99
+AUR-TOP-11033-S,AUR-TOP-11033,Check Red Top,S,Tops,Tops,Women,Red,32.99
+AUR-TOP-11033-M,AUR-TOP-11033,Check Red Top,M,Tops,Tops,Women,Red,32.99
+AUR-TOP-11033-L,AUR-TOP-11033,Check Red Top,L,Tops,Tops,Women,Red,32.99
+AUR-TOP-11033-XL,AUR-TOP-11033,Check Red Top,XL,Tops,Tops,Women,Red,32.99
+AUR-TOP-11036-XS,AUR-TOP-11036,Solid Black Top,XS,Tops,Tops,Women,Black,21.99
+AUR-TOP-11036-S,AUR-TOP-11036,Solid Black Top,S,Tops,Tops,Women,Black,21.99
+AUR-TOP-11036-M,AUR-TOP-11036,Solid Black Top,M,Tops,Tops,Women,Black,21.99
+AUR-TOP-11036-L,AUR-TOP-11036,Solid Black Top,L,Tops,Tops,Women,Black,21.99
+AUR-TOP-11036-XL,AUR-TOP-11036,Solid Black Top,XL,Tops,Tops,Women,Black,21.99
+AUR-TOP-11037-XS,AUR-TOP-11037,Solid Pink Top,XS,Tops,Tops,Women,Pink,35.99
+AUR-TOP-11037-S,AUR-TOP-11037,Solid Pink Top,S,Tops,Tops,Women,Pink,35.99
+AUR-TOP-11037-M,AUR-TOP-11037,Solid Pink Top,M,Tops,Tops,Women,Pink,35.99
+AUR-TOP-11037-L,AUR-TOP-11037,Solid Pink Top,L,Tops,Tops,Women,Pink,35.99
+AUR-TOP-11037-XL,AUR-TOP-11037,Solid Pink Top,XL,Tops,Tops,Women,Pink,35.99
+AUR-TOP-11038-XS,AUR-TOP-11038,Check Brown Top,XS,Tops,Tops,Women,Brown,36.99
+AUR-TOP-11038-S,AUR-TOP-11038,Check Brown Top,S,Tops,Tops,Women,Brown,36.99
+AUR-TOP-11038-M,AUR-TOP-11038,Check Brown Top,M,Tops,Tops,Women,Brown,36.99
+AUR-TOP-11038-L,AUR-TOP-11038,Check Brown Top,L,Tops,Tops,Women,Brown,36.99
+AUR-TOP-11038-XL,AUR-TOP-11038,Check Brown Top,XL,Tops,Tops,Women,Brown,36.99
+AUR-TOP-32594-XS,AUR-TOP-32594,Green Top,XS,Tops,Tops,Women,Green,37.99
+AUR-TOP-32594-S,AUR-TOP-32594,Green Top,S,Tops,Tops,Women,Green,37.99
+AUR-TOP-32594-M,AUR-TOP-32594,Green Top,M,Tops,Tops,Women,Green,37.99
+AUR-TOP-32594-L,AUR-TOP-32594,Green Top,L,Tops,Tops,Women,Green,37.99
+AUR-TOP-32594-XL,AUR-TOP-32594,Green Top,XL,Tops,Tops,Women,Green,37.99
+AUR-TOP-32596-XS,AUR-TOP-32596,Peach Top,XS,Tops,Tops,Women,Peach,30.99
+AUR-TOP-32596-S,AUR-TOP-32596,Peach Top,S,Tops,Tops,Women,Peach,30.99
+AUR-TOP-32596-M,AUR-TOP-32596,Peach Top,M,Tops,Tops,Women,Peach,30.99
+AUR-TOP-32596-L,AUR-TOP-32596,Peach Top,L,Tops,Tops,Women,Peach,30.99
+AUR-TOP-32596-XL,AUR-TOP-32596,Peach Top,XL,Tops,Tops,Women,Peach,30.99
+AUR-TOP-32593-XS,AUR-TOP-32593,Yellow Top,XS,Tops,Tops,Women,Yellow,41.99
+AUR-TOP-32593-S,AUR-TOP-32593,Yellow Top,S,Tops,Tops,Women,Yellow,41.99
+AUR-TOP-32593-M,AUR-TOP-32593,Yellow Top,M,Tops,Tops,Women,Yellow,41.99
+AUR-TOP-32593-L,AUR-TOP-32593,Yellow Top,L,Tops,Tops,Women,Yellow,41.99
+AUR-TOP-32593-XL,AUR-TOP-32593,Yellow Top,XL,Tops,Tops,Women,Yellow,41.99
+AUR-TOP-32598-XS,AUR-TOP-32598,Orange Top,XS,Tops,Tops,Women,Orange,25.99
+AUR-TOP-32598-S,AUR-TOP-32598,Orange Top,S,Tops,Tops,Women,Orange,25.99
+AUR-TOP-32598-M,AUR-TOP-32598,Orange Top,M,Tops,Tops,Women,Orange,25.99
+AUR-TOP-32598-L,AUR-TOP-32598,Orange Top,L,Tops,Tops,Women,Orange,25.99
+AUR-TOP-32598-XL,AUR-TOP-32598,Orange Top,XL,Tops,Tops,Women,Orange,25.99
+AUR-TOP-13308-XS,AUR-TOP-13308,Printed White Top,XS,Tops,Tops,Women,White,43.99
+AUR-TOP-13308-S,AUR-TOP-13308,Printed White Top,S,Tops,Tops,Women,White,43.99
+AUR-TOP-13308-M,AUR-TOP-13308,Printed White Top,M,Tops,Tops,Women,White,43.99
+AUR-TOP-13308-L,AUR-TOP-13308,Printed White Top,L,Tops,Tops,Women,White,43.99
+AUR-TOP-13308-XL,AUR-TOP-13308,Printed White Top,XL,Tops,Tops,Women,White,43.99
+AUR-TOP-16606-XS,AUR-TOP-16606,Solid Purple Knit Top,XS,Tops,Tops,Women,Purple,22.99
+AUR-TOP-16606-S,AUR-TOP-16606,Solid Purple Knit Top,S,Tops,Tops,Women,Purple,22.99
+AUR-TOP-16606-M,AUR-TOP-16606,Solid Purple Knit Top,M,Tops,Tops,Women,Purple,22.99
+AUR-TOP-16606-L,AUR-TOP-16606,Solid Purple Knit Top,L,Tops,Tops,Women,Purple,22.99
+AUR-TOP-16606-XL,AUR-TOP-16606,Solid Purple Knit Top,XL,Tops,Tops,Women,Purple,22.99
+AUR-TOP-25891-XS,AUR-TOP-25891,Beige Top,XS,Tops,Tops,Women,Beige,30.99
+AUR-TOP-25891-S,AUR-TOP-25891,Beige Top,S,Tops,Tops,Women,Beige,30.99
+AUR-TOP-25891-M,AUR-TOP-25891,Beige Top,M,Tops,Tops,Women,Beige,30.99
+AUR-TOP-25891-L,AUR-TOP-25891,Beige Top,L,Tops,Tops,Women,Beige,30.99
+AUR-TOP-25891-XL,AUR-TOP-25891,Beige Top,XL,Tops,Tops,Women,Beige,30.99
+AUR-TOP-6902-XS,AUR-TOP-6902,Weekend Purple T-Shirt,XS,T-Shirts,Tops,Women,Purple,23.99
+AUR-TOP-6902-S,AUR-TOP-6902,Weekend Purple T-Shirt,S,T-Shirts,Tops,Women,Purple,23.99
+AUR-TOP-6902-M,AUR-TOP-6902,Weekend Purple T-Shirt,M,T-Shirts,Tops,Women,Purple,23.99
+AUR-TOP-6902-L,AUR-TOP-6902,Weekend Purple T-Shirt,L,T-Shirts,Tops,Women,Purple,23.99
+AUR-TOP-6902-XL,AUR-TOP-6902,Weekend Purple T-Shirt,XL,T-Shirts,Tops,Women,Purple,23.99
+AUR-TOP-6903-XS,AUR-TOP-6903,Cream T-Shirt,XS,T-Shirts,Tops,Women,Cream,18.99
+AUR-TOP-6903-S,AUR-TOP-6903,Cream T-Shirt,S,T-Shirts,Tops,Women,Cream,18.99
+AUR-TOP-6903-M,AUR-TOP-6903,Cream T-Shirt,M,T-Shirts,Tops,Women,Cream,18.99
+AUR-TOP-6903-L,AUR-TOP-6903,Cream T-Shirt,L,T-Shirts,Tops,Women,Cream,18.99
+AUR-TOP-6903-XL,AUR-TOP-6903,Cream T-Shirt,XL,T-Shirts,Tops,Women,Cream,18.99
+AUR-TOP-16823-XS,AUR-TOP-16823,Printed Blue T-Shirt,XS,T-Shirts,Tops,Women,Blue,28.99
+AUR-TOP-16823-S,AUR-TOP-16823,Printed Blue T-Shirt,S,T-Shirts,Tops,Women,Blue,28.99
+AUR-TOP-16823-M,AUR-TOP-16823,Printed Blue T-Shirt,M,T-Shirts,Tops,Women,Blue,28.99
+AUR-TOP-16823-L,AUR-TOP-16823,Printed Blue T-Shirt,L,T-Shirts,Tops,Women,Blue,28.99
+AUR-TOP-16823-XL,AUR-TOP-16823,Printed Blue T-Shirt,XL,T-Shirts,Tops,Women,Blue,28.99
+AUR-TOP-6901-XS,AUR-TOP-6901,Coastal Red T-Shirt,XS,T-Shirts,Tops,Women,Red,19.99
+AUR-TOP-6901-S,AUR-TOP-6901,Coastal Red T-Shirt,S,T-Shirts,Tops,Women,Red,19.99
+AUR-TOP-6901-M,AUR-TOP-6901,Coastal Red T-Shirt,M,T-Shirts,Tops,Women,Red,19.99
+AUR-TOP-6901-L,AUR-TOP-6901,Coastal Red T-Shirt,L,T-Shirts,Tops,Women,Red,19.99
+AUR-TOP-6901-XL,AUR-TOP-6901,Coastal Red T-Shirt,XL,T-Shirts,Tops,Women,Red,19.99
+AUR-TOP-16826-XS,AUR-TOP-16826,Studio Printed Green T-Shirt,XS,T-Shirts,Tops,Women,Green,24.99
+AUR-TOP-16826-S,AUR-TOP-16826,Studio Printed Green T-Shirt,S,T-Shirts,Tops,Women,Green,24.99
+AUR-TOP-16826-M,AUR-TOP-16826,Studio Printed Green T-Shirt,M,T-Shirts,Tops,Women,Green,24.99
+AUR-TOP-16826-L,AUR-TOP-16826,Studio Printed Green T-Shirt,L,T-Shirts,Tops,Women,Green,24.99
+AUR-TOP-16826-XL,AUR-TOP-16826,Studio Printed Green T-Shirt,XL,T-Shirts,Tops,Women,Green,24.99
+AUR-TOP-6904-XS,AUR-TOP-6904,Orange T-Shirt,XS,T-Shirts,Tops,Women,Orange,33.99
+AUR-TOP-6904-S,AUR-TOP-6904,Orange T-Shirt,S,T-Shirts,Tops,Women,Orange,33.99
+AUR-TOP-6904-M,AUR-TOP-6904,Orange T-Shirt,M,T-Shirts,Tops,Women,Orange,33.99
+AUR-TOP-6904-L,AUR-TOP-6904,Orange T-Shirt,L,T-Shirts,Tops,Women,Orange,33.99
+AUR-TOP-6904-XL,AUR-TOP-6904,Orange T-Shirt,XL,T-Shirts,Tops,Women,Orange,33.99
+AUR-TOP-16827-XS,AUR-TOP-16827,Printed Magenta T-Shirt,XS,T-Shirts,Tops,Women,Magenta,24.99
+AUR-TOP-16827-S,AUR-TOP-16827,Printed Magenta T-Shirt,S,T-Shirts,Tops,Women,Magenta,24.99
+AUR-TOP-16827-M,AUR-TOP-16827,Printed Magenta T-Shirt,M,T-Shirts,Tops,Women,Magenta,24.99
+AUR-TOP-16827-L,AUR-TOP-16827,Printed Magenta T-Shirt,L,T-Shirts,Tops,Women,Magenta,24.99
+AUR-TOP-16827-XL,AUR-TOP-16827,Printed Magenta T-Shirt,XL,T-Shirts,Tops,Women,Magenta,24.99
+AUR-TOP-6905-XS,AUR-TOP-6905,Studio Pink T-Shirt,XS,T-Shirts,Tops,Women,Pink,20.99
+AUR-TOP-6905-S,AUR-TOP-6905,Studio Pink T-Shirt,S,T-Shirts,Tops,Women,Pink,20.99
+AUR-TOP-6905-M,AUR-TOP-6905,Studio Pink T-Shirt,M,T-Shirts,Tops,Women,Pink,20.99
+AUR-TOP-6905-L,AUR-TOP-6905,Studio Pink T-Shirt,L,T-Shirts,Tops,Women,Pink,20.99
+AUR-TOP-6905-XL,AUR-TOP-6905,Studio Pink T-Shirt,XL,T-Shirts,Tops,Women,Pink,20.99
+AUR-TOP-11030-XS,AUR-TOP-11030,Willow Check Blue Shirt,XS,Shirts,Tops,Women,Blue,60.99
+AUR-TOP-11030-S,AUR-TOP-11030,Willow Check Blue Shirt,S,Shirts,Tops,Women,Blue,60.99
+AUR-TOP-11030-M,AUR-TOP-11030,Willow Check Blue Shirt,M,Shirts,Tops,Women,Blue,60.99
+AUR-TOP-11030-L,AUR-TOP-11030,Willow Check Blue Shirt,L,Shirts,Tops,Women,Blue,60.99
+AUR-TOP-11030-XL,AUR-TOP-11030,Willow Check Blue Shirt,XL,Shirts,Tops,Women,Blue,60.99
+AUR-TOP-11035-XS,AUR-TOP-11035,Coastal Check Purple Shirt,XS,Shirts,Tops,Women,Purple,41.99
+AUR-TOP-11035-S,AUR-TOP-11035,Coastal Check Purple Shirt,S,Shirts,Tops,Women,Purple,41.99
+AUR-TOP-11035-M,AUR-TOP-11035,Coastal Check Purple Shirt,M,Shirts,Tops,Women,Purple,41.99
+AUR-TOP-11035-L,AUR-TOP-11035,Coastal Check Purple Shirt,L,Shirts,Tops,Women,Purple,41.99
+AUR-TOP-11035-XL,AUR-TOP-11035,Coastal Check Purple Shirt,XL,Shirts,Tops,Women,Purple,41.99
+AUR-TOP-11039-XS,AUR-TOP-11039,Coastal Check Red Shirt,XS,Shirts,Tops,Women,Red,50.99
+AUR-TOP-11039-S,AUR-TOP-11039,Coastal Check Red Shirt,S,Shirts,Tops,Women,Red,50.99
+AUR-TOP-11039-M,AUR-TOP-11039,Coastal Check Red Shirt,M,Shirts,Tops,Women,Red,50.99
+AUR-TOP-11039-L,AUR-TOP-11039,Coastal Check Red Shirt,L,Shirts,Tops,Women,Red,50.99
+AUR-TOP-11039-XL,AUR-TOP-11039,Coastal Check Red Shirt,XL,Shirts,Tops,Women,Red,50.99
+AUR-TOP-16602-XS,AUR-TOP-16602,Check Black Shirt,XS,Shirts,Tops,Women,Black,36.99
+AUR-TOP-16602-S,AUR-TOP-16602,Check Black Shirt,S,Shirts,Tops,Women,Black,36.99
+AUR-TOP-16602-M,AUR-TOP-16602,Check Black Shirt,M,Shirts,Tops,Women,Black,36.99
+AUR-TOP-16602-L,AUR-TOP-16602,Check Black Shirt,L,Shirts,Tops,Women,Black,36.99
+AUR-TOP-16602-XL,AUR-TOP-16602,Check Black Shirt,XL,Shirts,Tops,Women,Black,36.99
+AUR-TOP-32571-XS,AUR-TOP-32571,Grey Sweater,XS,Sweaters,Tops,Women,Grey,75.99
+AUR-TOP-32571-S,AUR-TOP-32571,Grey Sweater,S,Sweaters,Tops,Women,Grey,75.99
+AUR-TOP-32571-M,AUR-TOP-32571,Grey Sweater,M,Sweaters,Tops,Women,Grey,75.99
+AUR-TOP-32571-L,AUR-TOP-32571,Grey Sweater,L,Sweaters,Tops,Women,Grey,75.99
+AUR-TOP-32571-XL,AUR-TOP-32571,Grey Sweater,XL,Sweaters,Tops,Women,Grey,75.99
+AUR-TOP-11096-XS,AUR-TOP-11096,Striped Purple Sweater,XS,Sweaters,Tops,Women,Purple,68.99
+AUR-TOP-11096-S,AUR-TOP-11096,Striped Purple Sweater,S,Sweaters,Tops,Women,Purple,68.99
+AUR-TOP-11096-M,AUR-TOP-11096,Striped Purple Sweater,M,Sweaters,Tops,Women,Purple,68.99
+AUR-TOP-11096-L,AUR-TOP-11096,Striped Purple Sweater,L,Sweaters,Tops,Women,Purple,68.99
+AUR-TOP-11096-XL,AUR-TOP-11096,Striped Purple Sweater,XL,Sweaters,Tops,Women,Purple,68.99
+AUR-TOP-11094-XS,AUR-TOP-11094,Striped Black Sweater,XS,Sweaters,Tops,Women,Black,65.99
+AUR-TOP-11094-S,AUR-TOP-11094,Striped Black Sweater,S,Sweaters,Tops,Women,Black,65.99
+AUR-TOP-11094-M,AUR-TOP-11094,Striped Black Sweater,M,Sweaters,Tops,Women,Black,65.99
+AUR-TOP-11094-L,AUR-TOP-11094,Striped Black Sweater,L,Sweaters,Tops,Women,Black,65.99
+AUR-TOP-11094-XL,AUR-TOP-11094,Striped Black Sweater,XL,Sweaters,Tops,Women,Black,65.99
+AUR-TOP-11093-XS,AUR-TOP-11093,White Knit Sweater,XS,Sweaters,Tops,Women,White,60.99
+AUR-TOP-11093-S,AUR-TOP-11093,White Knit Sweater,S,Sweaters,Tops,Women,White,60.99
+AUR-TOP-11093-M,AUR-TOP-11093,White Knit Sweater,M,Sweaters,Tops,Women,White,60.99
+AUR-TOP-11093-L,AUR-TOP-11093,White Knit Sweater,L,Sweaters,Tops,Women,White,60.99
+AUR-TOP-11093-XL,AUR-TOP-11093,White Knit Sweater,XL,Sweaters,Tops,Women,White,60.99
+AUR-TOP-11095-XS,AUR-TOP-11095,Black Knit Sweater,XS,Sweaters,Tops,Women,Black,73.99
+AUR-TOP-11095-S,AUR-TOP-11095,Black Knit Sweater,S,Sweaters,Tops,Women,Black,73.99
+AUR-TOP-11095-M,AUR-TOP-11095,Black Knit Sweater,M,Sweaters,Tops,Women,Black,73.99
+AUR-TOP-11095-L,AUR-TOP-11095,Black Knit Sweater,L,Sweaters,Tops,Women,Black,73.99
+AUR-TOP-11095-XL,AUR-TOP-11095,Black Knit Sweater,XL,Sweaters,Tops,Women,Black,73.99
+AUR-TOP-15371-XS,AUR-TOP-15371,Solid Purple Sweatshirt,XS,Sweatshirts,Tops,Women,Purple,55.99
+AUR-TOP-15371-S,AUR-TOP-15371,Solid Purple Sweatshirt,S,Sweatshirts,Tops,Women,Purple,55.99
+AUR-TOP-15371-M,AUR-TOP-15371,Solid Purple Sweatshirt,M,Sweatshirts,Tops,Women,Purple,55.99
+AUR-TOP-15371-L,AUR-TOP-15371,Solid Purple Sweatshirt,L,Sweatshirts,Tops,Women,Purple,55.99
+AUR-TOP-15371-XL,AUR-TOP-15371,Solid Purple Sweatshirt,XL,Sweatshirts,Tops,Women,Purple,55.99
+AUR-TOP-15370-XS,AUR-TOP-15370,Solid Pink Sweatshirt,XS,Sweatshirts,Tops,Women,Pink,55.99
+AUR-TOP-15370-S,AUR-TOP-15370,Solid Pink Sweatshirt,S,Sweatshirts,Tops,Women,Pink,55.99
+AUR-TOP-15370-M,AUR-TOP-15370,Solid Pink Sweatshirt,M,Sweatshirts,Tops,Women,Pink,55.99
+AUR-TOP-15370-L,AUR-TOP-15370,Solid Pink Sweatshirt,L,Sweatshirts,Tops,Women,Pink,55.99
+AUR-TOP-15370-XL,AUR-TOP-15370,Solid Pink Sweatshirt,XL,Sweatshirts,Tops,Women,Pink,55.99
+AUR-TOP-18521-XS,AUR-TOP-18521,Solid Black Sweatshirt,XS,Sweatshirts,Tops,Women,Black,51.99
+AUR-TOP-18521-S,AUR-TOP-18521,Solid Black Sweatshirt,S,Sweatshirts,Tops,Women,Black,51.99
+AUR-TOP-18521-M,AUR-TOP-18521,Solid Black Sweatshirt,M,Sweatshirts,Tops,Women,Black,51.99
+AUR-TOP-18521-L,AUR-TOP-18521,Solid Black Sweatshirt,L,Sweatshirts,Tops,Women,Black,51.99
+AUR-TOP-18521-XL,AUR-TOP-18521,Solid Black Sweatshirt,XL,Sweatshirts,Tops,Women,Black,51.99
+AUR-OUT-6891-XS,AUR-OUT-6891,Urban Black Jacket,XS,Jackets,Outerwear,Women,Black,102.99
+AUR-OUT-6891-S,AUR-OUT-6891,Urban Black Jacket,S,Jackets,Outerwear,Women,Black,102.99
+AUR-OUT-6891-M,AUR-OUT-6891,Urban Black Jacket,M,Jackets,Outerwear,Women,Black,102.99
+AUR-OUT-6891-L,AUR-OUT-6891,Urban Black Jacket,L,Jackets,Outerwear,Women,Black,102.99
+AUR-OUT-6891-XL,AUR-OUT-6891,Urban Black Jacket,XL,Jackets,Outerwear,Women,Black,102.99
+AUR-OUT-6882-XS,AUR-OUT-6882,Cream Jacket,XS,Jackets,Outerwear,Women,Cream,135.99
+AUR-OUT-6882-S,AUR-OUT-6882,Cream Jacket,S,Jackets,Outerwear,Women,Cream,135.99
+AUR-OUT-6882-M,AUR-OUT-6882,Cream Jacket,M,Jackets,Outerwear,Women,Cream,135.99
+AUR-OUT-6882-L,AUR-OUT-6882,Cream Jacket,L,Jackets,Outerwear,Women,Cream,135.99
+AUR-OUT-6882-XL,AUR-OUT-6882,Cream Jacket,XL,Jackets,Outerwear,Women,Cream,135.99
+AUR-OUT-6887-XS,AUR-OUT-6887,Blue Jacket,XS,Jackets,Outerwear,Women,Blue,122.99
+AUR-OUT-6887-S,AUR-OUT-6887,Blue Jacket,S,Jackets,Outerwear,Women,Blue,122.99
+AUR-OUT-6887-M,AUR-OUT-6887,Blue Jacket,M,Jackets,Outerwear,Women,Blue,122.99
+AUR-OUT-6887-L,AUR-OUT-6887,Blue Jacket,L,Jackets,Outerwear,Women,Blue,122.99
+AUR-OUT-6887-XL,AUR-OUT-6887,Blue Jacket,XL,Jackets,Outerwear,Women,Blue,122.99
+AUR-OUT-6876-XS,AUR-OUT-6876,Peach Jacket,XS,Jackets,Outerwear,Women,Peach,138.99
+AUR-OUT-6876-S,AUR-OUT-6876,Peach Jacket,S,Jackets,Outerwear,Women,Peach,138.99
+AUR-OUT-6876-M,AUR-OUT-6876,Peach Jacket,M,Jackets,Outerwear,Women,Peach,138.99
+AUR-OUT-6876-L,AUR-OUT-6876,Peach Jacket,L,Jackets,Outerwear,Women,Peach,138.99
+AUR-OUT-6876-XL,AUR-OUT-6876,Peach Jacket,XL,Jackets,Outerwear,Women,Peach,138.99
+AUR-DRS-13290-XS,AUR-DRS-13290,Solid Pink Dress,XS,Dresses,Dresses,Women,Pink,89.99
+AUR-DRS-13290-S,AUR-DRS-13290,Solid Pink Dress,S,Dresses,Dresses,Women,Pink,89.99
+AUR-DRS-13290-M,AUR-DRS-13290,Solid Pink Dress,M,Dresses,Dresses,Women,Pink,89.99
+AUR-DRS-13290-L,AUR-DRS-13290,Solid Pink Dress,L,Dresses,Dresses,Women,Pink,89.99
+AUR-DRS-13290-XL,AUR-DRS-13290,Solid Pink Dress,XL,Dresses,Dresses,Women,Pink,89.99
+AUR-DRS-25966-XS,AUR-DRS-25966,Brown Dress,XS,Dresses,Dresses,Women,Brown,105.99
+AUR-DRS-25966-S,AUR-DRS-25966,Brown Dress,S,Dresses,Dresses,Women,Brown,105.99
+AUR-DRS-25966-M,AUR-DRS-25966,Brown Dress,M,Dresses,Dresses,Women,Brown,105.99
+AUR-DRS-25966-L,AUR-DRS-25966,Brown Dress,L,Dresses,Dresses,Women,Brown,105.99
+AUR-DRS-25966-XL,AUR-DRS-25966,Brown Dress,XL,Dresses,Dresses,Women,Brown,105.99
+AUR-DRS-13310-XS,AUR-DRS-13310,Solid White Dress,XS,Dresses,Dresses,Women,White,44.99
+AUR-DRS-13310-S,AUR-DRS-13310,Solid White Dress,S,Dresses,Dresses,Women,White,44.99
+AUR-DRS-13310-M,AUR-DRS-13310,Solid White Dress,M,Dresses,Dresses,Women,White,44.99
+AUR-DRS-13310-L,AUR-DRS-13310,Solid White Dress,L,Dresses,Dresses,Women,White,44.99
+AUR-DRS-13310-XL,AUR-DRS-13310,Solid White Dress,XL,Dresses,Dresses,Women,White,44.99
+AUR-DRS-25971-XS,AUR-DRS-25971,Black Dress,XS,Dresses,Dresses,Women,Black,84.99
+AUR-DRS-25971-S,AUR-DRS-25971,Black Dress,S,Dresses,Dresses,Women,Black,84.99
+AUR-DRS-25971-M,AUR-DRS-25971,Black Dress,M,Dresses,Dresses,Women,Black,84.99
+AUR-DRS-25971-L,AUR-DRS-25971,Black Dress,L,Dresses,Dresses,Women,Black,84.99
+AUR-DRS-25971-XL,AUR-DRS-25971,Black Dress,XL,Dresses,Dresses,Women,Black,84.99
+AUR-DRS-16567-XS,AUR-DRS-16567,Printed Red Dress,XS,Dresses,Dresses,Women,Red,71.99
+AUR-DRS-16567-S,AUR-DRS-16567,Printed Red Dress,S,Dresses,Dresses,Women,Red,71.99
+AUR-DRS-16567-M,AUR-DRS-16567,Printed Red Dress,M,Dresses,Dresses,Women,Red,71.99
+AUR-DRS-16567-L,AUR-DRS-16567,Printed Red Dress,L,Dresses,Dresses,Women,Red,71.99
+AUR-DRS-16567-XL,AUR-DRS-16567,Printed Red Dress,XL,Dresses,Dresses,Women,Red,71.99
+AUR-DRS-32576-XS,AUR-DRS-32576,Orange Dress,XS,Dresses,Dresses,Women,Orange,100.99
+AUR-DRS-32576-S,AUR-DRS-32576,Orange Dress,S,Dresses,Dresses,Women,Orange,100.99
+AUR-DRS-32576-M,AUR-DRS-32576,Orange Dress,M,Dresses,Dresses,Women,Orange,100.99
+AUR-DRS-32576-L,AUR-DRS-32576,Orange Dress,L,Dresses,Dresses,Women,Orange,100.99
+AUR-DRS-32576-XL,AUR-DRS-32576,Orange Dress,XL,Dresses,Dresses,Women,Orange,100.99
+AUR-DRS-32577-XS,AUR-DRS-32577,Printed Grey Dress,XS,Dresses,Dresses,Women,Grey,45.99
+AUR-DRS-32577-S,AUR-DRS-32577,Printed Grey Dress,S,Dresses,Dresses,Women,Grey,45.99
+AUR-DRS-32577-M,AUR-DRS-32577,Printed Grey Dress,M,Dresses,Dresses,Women,Grey,45.99
+AUR-DRS-32577-L,AUR-DRS-32577,Printed Grey Dress,L,Dresses,Dresses,Women,Grey,45.99
+AUR-DRS-32577-XL,AUR-DRS-32577,Printed Grey Dress,XL,Dresses,Dresses,Women,Grey,45.99
+AUR-DRS-32582-XS,AUR-DRS-32582,Printed Yellow Dress,XS,Dresses,Dresses,Women,Yellow,46.99
+AUR-DRS-32582-S,AUR-DRS-32582,Printed Yellow Dress,S,Dresses,Dresses,Women,Yellow,46.99
+AUR-DRS-32582-M,AUR-DRS-32582,Printed Yellow Dress,M,Dresses,Dresses,Women,Yellow,46.99
+AUR-DRS-32582-L,AUR-DRS-32582,Printed Yellow Dress,L,Dresses,Dresses,Women,Yellow,46.99
+AUR-DRS-32582-XL,AUR-DRS-32582,Printed Yellow Dress,XL,Dresses,Dresses,Women,Yellow,46.99
+AUR-DRS-25907-XS,AUR-DRS-25907,Purple Dress,XS,Dresses,Dresses,Women,Purple,61.99
+AUR-DRS-25907-S,AUR-DRS-25907,Purple Dress,S,Dresses,Dresses,Women,Purple,61.99
+AUR-DRS-25907-M,AUR-DRS-25907,Purple Dress,M,Dresses,Dresses,Women,Purple,61.99
+AUR-DRS-25907-L,AUR-DRS-25907,Purple Dress,L,Dresses,Dresses,Women,Purple,61.99
+AUR-DRS-25907-XL,AUR-DRS-25907,Purple Dress,XL,Dresses,Dresses,Women,Purple,61.99
+AUR-DRS-6870-XS,AUR-DRS-6870,Pink Dress,XS,Dresses,Dresses,Women,Pink,98.99
+AUR-DRS-6870-S,AUR-DRS-6870,Pink Dress,S,Dresses,Dresses,Women,Pink,98.99
+AUR-DRS-6870-M,AUR-DRS-6870,Pink Dress,M,Dresses,Dresses,Women,Pink,98.99
+AUR-DRS-6870-L,AUR-DRS-6870,Pink Dress,L,Dresses,Dresses,Women,Pink,98.99
+AUR-DRS-6870-XL,AUR-DRS-6870,Pink Dress,XL,Dresses,Dresses,Women,Pink,98.99
+AUR-BTM-32591-XS,AUR-BTM-32591,Pink Skirt,XS,Skirts,Bottoms,Women,Pink,49.99
+AUR-BTM-32591-S,AUR-BTM-32591,Pink Skirt,S,Skirts,Bottoms,Women,Pink,49.99
+AUR-BTM-32591-M,AUR-BTM-32591,Pink Skirt,M,Skirts,Bottoms,Women,Pink,49.99
+AUR-BTM-32591-L,AUR-BTM-32591,Pink Skirt,L,Skirts,Bottoms,Women,Pink,49.99
+AUR-BTM-32591-XL,AUR-BTM-32591,Pink Skirt,XL,Skirts,Bottoms,Women,Pink,49.99
+AUR-BTM-13304-XS,AUR-BTM-13304,Solid Red Skirt,XS,Skirts,Bottoms,Women,Red,47.99
+AUR-BTM-13304-S,AUR-BTM-13304,Solid Red Skirt,S,Skirts,Bottoms,Women,Red,47.99
+AUR-BTM-13304-M,AUR-BTM-13304,Solid Red Skirt,M,Skirts,Bottoms,Women,Red,47.99
+AUR-BTM-13304-L,AUR-BTM-13304,Solid Red Skirt,L,Skirts,Bottoms,Women,Red,47.99
+AUR-BTM-13304-XL,AUR-BTM-13304,Solid Red Skirt,XL,Skirts,Bottoms,Women,Red,47.99
+AUR-BTM-6898-XS,AUR-BTM-6898,Cream Skirt,XS,Skirts,Bottoms,Women,Cream,31.99
+AUR-BTM-6898-S,AUR-BTM-6898,Cream Skirt,S,Skirts,Bottoms,Women,Cream,31.99
+AUR-BTM-6898-M,AUR-BTM-6898,Cream Skirt,M,Skirts,Bottoms,Women,Cream,31.99
+AUR-BTM-6898-L,AUR-BTM-6898,Cream Skirt,L,Skirts,Bottoms,Women,Cream,31.99
+AUR-BTM-6898-XL,AUR-BTM-6898,Cream Skirt,XL,Skirts,Bottoms,Women,Cream,31.99
+AUR-BTM-6864-XS,AUR-BTM-6864,Printed White Skirt,XS,Skirts,Bottoms,Women,White,51.99
+AUR-BTM-6864-S,AUR-BTM-6864,Printed White Skirt,S,Skirts,Bottoms,Women,White,51.99
+AUR-BTM-6864-M,AUR-BTM-6864,Printed White Skirt,M,Skirts,Bottoms,Women,White,51.99
+AUR-BTM-6864-L,AUR-BTM-6864,Printed White Skirt,L,Skirts,Bottoms,Women,White,51.99
+AUR-BTM-6864-XL,AUR-BTM-6864,Printed White Skirt,XL,Skirts,Bottoms,Women,White,51.99
+AUR-BTM-6860-XS,AUR-BTM-6860,Black Skirt,XS,Skirts,Bottoms,Women,Black,39.99
+AUR-BTM-6860-S,AUR-BTM-6860,Black Skirt,S,Skirts,Bottoms,Women,Black,39.99
+AUR-BTM-6860-M,AUR-BTM-6860,Black Skirt,M,Skirts,Bottoms,Women,Black,39.99
+AUR-BTM-6860-L,AUR-BTM-6860,Black Skirt,L,Skirts,Bottoms,Women,Black,39.99
+AUR-BTM-6860-XL,AUR-BTM-6860,Black Skirt,XL,Skirts,Bottoms,Women,Black,39.99
+AUR-BTM-6862-XS,AUR-BTM-6862,Essential Pink Skirt,XS,Skirts,Bottoms,Women,Pink,45.99
+AUR-BTM-6862-S,AUR-BTM-6862,Essential Pink Skirt,S,Skirts,Bottoms,Women,Pink,45.99
+AUR-BTM-6862-M,AUR-BTM-6862,Essential Pink Skirt,M,Skirts,Bottoms,Women,Pink,45.99
+AUR-BTM-6862-L,AUR-BTM-6862,Essential Pink Skirt,L,Skirts,Bottoms,Women,Pink,45.99
+AUR-BTM-6862-XL,AUR-BTM-6862,Essential Pink Skirt,XL,Skirts,Bottoms,Women,Pink,45.99
+AUR-BTM-13259-25,AUR-BTM-13259,Heritage Black Jeans,25,Jeans,Bottoms,Women,Black,53.99
+AUR-BTM-13259-26,AUR-BTM-13259,Heritage Black Jeans,26,Jeans,Bottoms,Women,Black,53.99
+AUR-BTM-13259-28,AUR-BTM-13259,Heritage Black Jeans,28,Jeans,Bottoms,Women,Black,53.99
+AUR-BTM-13259-30,AUR-BTM-13259,Heritage Black Jeans,30,Jeans,Bottoms,Women,Black,53.99
+AUR-BTM-13259-32,AUR-BTM-13259,Heritage Black Jeans,32,Jeans,Bottoms,Women,Black,53.99
+AUR-BTM-32561-25,AUR-BTM-32561,Peach Jeans,25,Jeans,Bottoms,Women,Peach,80.99
+AUR-BTM-32561-26,AUR-BTM-32561,Peach Jeans,26,Jeans,Bottoms,Women,Peach,80.99
+AUR-BTM-32561-28,AUR-BTM-32561,Peach Jeans,28,Jeans,Bottoms,Women,Peach,80.99
+AUR-BTM-32561-30,AUR-BTM-32561,Peach Jeans,30,Jeans,Bottoms,Women,Peach,80.99
+AUR-BTM-32561-32,AUR-BTM-32561,Peach Jeans,32,Jeans,Bottoms,Women,Peach,80.99
+AUR-BTM-32560-25,AUR-BTM-32560,Coastal Blue Jeans,25,Jeans,Bottoms,Women,Blue,62.99
+AUR-BTM-32560-26,AUR-BTM-32560,Coastal Blue Jeans,26,Jeans,Bottoms,Women,Blue,62.99
+AUR-BTM-32560-28,AUR-BTM-32560,Coastal Blue Jeans,28,Jeans,Bottoms,Women,Blue,62.99
+AUR-BTM-32560-30,AUR-BTM-32560,Coastal Blue Jeans,30,Jeans,Bottoms,Women,Blue,62.99
+AUR-BTM-32560-32,AUR-BTM-32560,Coastal Blue Jeans,32,Jeans,Bottoms,Women,Blue,62.99
+AUR-BTM-32559-25,AUR-BTM-32559,Classic Black Jeans,25,Jeans,Bottoms,Women,Black,62.99
+AUR-BTM-32559-26,AUR-BTM-32559,Classic Black Jeans,26,Jeans,Bottoms,Women,Black,62.99
+AUR-BTM-32559-28,AUR-BTM-32559,Classic Black Jeans,28,Jeans,Bottoms,Women,Black,62.99
+AUR-BTM-32559-30,AUR-BTM-32559,Classic Black Jeans,30,Jeans,Bottoms,Women,Black,62.99
+AUR-BTM-32559-32,AUR-BTM-32559,Classic Black Jeans,32,Jeans,Bottoms,Women,Black,62.99
+AUR-BTM-32567-25,AUR-BTM-32567,Willow Blue Jeans,25,Jeans,Bottoms,Women,Blue,77.99
+AUR-BTM-32567-26,AUR-BTM-32567,Willow Blue Jeans,26,Jeans,Bottoms,Women,Blue,77.99
+AUR-BTM-32567-28,AUR-BTM-32567,Willow Blue Jeans,28,Jeans,Bottoms,Women,Blue,77.99
+AUR-BTM-32567-30,AUR-BTM-32567,Willow Blue Jeans,30,Jeans,Bottoms,Women,Blue,77.99
+AUR-BTM-32567-32,AUR-BTM-32567,Willow Blue Jeans,32,Jeans,Bottoms,Women,Blue,77.99
+AUR-BTM-13260-25,AUR-BTM-13260,Metro Black Jeans,25,Jeans,Bottoms,Women,Black,67.99
+AUR-BTM-13260-26,AUR-BTM-13260,Metro Black Jeans,26,Jeans,Bottoms,Women,Black,67.99
+AUR-BTM-13260-28,AUR-BTM-13260,Metro Black Jeans,28,Jeans,Bottoms,Women,Black,67.99
+AUR-BTM-13260-30,AUR-BTM-13260,Metro Black Jeans,30,Jeans,Bottoms,Women,Black,67.99
+AUR-BTM-13260-32,AUR-BTM-13260,Metro Black Jeans,32,Jeans,Bottoms,Women,Black,67.99
+AUR-BTM-32563-25,AUR-BTM-32563,Blue Pants,25,Pants,Bottoms,Women,Blue,57.99
+AUR-BTM-32563-26,AUR-BTM-32563,Blue Pants,26,Pants,Bottoms,Women,Blue,57.99
+AUR-BTM-32563-28,AUR-BTM-32563,Blue Pants,28,Pants,Bottoms,Women,Blue,57.99
+AUR-BTM-32563-30,AUR-BTM-32563,Blue Pants,30,Pants,Bottoms,Women,Blue,57.99
+AUR-BTM-32563-32,AUR-BTM-32563,Blue Pants,32,Pants,Bottoms,Women,Blue,57.99
+AUR-BTM-32562-25,AUR-BTM-32562,Olive Pants,25,Pants,Bottoms,Women,Olive,69.99
+AUR-BTM-32562-26,AUR-BTM-32562,Olive Pants,26,Pants,Bottoms,Women,Olive,69.99
+AUR-BTM-32562-28,AUR-BTM-32562,Olive Pants,28,Pants,Bottoms,Women,Olive,69.99
+AUR-BTM-32562-30,AUR-BTM-32562,Olive Pants,30,Pants,Bottoms,Women,Olive,69.99
+AUR-BTM-32562-32,AUR-BTM-32562,Olive Pants,32,Pants,Bottoms,Women,Olive,69.99
+AUR-BTM-32564-25,AUR-BTM-32564,Orange Pants,25,Pants,Bottoms,Women,Orange,54.99
+AUR-BTM-32564-26,AUR-BTM-32564,Orange Pants,26,Pants,Bottoms,Women,Orange,54.99
+AUR-BTM-32564-28,AUR-BTM-32564,Orange Pants,28,Pants,Bottoms,Women,Orange,54.99
+AUR-BTM-32564-30,AUR-BTM-32564,Orange Pants,30,Pants,Bottoms,Women,Orange,54.99
+AUR-BTM-32564-32,AUR-BTM-32564,Orange Pants,32,Pants,Bottoms,Women,Orange,54.99
+AUR-BTM-6896-25,AUR-BTM-6896,Black Pants,25,Pants,Bottoms,Women,Black,40.99
+AUR-BTM-6896-26,AUR-BTM-6896,Black Pants,26,Pants,Bottoms,Women,Black,40.99
+AUR-BTM-6896-28,AUR-BTM-6896,Black Pants,28,Pants,Bottoms,Women,Black,40.99
+AUR-BTM-6896-30,AUR-BTM-6896,Black Pants,30,Pants,Bottoms,Women,Black,40.99
+AUR-BTM-6896-32,AUR-BTM-6896,Black Pants,32,Pants,Bottoms,Women,Black,40.99
+AUR-BTM-32586-25,AUR-BTM-32586,Brown Pants,25,Pants,Bottoms,Women,Brown,65.99
+AUR-BTM-32586-26,AUR-BTM-32586,Brown Pants,26,Pants,Bottoms,Women,Brown,65.99
+AUR-BTM-32586-28,AUR-BTM-32586,Brown Pants,28,Pants,Bottoms,Women,Brown,65.99
+AUR-BTM-32586-30,AUR-BTM-32586,Brown Pants,30,Pants,Bottoms,Women,Brown,65.99
+AUR-BTM-32586-32,AUR-BTM-32586,Brown Pants,32,Pants,Bottoms,Women,Brown,65.99
+AUR-BTM-32590-XS,AUR-BTM-32590,Brown Shorts,XS,Shorts,Bottoms,Women,Brown,31.99
+AUR-BTM-32590-S,AUR-BTM-32590,Brown Shorts,S,Shorts,Bottoms,Women,Brown,31.99
+AUR-BTM-32590-M,AUR-BTM-32590,Brown Shorts,M,Shorts,Bottoms,Women,Brown,31.99
+AUR-BTM-32590-L,AUR-BTM-32590,Brown Shorts,L,Shorts,Bottoms,Women,Brown,31.99
+AUR-BTM-32590-XL,AUR-BTM-32590,Brown Shorts,XL,Shorts,Bottoms,Women,Brown,31.99
+AUR-BTM-2579-XS,AUR-BTM-2579,Blue Shorts,XS,Shorts,Bottoms,Women,Blue,27.99
+AUR-BTM-2579-S,AUR-BTM-2579,Blue Shorts,S,Shorts,Bottoms,Women,Blue,27.99
+AUR-BTM-2579-M,AUR-BTM-2579,Blue Shorts,M,Shorts,Bottoms,Women,Blue,27.99
+AUR-BTM-2579-L,AUR-BTM-2579,Blue Shorts,L,Shorts,Bottoms,Women,Blue,27.99
+AUR-BTM-2579-XL,AUR-BTM-2579,Blue Shorts,XL,Shorts,Bottoms,Women,Blue,27.99
+AUR-BTM-32587-XS,AUR-BTM-32587,Black Shorts,XS,Shorts,Bottoms,Women,Black,41.99
+AUR-BTM-32587-S,AUR-BTM-32587,Black Shorts,S,Shorts,Bottoms,Women,Black,41.99
+AUR-BTM-32587-M,AUR-BTM-32587,Black Shorts,M,Shorts,Bottoms,Women,Black,41.99
+AUR-BTM-32587-L,AUR-BTM-32587,Black Shorts,L,Shorts,Bottoms,Women,Black,41.99
+AUR-BTM-32587-XL,AUR-BTM-32587,Black Shorts,XL,Shorts,Bottoms,Women,Black,41.99
+AUR-BTM-49761-XS,AUR-BTM-49761,White Leggings,XS,Leggings,Bottoms,Women,White,27.99
+AUR-BTM-49761-S,AUR-BTM-49761,White Leggings,S,Leggings,Bottoms,Women,White,27.99
+AUR-BTM-49761-M,AUR-BTM-49761,White Leggings,M,Leggings,Bottoms,Women,White,27.99
+AUR-BTM-49761-L,AUR-BTM-49761,White Leggings,L,Leggings,Bottoms,Women,White,27.99
+AUR-BTM-49761-XL,AUR-BTM-49761,White Leggings,XL,Leggings,Bottoms,Women,White,27.99
+AUR-BTM-49760-XS,AUR-BTM-49760,Green Leggings,XS,Leggings,Bottoms,Women,Green,39.99
+AUR-BTM-49760-S,AUR-BTM-49760,Green Leggings,S,Leggings,Bottoms,Women,Green,39.99
+AUR-BTM-49760-M,AUR-BTM-49760,Green Leggings,M,Leggings,Bottoms,Women,Green,39.99
+AUR-BTM-49760-L,AUR-BTM-49760,Green Leggings,L,Leggings,Bottoms,Women,Green,39.99
+AUR-BTM-49760-XL,AUR-BTM-49760,Green Leggings,XL,Leggings,Bottoms,Women,Green,39.99
+AUR-BTM-49763-XS,AUR-BTM-49763,Grey Leggings,XS,Leggings,Bottoms,Women,Grey,34.99
+AUR-BTM-49763-S,AUR-BTM-49763,Grey Leggings,S,Leggings,Bottoms,Women,Grey,34.99
+AUR-BTM-49763-M,AUR-BTM-49763,Grey Leggings,M,Leggings,Bottoms,Women,Grey,34.99
+AUR-BTM-49763-L,AUR-BTM-49763,Grey Leggings,L,Leggings,Bottoms,Women,Grey,34.99
+AUR-BTM-49763-XL,AUR-BTM-49763,Grey Leggings,XL,Leggings,Bottoms,Women,Grey,34.99
+AUR-SHO-13280-5,AUR-SHO-13280,Multicolor Heels,5,Heels,Shoes,Women,Multicolor,88.99
+AUR-SHO-13280-6,AUR-SHO-13280,Multicolor Heels,6,Heels,Shoes,Women,Multicolor,88.99
+AUR-SHO-13280-7,AUR-SHO-13280,Multicolor Heels,7,Heels,Shoes,Women,Multicolor,88.99
+AUR-SHO-13280-8,AUR-SHO-13280,Multicolor Heels,8,Heels,Shoes,Women,Multicolor,88.99
+AUR-SHO-13280-9,AUR-SHO-13280,Multicolor Heels,9,Heels,Shoes,Women,Multicolor,88.99
+AUR-SHO-13280-10,AUR-SHO-13280,Multicolor Heels,10,Heels,Shoes,Women,Multicolor,88.99
+AUR-SHO-10271-5,AUR-SHO-10271,Red Leather Heels,5,Heels,Shoes,Women,Red,80.99
+AUR-SHO-10271-6,AUR-SHO-10271,Red Leather Heels,6,Heels,Shoes,Women,Red,80.99
+AUR-SHO-10271-7,AUR-SHO-10271,Red Leather Heels,7,Heels,Shoes,Women,Red,80.99
+AUR-SHO-10271-8,AUR-SHO-10271,Red Leather Heels,8,Heels,Shoes,Women,Red,80.99
+AUR-SHO-10271-9,AUR-SHO-10271,Red Leather Heels,9,Heels,Shoes,Women,Red,80.99
+AUR-SHO-10271-10,AUR-SHO-10271,Red Leather Heels,10,Heels,Shoes,Women,Red,80.99
+AUR-SHO-10289-5,AUR-SHO-10289,Black Leather Heels,5,Heels,Shoes,Women,Black,57.99
+AUR-SHO-10289-6,AUR-SHO-10289,Black Leather Heels,6,Heels,Shoes,Women,Black,57.99
+AUR-SHO-10289-7,AUR-SHO-10289,Black Leather Heels,7,Heels,Shoes,Women,Black,57.99
+AUR-SHO-10289-8,AUR-SHO-10289,Black Leather Heels,8,Heels,Shoes,Women,Black,57.99
+AUR-SHO-10289-9,AUR-SHO-10289,Black Leather Heels,9,Heels,Shoes,Women,Black,57.99
+AUR-SHO-10289-10,AUR-SHO-10289,Black Leather Heels,10,Heels,Shoes,Women,Black,57.99
+AUR-SHO-10272-5,AUR-SHO-10272,Grey Leather Heels,5,Heels,Shoes,Women,Grey,90.99
+AUR-SHO-10272-6,AUR-SHO-10272,Grey Leather Heels,6,Heels,Shoes,Women,Grey,90.99
+AUR-SHO-10272-7,AUR-SHO-10272,Grey Leather Heels,7,Heels,Shoes,Women,Grey,90.99
+AUR-SHO-10272-8,AUR-SHO-10272,Grey Leather Heels,8,Heels,Shoes,Women,Grey,90.99
+AUR-SHO-10272-9,AUR-SHO-10272,Grey Leather Heels,9,Heels,Shoes,Women,Grey,90.99
+AUR-SHO-10272-10,AUR-SHO-10272,Grey Leather Heels,10,Heels,Shoes,Women,Grey,90.99
+AUR-SHO-13275-5,AUR-SHO-13275,Gold Heels,5,Heels,Shoes,Women,Gold,115.99
+AUR-SHO-13275-6,AUR-SHO-13275,Gold Heels,6,Heels,Shoes,Women,Gold,115.99
+AUR-SHO-13275-7,AUR-SHO-13275,Gold Heels,7,Heels,Shoes,Women,Gold,115.99
+AUR-SHO-13275-8,AUR-SHO-13275,Gold Heels,8,Heels,Shoes,Women,Gold,115.99
+AUR-SHO-13275-9,AUR-SHO-13275,Gold Heels,9,Heels,Shoes,Women,Gold,115.99
+AUR-SHO-13275-10,AUR-SHO-13275,Gold Heels,10,Heels,Shoes,Women,Gold,115.99
+AUR-SHO-49827-5,AUR-SHO-49827,Brown Heels,5,Heels,Shoes,Women,Brown,110.99
+AUR-SHO-49827-6,AUR-SHO-49827,Brown Heels,6,Heels,Shoes,Women,Brown,110.99
+AUR-SHO-49827-7,AUR-SHO-49827,Brown Heels,7,Heels,Shoes,Women,Brown,110.99
+AUR-SHO-49827-8,AUR-SHO-49827,Brown Heels,8,Heels,Shoes,Women,Brown,110.99
+AUR-SHO-49827-9,AUR-SHO-49827,Brown Heels,9,Heels,Shoes,Women,Brown,110.99
+AUR-SHO-49827-10,AUR-SHO-49827,Brown Heels,10,Heels,Shoes,Women,Brown,110.99
+AUR-SHO-10298-5,AUR-SHO-10298,White Leather Heels,5,Heels,Shoes,Women,White,87.99
+AUR-SHO-10298-6,AUR-SHO-10298,White Leather Heels,6,Heels,Shoes,Women,White,87.99
+AUR-SHO-10298-7,AUR-SHO-10298,White Leather Heels,7,Heels,Shoes,Women,White,87.99
+AUR-SHO-10298-8,AUR-SHO-10298,White Leather Heels,8,Heels,Shoes,Women,White,87.99
+AUR-SHO-10298-9,AUR-SHO-10298,White Leather Heels,9,Heels,Shoes,Women,White,87.99
+AUR-SHO-10298-10,AUR-SHO-10298,White Leather Heels,10,Heels,Shoes,Women,White,87.99
+AUR-SHO-2624-5,AUR-SHO-2624,Solid Black Heels,5,Heels,Shoes,Women,Black,115.99
+AUR-SHO-2624-6,AUR-SHO-2624,Solid Black Heels,6,Heels,Shoes,Women,Black,115.99
+AUR-SHO-2624-7,AUR-SHO-2624,Solid Black Heels,7,Heels,Shoes,Women,Black,115.99
+AUR-SHO-2624-8,AUR-SHO-2624,Solid Black Heels,8,Heels,Shoes,Women,Black,115.99
+AUR-SHO-2624-9,AUR-SHO-2624,Solid Black Heels,9,Heels,Shoes,Women,Black,115.99
+AUR-SHO-2624-10,AUR-SHO-2624,Solid Black Heels,10,Heels,Shoes,Women,Black,115.99
+AUR-SHO-6912-5,AUR-SHO-6912,Black Flats,5,Flats,Shoes,Women,Black,56.99
+AUR-SHO-6912-6,AUR-SHO-6912,Black Flats,6,Flats,Shoes,Women,Black,56.99
+AUR-SHO-6912-7,AUR-SHO-6912,Black Flats,7,Flats,Shoes,Women,Black,56.99
+AUR-SHO-6912-8,AUR-SHO-6912,Black Flats,8,Flats,Shoes,Women,Black,56.99
+AUR-SHO-6912-9,AUR-SHO-6912,Black Flats,9,Flats,Shoes,Women,Black,56.99
+AUR-SHO-6912-10,AUR-SHO-6912,Black Flats,10,Flats,Shoes,Women,Black,56.99
+AUR-SHO-10284-5,AUR-SHO-10284,White Leather Flats,5,Flats,Shoes,Women,White,41.99
+AUR-SHO-10284-6,AUR-SHO-10284,White Leather Flats,6,Flats,Shoes,Women,White,41.99
+AUR-SHO-10284-7,AUR-SHO-10284,White Leather Flats,7,Flats,Shoes,Women,White,41.99
+AUR-SHO-10284-8,AUR-SHO-10284,White Leather Flats,8,Flats,Shoes,Women,White,41.99
+AUR-SHO-10284-9,AUR-SHO-10284,White Leather Flats,9,Flats,Shoes,Women,White,41.99
+AUR-SHO-10284-10,AUR-SHO-10284,White Leather Flats,10,Flats,Shoes,Women,White,41.99
+AUR-SHO-10287-5,AUR-SHO-10287,Silver Leather Flats,5,Flats,Shoes,Women,Silver,38.99
+AUR-SHO-10287-6,AUR-SHO-10287,Silver Leather Flats,6,Flats,Shoes,Women,Silver,38.99
+AUR-SHO-10287-7,AUR-SHO-10287,Silver Leather Flats,7,Flats,Shoes,Women,Silver,38.99
+AUR-SHO-10287-8,AUR-SHO-10287,Silver Leather Flats,8,Flats,Shoes,Women,Silver,38.99
+AUR-SHO-10287-9,AUR-SHO-10287,Silver Leather Flats,9,Flats,Shoes,Women,Silver,38.99
+AUR-SHO-10287-10,AUR-SHO-10287,Silver Leather Flats,10,Flats,Shoes,Women,Silver,38.99
+AUR-SHO-10288-5,AUR-SHO-10288,Brown Leather Flats,5,Flats,Shoes,Women,Brown,56.99
+AUR-SHO-10288-6,AUR-SHO-10288,Brown Leather Flats,6,Flats,Shoes,Women,Brown,56.99
+AUR-SHO-10288-7,AUR-SHO-10288,Brown Leather Flats,7,Flats,Shoes,Women,Brown,56.99
+AUR-SHO-10288-8,AUR-SHO-10288,Brown Leather Flats,8,Flats,Shoes,Women,Brown,56.99
+AUR-SHO-10288-9,AUR-SHO-10288,Brown Leather Flats,9,Flats,Shoes,Women,Brown,56.99
+AUR-SHO-10288-10,AUR-SHO-10288,Brown Leather Flats,10,Flats,Shoes,Women,Brown,56.99
+AUR-SHO-2616-5,AUR-SHO-2616,Gold Wedge Flats,5,Flats,Shoes,Women,Gold,58.99
+AUR-SHO-2616-6,AUR-SHO-2616,Gold Wedge Flats,6,Flats,Shoes,Women,Gold,58.99
+AUR-SHO-2616-7,AUR-SHO-2616,Gold Wedge Flats,7,Flats,Shoes,Women,Gold,58.99
+AUR-SHO-2616-8,AUR-SHO-2616,Gold Wedge Flats,8,Flats,Shoes,Women,Gold,58.99
+AUR-SHO-2616-9,AUR-SHO-2616,Gold Wedge Flats,9,Flats,Shoes,Women,Gold,58.99
+AUR-SHO-2616-10,AUR-SHO-2616,Gold Wedge Flats,10,Flats,Shoes,Women,Gold,58.99
+AUR-SHO-2614-5,AUR-SHO-2614,Beige Flats,5,Flats,Shoes,Women,Beige,43.99
+AUR-SHO-2614-6,AUR-SHO-2614,Beige Flats,6,Flats,Shoes,Women,Beige,43.99
+AUR-SHO-2614-7,AUR-SHO-2614,Beige Flats,7,Flats,Shoes,Women,Beige,43.99
+AUR-SHO-2614-8,AUR-SHO-2614,Beige Flats,8,Flats,Shoes,Women,Beige,43.99
+AUR-SHO-2614-9,AUR-SHO-2614,Beige Flats,9,Flats,Shoes,Women,Beige,43.99
+AUR-SHO-2614-10,AUR-SHO-2614,Beige Flats,10,Flats,Shoes,Women,Beige,43.99
+AUR-SHO-12422-5,AUR-SHO-12422,Pink Casual Shoes,5,Casual Shoes,Shoes,Women,Pink,55.99
+AUR-SHO-12422-6,AUR-SHO-12422,Pink Casual Shoes,6,Casual Shoes,Shoes,Women,Pink,55.99
+AUR-SHO-12422-7,AUR-SHO-12422,Pink Casual Shoes,7,Casual Shoes,Shoes,Women,Pink,55.99
+AUR-SHO-12422-8,AUR-SHO-12422,Pink Casual Shoes,8,Casual Shoes,Shoes,Women,Pink,55.99
+AUR-SHO-12422-9,AUR-SHO-12422,Pink Casual Shoes,9,Casual Shoes,Shoes,Women,Pink,55.99
+AUR-SHO-12422-10,AUR-SHO-12422,Pink Casual Shoes,10,Casual Shoes,Shoes,Women,Pink,55.99
+AUR-SHO-12423-5,AUR-SHO-12423,Everyday Brown Casual Shoes,5,Casual Shoes,Shoes,Women,Brown,86.99
+AUR-SHO-12423-6,AUR-SHO-12423,Everyday Brown Casual Shoes,6,Casual Shoes,Shoes,Women,Brown,86.99
+AUR-SHO-12423-7,AUR-SHO-12423,Everyday Brown Casual Shoes,7,Casual Shoes,Shoes,Women,Brown,86.99
+AUR-SHO-12423-8,AUR-SHO-12423,Everyday Brown Casual Shoes,8,Casual Shoes,Shoes,Women,Brown,86.99
+AUR-SHO-12423-9,AUR-SHO-12423,Everyday Brown Casual Shoes,9,Casual Shoes,Shoes,Women,Brown,86.99
+AUR-SHO-12423-10,AUR-SHO-12423,Everyday Brown Casual Shoes,10,Casual Shoes,Shoes,Women,Brown,86.99
+AUR-SHO-12421-5,AUR-SHO-12421,Breeze Beige Casual Shoes,5,Casual Shoes,Shoes,Women,Beige,108.99
+AUR-SHO-12421-6,AUR-SHO-12421,Breeze Beige Casual Shoes,6,Casual Shoes,Shoes,Women,Beige,108.99
+AUR-SHO-12421-7,AUR-SHO-12421,Breeze Beige Casual Shoes,7,Casual Shoes,Shoes,Women,Beige,108.99
+AUR-SHO-12421-8,AUR-SHO-12421,Breeze Beige Casual Shoes,8,Casual Shoes,Shoes,Women,Beige,108.99
+AUR-SHO-12421-9,AUR-SHO-12421,Breeze Beige Casual Shoes,9,Casual Shoes,Shoes,Women,Beige,108.99
+AUR-SHO-12421-10,AUR-SHO-12421,Breeze Beige Casual Shoes,10,Casual Shoes,Shoes,Women,Beige,108.99
+AUR-SHO-12424-5,AUR-SHO-12424,Grey Casual Shoes,5,Casual Shoes,Shoes,Women,Grey,54.99
+AUR-SHO-12424-6,AUR-SHO-12424,Grey Casual Shoes,6,Casual Shoes,Shoes,Women,Grey,54.99
+AUR-SHO-12424-7,AUR-SHO-12424,Grey Casual Shoes,7,Casual Shoes,Shoes,Women,Grey,54.99
+AUR-SHO-12424-8,AUR-SHO-12424,Grey Casual Shoes,8,Casual Shoes,Shoes,Women,Grey,54.99
+AUR-SHO-12424-9,AUR-SHO-12424,Grey Casual Shoes,9,Casual Shoes,Shoes,Women,Grey,54.99
+AUR-SHO-12424-10,AUR-SHO-12424,Grey Casual Shoes,10,Casual Shoes,Shoes,Women,Grey,54.99
+AUR-SHO-12431-5,AUR-SHO-12431,Weekend Brown Casual Shoes,5,Casual Shoes,Shoes,Women,Brown,79.99
+AUR-SHO-12431-6,AUR-SHO-12431,Weekend Brown Casual Shoes,6,Casual Shoes,Shoes,Women,Brown,79.99
+AUR-SHO-12431-7,AUR-SHO-12431,Weekend Brown Casual Shoes,7,Casual Shoes,Shoes,Women,Brown,79.99
+AUR-SHO-12431-8,AUR-SHO-12431,Weekend Brown Casual Shoes,8,Casual Shoes,Shoes,Women,Brown,79.99
+AUR-SHO-12431-9,AUR-SHO-12431,Weekend Brown Casual Shoes,9,Casual Shoes,Shoes,Women,Brown,79.99
+AUR-SHO-12431-10,AUR-SHO-12431,Weekend Brown Casual Shoes,10,Casual Shoes,Shoes,Women,Brown,79.99
+AUR-SHO-36419-5,AUR-SHO-36419,Heritage Blue Running Shoes,5,Running Shoes,Shoes,Women,Blue,85.99
+AUR-SHO-36419-6,AUR-SHO-36419,Heritage Blue Running Shoes,6,Running Shoes,Shoes,Women,Blue,85.99
+AUR-SHO-36419-7,AUR-SHO-36419,Heritage Blue Running Shoes,7,Running Shoes,Shoes,Women,Blue,85.99
+AUR-SHO-36419-8,AUR-SHO-36419,Heritage Blue Running Shoes,8,Running Shoes,Shoes,Women,Blue,85.99
+AUR-SHO-36419-9,AUR-SHO-36419,Heritage Blue Running Shoes,9,Running Shoes,Shoes,Women,Blue,85.99
+AUR-SHO-36419-10,AUR-SHO-36419,Heritage Blue Running Shoes,10,Running Shoes,Shoes,Women,Blue,85.99
+AUR-SHO-36418-5,AUR-SHO-36418,Pink Running Shoes,5,Running Shoes,Shoes,Women,Pink,112.99
+AUR-SHO-36418-6,AUR-SHO-36418,Pink Running Shoes,6,Running Shoes,Shoes,Women,Pink,112.99
+AUR-SHO-36418-7,AUR-SHO-36418,Pink Running Shoes,7,Running Shoes,Shoes,Women,Pink,112.99
+AUR-SHO-36418-8,AUR-SHO-36418,Pink Running Shoes,8,Running Shoes,Shoes,Women,Pink,112.99
+AUR-SHO-36418-9,AUR-SHO-36418,Pink Running Shoes,9,Running Shoes,Shoes,Women,Pink,112.99
+AUR-SHO-36418-10,AUR-SHO-36418,Pink Running Shoes,10,Running Shoes,Shoes,Women,Pink,112.99
+AUR-SHO-36417-5,AUR-SHO-36417,Classic Black Running Shoes,5,Running Shoes,Shoes,Women,Black,117.99
+AUR-SHO-36417-6,AUR-SHO-36417,Classic Black Running Shoes,6,Running Shoes,Shoes,Women,Black,117.99
+AUR-SHO-36417-7,AUR-SHO-36417,Classic Black Running Shoes,7,Running Shoes,Shoes,Women,Black,117.99
+AUR-SHO-36417-8,AUR-SHO-36417,Classic Black Running Shoes,8,Running Shoes,Shoes,Women,Black,117.99
+AUR-SHO-36417-9,AUR-SHO-36417,Classic Black Running Shoes,9,Running Shoes,Shoes,Women,Black,117.99
+AUR-SHO-36417-10,AUR-SHO-36417,Classic Black Running Shoes,10,Running Shoes,Shoes,Women,Black,117.99
+AUR-SHO-33697-5,AUR-SHO-33697,Brown Sandals,5,Sandals,Shoes,Women,Brown,62.99
+AUR-SHO-33697-6,AUR-SHO-33697,Brown Sandals,6,Sandals,Shoes,Women,Brown,62.99
+AUR-SHO-33697-7,AUR-SHO-33697,Brown Sandals,7,Sandals,Shoes,Women,Brown,62.99
+AUR-SHO-33697-8,AUR-SHO-33697,Brown Sandals,8,Sandals,Shoes,Women,Brown,62.99
+AUR-SHO-33697-9,AUR-SHO-33697,Brown Sandals,9,Sandals,Shoes,Women,Brown,62.99
+AUR-SHO-33697-10,AUR-SHO-33697,Brown Sandals,10,Sandals,Shoes,Women,Brown,62.99
+AUR-SHO-26180-5,AUR-SHO-26180,Gold Sandals,5,Sandals,Shoes,Women,Gold,63.99
+AUR-SHO-26180-6,AUR-SHO-26180,Gold Sandals,6,Sandals,Shoes,Women,Gold,63.99
+AUR-SHO-26180-7,AUR-SHO-26180,Gold Sandals,7,Sandals,Shoes,Women,Gold,63.99
+AUR-SHO-26180-8,AUR-SHO-26180,Gold Sandals,8,Sandals,Shoes,Women,Gold,63.99
+AUR-SHO-26180-9,AUR-SHO-26180,Gold Sandals,9,Sandals,Shoes,Women,Gold,63.99
+AUR-SHO-26180-10,AUR-SHO-26180,Gold Sandals,10,Sandals,Shoes,Women,Gold,63.99
+AUR-BAG-47289,AUR-BAG-47289,Red Handbag,One Size,Handbags,Bags,Women,Red,78.99
+AUR-BAG-47298,AUR-BAG-47298,Purple Handbag,One Size,Handbags,Bags,Women,Purple,172.99
+AUR-BAG-47297,AUR-BAG-47297,Beige Handbag,One Size,Handbags,Bags,Women,Beige,144.99
+AUR-BAG-47296,AUR-BAG-47296,Brown Sling Handbag,One Size,Handbags,Bags,Women,Brown,127.99
+AUR-BAG-10323,AUR-BAG-10323,Black Handbag,One Size,Handbags,Bags,Women,Black,168.99
+AUR-BAG-10320,AUR-BAG-10320,White Handbag,One Size,Handbags,Bags,Women,White,60.99
+AUR-BAG-25798,AUR-BAG-25798,Green Leather Handbag,One Size,Handbags,Bags,Women,Green,87.99
+AUR-BAG-25799,AUR-BAG-25799,Turquoise Blue Leather Handbag,One Size,Handbags,Bags,Women,Turquoise Blue,134.99
+AUR-BAG-10242,AUR-BAG-10242,Grey Handbag,One Size,Handbags,Bags,Women,Grey,145.99
+AUR-BAG-33634,AUR-BAG-33634,Olive Handbag,One Size,Handbags,Bags,Women,Olive,143.99
+AUR-BAG-47318,AUR-BAG-47318,Pink Clutch,One Size,Clutches,Bags,Women,Pink,42.99
+AUR-BAG-47319,AUR-BAG-47319,Black Clutch,One Size,Clutches,Bags,Women,Black,38.99
+AUR-BAG-47287,AUR-BAG-47287,Purple Clutch,One Size,Clutches,Bags,Women,Purple,54.99
+AUR-BAG-47302,AUR-BAG-47302,Brown Clutch,One Size,Clutches,Bags,Women,Brown,78.99
+AUR-ACC-16840,AUR-ACC-16840,Maroon Sunglasses,One Size,Sunglasses,Accessories,Women,Maroon,30.99
+AUR-ACC-16841,AUR-ACC-16841,Brown Sunglasses,One Size,Sunglasses,Accessories,Women,Brown,77.99
+AUR-ACC-16842,AUR-ACC-16842,Everyday Black Sunglasses,One Size,Sunglasses,Accessories,Women,Black,30.99
+AUR-ACC-16852,AUR-ACC-16852,Breeze Green Sunglasses,One Size,Sunglasses,Accessories,Women,Green,28.99
+AUR-ACC-10312,AUR-ACC-10312,Silver Watch,One Size,Watches,Accessories,Women,Silver,206.99
+AUR-ACC-10313,AUR-ACC-10313,Studio Steel Watch,One Size,Watches,Accessories,Women,Steel,177.99
+AUR-ACC-10315,AUR-ACC-10315,Gold Watch,One Size,Watches,Accessories,Women,Gold,205.99
+AUR-ACC-49849,AUR-ACC-49849,Pink Analog Watch,One Size,Watches,Accessories,Women,Pink,157.99
+AUR-ACC-25960,AUR-ACC-25960,Blue Scarf,One Size,Scarves,Accessories,Women,Blue,41.99
+AUR-ACC-25949,AUR-ACC-25949,Printed Brown Scarf,One Size,Scarves,Accessories,Women,Brown,42.99
+AUR-ACC-25948,AUR-ACC-25948,Green Scarf,One Size,Scarves,Accessories,Women,Green,38.99
+AUR-ACC-25943,AUR-ACC-25943,Printed Yellow Scarf,One Size,Scarves,Accessories,Women,Yellow,43.99
+AUR-HAT-16535,AUR-HAT-16535,Check Grey Cap,One Size,Caps,Hats & Caps,Women,Grey,27.99
+AUR-HAT-16536,AUR-HAT-16536,Check Red Cap,One Size,Caps,Hats & Caps,Women,Red,30.99
+AUR-HAT-12437,AUR-HAT-12437,Everyday Green Cap,One Size,Caps,Hats & Caps,Unisex,Green,24.99
+AUR-HAT-12438,AUR-HAT-12438,Classic Black Cap,One Size,Caps,Hats & Caps,Unisex,Black,31.99
+AUR-HAT-2582,AUR-HAT-2582,Weekend Red Cap,One Size,Caps,Hats & Caps,Unisex,Red,23.99
+AUR-HAT-2585,AUR-HAT-2585,Studio Black Cap,One Size,Caps,Hats & Caps,Unisex,Black,19.99
+AUR-HAT-12440,AUR-HAT-12440,Black Hat,One Size,Hats,Hats & Caps,Unisex,Black,42.99
+AUR-HAT-12439,AUR-HAT-12439,Red Hat,One Size,Hats,Hats & Caps,Unisex,Red,43.99
+AUR-BAG-25864,AUR-BAG-25864,Purple Backpack,One Size,Backpacks,Bags,Unisex,Purple,60.99
+AUR-BAG-25865,AUR-BAG-25865,Blue Backpack,One Size,Backpacks,Bags,Unisex,Blue,67.99
+AUR-BAG-25867,AUR-BAG-25867,Black Reversible Backpack,One Size,Backpacks,Bags,Unisex,Black,90.99
+AUR-ACC-16849,AUR-ACC-16849,Avenue Green Sunglasses,One Size,Sunglasses,Accessories,Unisex,Green,32.99
+AUR-ACC-16859,AUR-ACC-16859,Everyday Brown Sunglasses,One Size,Sunglasses,Accessories,Unisex,Brown,84.99

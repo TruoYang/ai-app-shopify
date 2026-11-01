@@ -1,16 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Production URL
-  const PRODUCTION_URL = "https://my-plugin-ai.onrender.com";
-  
-  // Dev URL - set null to use production
-  let DEV_URL = null;
-  // Uncomment and update when testing locally:
-  DEV_URL = 'https://gnu-surround-journalist-just.trycloudflare.com';
-  
-  const APP_URL = DEV_URL || PRODUCTION_URL;
+  // Shopify app proxy (shopify.app.toml [app_proxy]): same origin as the store,
+  // forwarded by Shopify to whatever URL the app currently runs on.
+  const PROXY_PATH = '/apps/ai/recommend';
 
   console.log('AI Widget started...');
-  console.log('Using API:', APP_URL);
 
   const widgetContainer = document.getElementById('ai-widget-container');
   const contentContainer = document.getElementById('ai-product-content');
@@ -55,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Product IDs:', productIds);
       console.log('SKUs:', skus);
 
-      const apiUrl = `${APP_URL}/api/recommend?shop=${shopDomain}&ids=${productIds.join(',')}&skus=${skus.join(',')}`;
+      const params = new URLSearchParams({ ids: productIds.join(','), skus: skus.join(',') });
+      const apiUrl = `${PROXY_PATH}?${params}`;
       console.log('Fetching:', apiUrl);
 
       return fetch(apiUrl);

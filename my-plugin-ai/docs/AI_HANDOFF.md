@@ -328,7 +328,7 @@ Steps:
 
 The widget displays visible status messages for loading, empty cart, no recommendation, and API errors.
 
-Do not add both the legacy `AI Recommendations Widget` from the old app and the current `AI recommendations` block. The old app is `my plugin ai`; the current project app is `plugin-app-fix1`.
+Do not add both the legacy `AI Recommendations Widget` from the old app and the current `AI recommendations` block. The old app is `my plugin ai`; the current project app is `SmartCart RCM` (handle `smartcart-rcm`, formerly `plugin-app-fix1`).
 
 ## 8. Known Warnings and Caveats
 

@@ -1,5 +1,5 @@
 {
-  "name": "my-plugin-ai",
+  "name": "smartcart-rcm",
   "private": true,
   "scripts": {
     "build": "prisma generate && react-router build",
@@ -17,7 +17,11 @@
     "prisma": "prisma",
     "graphql-codegen": "graphql-codegen",
     "vite": "vite",
-    "typecheck": "react-router typegen && tsc --noEmit"
+    "typecheck": "react-router typegen && tsc --noEmit",
+    "catalog:fetch": "node scripts/catalog/fetch-kagl-metadata.mjs",
+    "catalog:build": "node scripts/catalog/build-fashion-catalog.mjs",
+    "catalog:images": "node scripts/catalog/download-catalog-images.mjs",
+    "catalog:seed": "node scripts/catalog/seed-shopify-catalog.mjs"
   },
   "type": "module",
   "engines": {
@@ -58,6 +62,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.2",
     "graphql-config": "^5.1.1",
+    "hyparquet": "^1.32.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "vite": "^6.3.6"

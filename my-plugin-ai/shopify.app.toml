@@ -1,20 +1,27 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "6a891d8e4d3a8ebc5706e099f72b3112"
-name = "plugin-app-fix1"
+name = "SmartCart RCM"
+handle = "smartcart-rcm"
 application_url = "https://shopify.dev/apps/default-app-home"
 embedded = true
 
 [build]
 automatically_update_urls_on_dev = true
-include_config_on_deploy = true
 
 [webhooks]
 api_version = "2026-01"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_orders,read_products"
+scopes = "read_orders,read_products,write_products,read_publications,write_publications,read_online_store_navigation,write_online_store_navigation"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+
+# Storefront widget calls https://<shop>/apps/ai/recommend, forwarded to <app url>/apps/ai/recommend.
+# "shopify app dev" swaps only the host for the current tunnel and keeps the /apps/ai path.
+[app_proxy]
+url = "https://shopify.dev/apps/ai"
+subpath = "ai"
+prefix = "apps"
