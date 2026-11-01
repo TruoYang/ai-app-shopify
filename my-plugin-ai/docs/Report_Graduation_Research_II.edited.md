@@ -42,72 +42,7 @@ List of Abbreviations 4
 3.1 Experimental Setup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 3.2 Sample Input Orders . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
 3.3 Example Learned Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
-3.4 Recommendation Test Cases . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
-3.5 Discussion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
-4 Conclusion and Future Developing 29
-4.1 Achievements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
-4.2 Skills Gained . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
-4.3 Future Improvements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
-1
-
-===== PAGE 3 =====
-ACKNOWLEDGEMENTS
-First and foremost, I would like to express my sincere gratitude to the Board of Management
-of SOICT - HUST and the lecturers of the Faculty of ICT for equipping me with valuable
-foundational knowledge throughout my academic journey.
-I am deeply indebted to my supervisor,Dr. Bui Trong Tungfor his dedicated guidance
-and support. His insightful feedback and expertise were instrumental in helping me navigate
-the technical challenges of building Shopify application, from optimizing the Association Rule
-algorithm to handing system integration issues.
-Despite my best efforts, this report may contain inevitable shortcomings due to lack of
-practical experience, I indeed welcome any constructive comments and suggestions from the
-lecturers to further improve this project in the future.
-Sincerely.
-Hanoi, 8 January, 2026
-Giang
-Nguyen Dang Truong Giang
-2
-
-===== PAGE 4 =====
-PREFACE
-In the digital age, e-commerce is developing robustly, becoming an indispensable component
-of the global economy. Beyond merely attracting new customers, optimizingAverage Order
-Value (AOV)is a critical challenge for retail businesses. One of the most effective solutions
-to address this is the implementation of aProduct Recommendation System. Howerver, for
-small and medium-sized merchants on the Shopify platform, accessing complex AI systems often
-presents significant barriers regarding cost and implementation capability.
-Addressing this practical need, this report presents the development process of"my-plugin-ai"
-- a Shopify application designed to automate product recommendations based on historical
-purchased order data.
-Problem Statement and SolutionThe core objective of this project is to build a closed-loop
-system serving two primary stakeholders: theMerchantandShop Owner.
-Algorithmic Foundation:System operates based on Association Rule Learning: The
-probability of product B exists given that a customer has selected product A.
-Technology Platform and Development Tools:The application is developed and tested in a
-local environment, designed withScalabilityfor future Production deployment in mind:
-•Platform:Shopify App (Embedded).
-• Network Communication:UtilizesShopify CLIcombined with aCloudflare Tunnel
-to establish a secure intermediate gateway. This allows the local application to maintain
-bi-directional communication (receiving Webhooks, consuming APIs) with Shopify
-servers.
-• Database:EmploysPrisma ORMto manage the data schema and execute queries for
-storing recommendation rules (including Pair IDs, SKUs, cart activation conditions and
-recommended products).
-SUMMARY OF REPORT CONTENTS
-The report is organized into chapters with specific contents as follows:
-• Chapter 1 - Problem Analysis and Solution Orientation:Presents the rationale for
-selecting the topic, research objectives and the scope of the "my-plugin-ai" application
-within the e-commerce ecosystem.
-• Chapter 2 - Theoretical Basis & System Design:Presents the comprehensive process
-of system construction. This chapter details the architectural design, logic processing,
-functional implementation (for both merchant and shopper workflows), system optimization,
-and the technical integration between Shopify, Cloudflare, and the local server.
-• Chapter 3 - Development and Experimental Implementation:Details the construction
-process of functional modules: the Data Training module, the Storage module ad the
-Recommendation API module via URL.
-• Chapter 4 - Conclusion:Summarizes the project’s achievements, key knowledge acquired
-during the course, and outlines potential directions for future system enhancements..
-3
+3.4 Recommendation Test Cases . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 
 
 ===== PAGE 5 =====
 List of Abbreviations
