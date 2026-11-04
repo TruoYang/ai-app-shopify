@@ -1,16 +1,119 @@
-<div id="ai-widget-container" style="display:block; border: 2px solid #008061; padding: 15px; margin-top: 20px; border-radius: 5px; background-color: #f4fbf9;">
-  <h3 style="margin-bottom: 10px; color: #008060;">Here are some suggestions for you</h3>
-  <div id="ai-product-content" style="display: flex; gap: 15px; align-items:center; flex-wrap: wrap;">
-    <p>Loading recommendations...</p>
-  </div>
-</div>
+{%- liquid
+  assign heading = block.settings.heading
+  if heading == blank
+    case template.name
+      when 'product'
+        assign heading = 'widget.heading_product' | t
+      when 'cart'
+        assign heading = 'widget.heading_cart' | t
+      else
+        assign heading = 'widget.heading_default' | t
+    endcase
+  endif
 
-<script src="{{ 'recommendations.js' | asset_url }}" defer="defer"></script>
+  case template.name
+    when 'product'
+      assign subtitle = 'widget.subtitle_product' | t
+    when 'cart'
+      assign subtitle = 'widget.subtitle_cart' | t
+    else
+      assign subtitle = 'widget.subtitle_default' | t
+  endcase
+
+  assign context_sku = ''
+  if template.name == 'product' and product
+    assign context_sku = product.selected_or_first_available_variant.sku
+  endif
+-%}
+
+<section
+  class="smartcart-rcm"
+  data-max-products="{{ block.settings.max_products }}"
+  data-size="{{ block.settings.card_size }}"
+  data-show-add-to-cart="{{ block.settings.show_add_to_cart }}"
+  data-context-sku="{{ context_sku | escape }}"
+  data-currency="{{ cart.currency.iso_code }}"
+  data-locale="{{ request.locale.iso_code }}"
+  data-text-add="{{ 'widget.add_to_cart' | t | escape }}"
+  data-text-added="{{ 'widget.added' | t | escape }}"
+  data-text-error="{{ 'widget.error' | t | escape }}"
+  data-text-best-seller="{{ 'widget.reason_best_seller' | t | escape }}"
+  data-text-trending="{{ 'widget.reason_trending' | t | escape }}"
+  data-text-new="{{ 'widget.reason_new' | t | escape }}"
+  data-text-similar="{{ 'widget.reason_similar' | t | escape }}"
+  data-text-bundle="{{ 'widget.bundle' | t | escape }}"
+  data-text-add-all="{{ 'widget.add_all' | t | escape }}"
+  {{ block.shopify_attributes }}
+  hidden
+>
+  <div class="smartcart-rcm__header">
+    <div>
+      <h2 class="smartcart-rcm__heading">{{ heading | escape }}</h2>
+      <p class="smartcart-rcm__subtitle">{{ subtitle | escape }}</p>
+    </div>
+    {%- if block.settings.show_size_switch -%}
+      <div class="smartcart-rcm__sizes" role="group" aria-label="{{ 'widget.card_size' | t | escape }}">
+        <button type="button" class="smartcart-rcm__size" data-size-option="large" aria-label="{{ 'widget.size_large' | t | escape }}" title="{{ 'widget.size_large' | t | escape }}">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="2"/></svg>
+        </button>
+        <button type="button" class="smartcart-rcm__size" data-size-option="medium" aria-label="{{ 'widget.size_medium' | t | escape }}" title="{{ 'widget.size_medium' | t | escape }}">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        </button>
+        <button type="button" class="smartcart-rcm__size" data-size-option="small" aria-label="{{ 'widget.size_small' | t | escape }}" title="{{ 'widget.size_small' | t | escape }}">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="6" y="1" width="4" height="4" rx="1"/><rect x="11" y="1" width="4" height="4" rx="1"/><rect x="1" y="6" width="4" height="4" rx="1"/><rect x="6" y="6" width="4" height="4" rx="1"/><rect x="11" y="6" width="4" height="4" rx="1"/><rect x="1" y="11" width="4" height="4" rx="1"/><rect x="6" y="11" width="4" height="4" rx="1"/><rect x="11" y="11" width="4" height="4" rx="1"/></svg>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="smartcart-rcm__grid" role="list"></div>
+  <div class="smartcart-rcm__footer"></div>
+</section>
 
 {% schema %}
 {
   "name": "AI recommendations",
   "target": "section",
-  "settings": []
+  "javascript": "recommendations.js",
+  "stylesheet": "recommendations.css",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave blank to use a heading that fits the page (home, product, cart)."
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "card_size",
+      "label": "Product card size",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_switch",
+      "label": "Let shoppers change the card size",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Show Add to cart button",
+      "default": true
+    }
+  ]
 }
 {% endschema %}

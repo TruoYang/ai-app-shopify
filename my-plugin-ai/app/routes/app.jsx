@@ -1,8 +1,12 @@
-// Layout for app 
+// Layout for the embedded admin app.
+//
+// AppProvider (Shopify) loads App Bridge with the app's API key: it adds the session token to
+// every request the app makes, so navigating inside the app (useNavigate, fetchers) stays
+// authenticated. Without it, in-app navigation is redirected to the login page.
 
-// app/routes/app.jsx
-import { Outlet, useLoaderData, useRouteError, isRouteErrorResponse } from "react-router";
-import { AppProvider as PolarisAppProvider, Frame } from "@shopify/polaris";
+import { Outlet, useLoaderData, useRouteError } from "react-router";
+import { AppProvider } from "@shopify/shopify-app-react-router/react";
+import { AppProvider as PolarisAppProvider } from "@shopify/polaris";
 import translations from "@shopify/polaris/locales/en.json";
 import "../styles.css";
 
@@ -15,42 +19,25 @@ export const loader = async ({ request }) => {
 };
 
 export default function App() {
-  useLoaderData();
+  const { apiKey } = useLoaderData();
 
   return (
-    <PolarisAppProvider i18n={translations}>
-      <ui-nav-menu>
-        <a href="/app">Recommendations</a>
-      </ui-nav-menu>
-      <Outlet/>
-    </PolarisAppProvider>
+    <AppProvider embedded apiKey={apiKey}>
+      <PolarisAppProvider i18n={translations}>
+        <ui-nav-menu>
+          <a href="/app" rel="home">Recommendations</a>
+          <a href="/app/rules">Rules</a>
+          <a href="/app/data">Data</a>
+        </ui-nav-menu>
+        <Outlet />
+      </PolarisAppProvider>
+    </AppProvider>
   );
 }
 
+// Shopify's boundary handles expired sessions (re-authentication) and shows other errors.
 export function ErrorBoundary() {
-  const error = useRouteError();
-  
-  if (isRouteErrorResponse(error)) {
-    return (
-      <html>
-        <body style={{ padding: 40 }}>
-          <h1>{error.status} - {error.statusText}</h1>
-          <p>{error.data}</p>
-          <a href="/auth/login">Log in again</a>
-        </body>
-      </html>
-    );
-  }
-
-  return (
-    <html>
-      <body style={{ padding: 40 }}>
-        <h1>Application Error</h1>
-        <pre>{error?.message || "Unknown error"}</pre>
-        <a href="/auth/login">Log in again</a>
-      </body>
-    </html>
-  );
+  return boundary.error(useRouteError());
 }
 
-export const headers = boundary.headers;
+export const headers = (headersArgs) => boundary.headers(headersArgs);

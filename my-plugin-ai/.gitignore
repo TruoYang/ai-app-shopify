@@ -30,3 +30,7 @@ database.sqlite
 /data/catalog/images/
 /data/catalog/seed-result-*.json
 /data/catalog/vn/
+/ml/.venv/
+__pycache__/
+/data/catalog/tstars/
+/data/catalog/pushed-orders-*.json

@@ -19,7 +19,6 @@ export const loader = async ({ request }) => {
             shop: session.shop,
             admin,
             cartSkus: parseList(url.searchParams.get("skus")),
-            cartIds: parseList(url.searchParams.get("ids")),
         });
 
         return Response.json(body, { status });

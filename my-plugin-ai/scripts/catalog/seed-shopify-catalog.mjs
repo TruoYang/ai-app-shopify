@@ -45,6 +45,7 @@ function parseArgs(argv) {
 const MAIN_MENU = [
   { title: "Women", collection: "women" },
   { title: "Men", collection: "men" },
+  { title: "Asia Edit", collection: "asia-edit" },
   {
     title: "Clothing",
     collection: "tops",
@@ -134,7 +135,9 @@ async function uploadImage(graphql, catalogDir, image) {
     throw new Error(`Missing ${filePath}. Run scripts/catalog/download-catalog-images.mjs first.`);
   }
   const bytes = fs.readFileSync(filePath);
-  const filename = path.basename(filePath);
+  // Catalogs may store PNGs (Tstars) as well as JPEGs (KAGL).
+  const mimeType = image.mimeType ?? "image/jpeg";
+  const filename = `${String(image.itemId)}.${mimeType === "image/png" ? "png" : "jpg"}`;
 
   const data = await graphql(
     `mutation StageImage($input: [StagedUploadInput!]!) {
@@ -147,7 +150,7 @@ async function uploadImage(graphql, catalogDir, image) {
       input: [{
         resource: "IMAGE",
         filename,
-        mimeType: "image/jpeg",
+        mimeType,
         httpMethod: "POST",
         fileSize: String(bytes.length),
       }],
@@ -159,7 +162,7 @@ async function uploadImage(graphql, catalogDir, image) {
   const target = stagedTargets[0];
   const form = new FormData();
   target.parameters.forEach(({ name, value }) => form.append(name, value));
-  form.append("file", new Blob([bytes], { type: "image/jpeg" }), filename);
+  form.append("file", new Blob([bytes], { type: mimeType }), filename);
 
   const response = await fetch(target.url, { method: "POST", body: form });
   if (!response.ok) throw new Error(`Image upload failed (${response.status}) for ${filename}`);
@@ -302,14 +305,15 @@ async function seedMenu(graphql) {
   if (!menu) throw new Error("Main menu (handle main-menu) not found");
 
   const collectionIds = new Map(data.collections.nodes.map((node) => [node.handle, node.id]));
+  // Entries whose collection does not exist on this shop are left out.
   const toItem = (entry) => {
     const resourceId = collectionIds.get(entry.collection);
-    if (!resourceId) throw new Error(`Collection ${entry.collection} not found; seed collections first`);
+    if (!resourceId) return null;
     return {
       title: entry.title,
       type: "COLLECTION",
       resourceId,
-      items: (entry.items ?? []).map(toItem),
+      items: (entry.items ?? []).map(toItem).filter(Boolean),
     };
   };
 
@@ -320,7 +324,7 @@ async function seedMenu(graphql) {
         userErrors { field message }
       }
     }`,
-    { id: menu.id, title: menu.title, items: MAIN_MENU.map(toItem) },
+    { id: menu.id, title: menu.title, items: MAIN_MENU.map(toItem).filter(Boolean) },
   );
   const { userErrors } = result.menuUpdate;
   if (userErrors.length) throw new Error(userErrors.map((error) => error.message).join("; "));

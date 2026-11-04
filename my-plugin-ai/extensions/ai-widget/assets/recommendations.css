@@ -1,0 +1,261 @@
+/* Inherits fonts and colours from the theme; only layout is set here. */
+/* Full width even when the theme section shrinks its blocks to their content. */
+.smartcart-rcm {
+  --rcm-card: 190px;
+  width: 100%;
+  align-self: stretch;
+  margin-block: 2rem;
+}
+
+/* Shopify wraps every app block in div.shopify-app-block; theme sections (Horizon) size it to its
+   content, so stretch that wrapper too. */
+.shopify-app-block[data-block-handle="ai-recommendations"] {
+  width: 100%;
+  align-self: stretch;
+  flex: 1 1 100%;
+}
+
+.smartcart-rcm[data-size="small"] { --rcm-card: 140px; }
+.smartcart-rcm[data-size="large"] { --rcm-card: 260px; }
+
+.smartcart-rcm__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.smartcart-rcm__heading {
+  margin: 0;
+}
+
+.smartcart-rcm__sizes {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.smartcart-rcm__size {
+  display: inline-flex;
+  padding: 0.4rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.smartcart-rcm__size svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.smartcart-rcm__size:hover,
+.smartcart-rcm__size[aria-pressed="true"] {
+  opacity: 1;
+  border-color: currentColor;
+}
+
+/* Cards flow in rows across the full width; the card size sets how many fit. */
+.smartcart-rcm__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--rcm-card), 1fr));
+  gap: 1.25rem 1rem;
+}
+
+@media (max-width: 749px) {
+  .smartcart-rcm__grid {
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--rcm-card) * 0.75), 1fr));
+  }
+}
+
+.smartcart-rcm__subtitle {
+  margin: 0.25rem 0 0;
+  opacity: 0.65;
+}
+
+/* Product card: lifts on hover; the reason label explains why it is suggested. */
+.smartcart-rcm__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 14px;
+  background: rgb(255 255 255);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.smartcart-rcm__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.1);
+}
+
+/* The light grey frame matches product shots on white or grey backgrounds, so the
+   space around a product (inside the photo) looks intentional. object-fit: cover keeps
+   proportions; "fill" would stretch and distort the product. */
+.smartcart-rcm__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+
+.smartcart-rcm__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.smartcart-rcm__card:hover .smartcart-rcm__media img {
+  transform: scale(1.06);
+}
+
+.smartcart-rcm__badge {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #e0242f;
+  color: #fff;
+}
+
+.smartcart-rcm__reason {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.6rem;
+  max-width: calc(100% - 1.2rem);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgb(255 255 255 / 0.92);
+  color: #111;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+}
+
+.smartcart-rcm__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem 0.8rem 0.85rem;
+}
+
+.smartcart-rcm__title {
+  min-height: 2.6em;
+  color: inherit;
+  text-decoration: none;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.smartcart-rcm__price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+
+.smartcart-rcm__now {
+  font-weight: 700;
+}
+
+.smartcart-rcm__now--sale {
+  color: #e0242f;
+}
+
+.smartcart-rcm__compare {
+  opacity: 0.55;
+  text-decoration: line-through;
+  font-size: 0.85em;
+}
+
+/* Gets the theme's "button" class (primary style); full width at the bottom of the card. */
+.smartcart-rcm__button {
+  margin-top: auto;
+  width: 100%;
+  min-height: 2.6rem;
+  cursor: pointer;
+}
+
+.smartcart-rcm__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+[data-size="small"] .smartcart-rcm__body {
+  padding: 0.6rem;
+  font-size: 0.9em;
+}
+
+/* "Complete the look" bar under the cards. */
+.smartcart-rcm__bundle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  background: rgb(0 0 0 / 0.04);
+}
+
+.smartcart-rcm__bundle-thumbs {
+  display: flex;
+}
+
+.smartcart-rcm__bundle-thumbs img {
+  width: 44px;
+  height: 58px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  margin-left: -10px;
+  background: #f4f4f4;
+}
+
+.smartcart-rcm__bundle-thumbs img:first-child {
+  margin-left: 0;
+}
+
+.smartcart-rcm__bundle-text {
+  flex: 1;
+  min-width: 180px;
+  font-weight: 600;
+}
+
+.smartcart-rcm__add-all {
+  width: auto;
+  margin-top: 0;
+  padding-inline: 1.5rem;
+}
+
+/* Only an empty widget shows a loading state: a soft pulse instead of dimmed cards. */
+.smartcart-rcm--loading .smartcart-rcm__grid:empty {
+  min-height: 220px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgb(0 0 0 / 0.04), rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.04));
+  background-size: 200% 100%;
+  animation: smartcart-rcm-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes smartcart-rcm-pulse {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}

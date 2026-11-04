@@ -62,3 +62,64 @@ div[class*="product-grid__item.product-grid__item--1"] {
     padding: 4px 8px;
     border-radius: 4px;
 } */
+/* Rules page (app.rules.jsx): cart product(s) -> suggested product */
+.rule-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+}
+
+.rule-row__cart {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rule-row__arrow {
+    text-align: center;
+    font-size: 28px;
+    color: var(--p-color-text-secondary, #616161);
+}
+
+.rule-card__link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
+
+.rule-card {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid var(--p-color-border, #e3e3e3);
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.rule-card__link:hover .rule-card {
+    border-color: var(--p-color-border-hover, #a8a8a8);
+    background: var(--p-color-bg-surface-hover, #f7f7f7);
+}
+
+.rule-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.rule-card--missing {
+    opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+    .rule-row {
+        grid-template-columns: 1fr;
+    }
+
+    .rule-row__arrow {
+        transform: rotate(90deg);
+    }
+}

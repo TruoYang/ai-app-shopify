@@ -21,7 +21,8 @@
     "catalog:fetch": "node scripts/catalog/fetch-kagl-metadata.mjs",
     "catalog:build": "node scripts/catalog/build-fashion-catalog.mjs",
     "catalog:images": "node scripts/catalog/download-catalog-images.mjs",
-    "catalog:seed": "node scripts/catalog/seed-shopify-catalog.mjs"
+    "catalog:seed": "node scripts/catalog/seed-shopify-catalog.mjs",
+    "build:widget": "esbuild widget-src/recommendations.js --minify --target=es2020 --outfile=extensions/ai-widget/assets/recommendations.js"
   },
   "type": "module",
   "engines": {
@@ -63,6 +64,8 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "graphql-config": "^5.1.1",
     "hyparquet": "^1.32.0",
+    "jpeg-js": "^0.4.4",
+    "pngjs": "^7.0.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "vite": "^6.3.6"

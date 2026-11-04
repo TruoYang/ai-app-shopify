@@ -57,8 +57,57 @@ model OrderHistory {
   productIds    String    // JSON array of product IDs in this order
   source        String    @default("shopify") // "csv_import" or "shopify"
   orderDate     DateTime? // Original order date
+  customerId    String?   // Customer ID from the CSV, or the Shopify customer GID
+  lines         String?   // JSON array: [{ code, quantity, price }] (price per unit, as in the source)
   createdAt     DateTime  @default(now())
 
   @@unique([shop, orderId])
   @@index([shop])
+  @@index([shop, customerId])
+}
+
+// One uploaded CSV file of historical orders and the column roles chosen for it.
+model CsvImport {
+  id            Int       @id @default(autoincrement())
+  shop          String
+  fileName      String
+  columnMap     String    // JSON: { orderId: "InvoiceNo", productCode: "StockCode", ... }
+  mode          String    // "replace" or "append"
+  rowCount      Int       @default(0)
+  orderCount    Int       @default(0)
+  skippedRows   Int       @default(0)
+  createdAt     DateTime  @default(now())
+
+  @@index([shop])
+}
+
+// A product as it appears in imported CSV files, and the shop product it stands for.
+// shopProductKey is a product key from app/catalog.server.js; each shop product is
+// matched to at most one CSV product.
+model CsvProduct {
+  id             Int       @id @default(autoincrement())
+  shop           String
+  code           String    // product code / SKU column in the CSV
+  name           String?
+  orderCount     Int       @default(0)
+  shopProductKey String?
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([shop, code])
+  @@unique([shop, shopProductKey])
+  @@index([shop, orderCount])
+}
+
+// Per-shop settings for training.
+model ShopSettings {
+  shop              String    @id
+  trainFrom         DateTime? // only orders on or after this date are used
+  trainTo           DateTime? // only orders on or before this date are used
+  trainLastMonths   Int?      // alternative to trainFrom: rolling window
+  strategy          String    @default("apriori")  // apriori | fpgrowth | itemknn | dec
+  rankBy            String    @default("balanced") // balanced | revenue | quantity | interaction
+  retrainSchedule   String    @default("none")     // none | weekly | monthly
+  lastTrainedAt     DateTime?
+  lastTrainSummary  String?   // JSON stats of the last training run
+  updatedAt         DateTime  @updatedAt
 }

@@ -33,7 +33,6 @@ export const loader = async ({ request }) => {
             shop,
             admin,
             cartSkus: parseList(url.searchParams.get("skus")),
-            cartIds: parseList(url.searchParams.get("ids")),
         });
 
         return new Response(JSON.stringify(body), { status, headers: corsHeaders });

@@ -1,6 +1,23 @@
 {
   "widget": {
-    "title": "AI Recommendations For You",
-    "loading": "Loading recommendations..."
+    "heading_default": "Recommended for you",
+    "heading_product": "Frequently bought together",
+    "heading_cart": "Complete your look",
+    "add_to_cart": "Add to cart",
+    "added": "Added",
+    "error": "Could not add",
+    "card_size": "Card size",
+    "size_large": "Large cards",
+    "size_medium": "Medium cards",
+    "size_small": "Small cards",
+    "subtitle_default": "Hand-picked from what other shoppers love right now",
+    "subtitle_product": "Shoppers who bought this also picked these",
+    "subtitle_cart": "Picked for what's already in your cart",
+    "reason_best_seller": "Best seller",
+    "reason_trending": "Trending",
+    "reason_new": "New in",
+    "reason_similar": "Similar style",
+    "bundle": "Complete the look: {count} items for {total}",
+    "add_all": "Add all {count} to cart"
   }
 }

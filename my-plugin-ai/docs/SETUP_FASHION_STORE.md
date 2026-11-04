@@ -103,3 +103,20 @@ npm.cmd run catalog:images   # tải ảnh
 ```
 
 Có thể chỉnh số lượng sản phẩm theo từng loại (`SELECTION`), khoảng giá (`TYPES`) và tên thương hiệu (`STORE_BRAND`) ở đầu file `scripts/catalog/build-fashion-catalog.mjs`.
+
+## Bộ hàng phong cách châu Á (Asia Edit)
+
+Ngoài 233 sản phẩm Myntra, shop có thêm 219 sản phẩm lấy từ bộ dữ liệu
+[Tstars-VTON](https://huggingface.co/datasets/TaobaoTmall-AlgorithmProducts/Tstars-VTON) của Taobao/Tmall
+(giấy phép **CC BY-NC-ND 4.0**: chỉ dùng phi thương mại, ghi nguồn, không chỉnh sửa ảnh).
+
+- 219 sản phẩm, 923 SKU (`AUR-AS-<NHÓM>-<mã>-<size>`): áo, áo khoác, quần, chân váy, đầm (có sườn xám), giày, túi, mũ.
+- Tất cả có tag `Asia Edit` (collection riêng, có trên menu) và vẫn vào các collection Women / Men / Tops / Shoes...
+- Màu sắc được nhận diện tự động từ ảnh (bộ dữ liệu không có thuộc tính màu); có thể sai với ảnh chụp trên người mẫu.
+- Mỗi sản phẩm có sẵn tên và mô tả tiếng Việt (`titleVi`, `descriptionHtmlVi` trong catalog) để đẩy bản dịch khi bật tiếng Việt cho storefront.
+
+```powershell
+node scripts/catalog/fetch-tstars-metadata.mjs     # thuộc tính 4.097 món (~1 phút)
+node scripts/catalog/build-tstars-catalog.mjs      # chọn, tải ảnh (~190 MB), dựng data/catalog/tstars/catalog.json
+node scripts/catalog/seed-shopify-catalog.mjs --catalog data/catalog/tstars/catalog.json --shop my-favsion.myshopify.com
+```

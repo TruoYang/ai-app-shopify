@@ -1,123 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Shopify app proxy (shopify.app.toml [app_proxy]): same origin as the store,
-  // forwarded by Shopify to whatever URL the app currently runs on.
-  const PROXY_PATH = '/apps/ai/recommend';
-
-  console.log('AI Widget started...');
-
-  const widgetContainer = document.getElementById('ai-widget-container');
-  const contentContainer = document.getElementById('ai-product-content');
-
-  if (!widgetContainer || !contentContainer) {
-    console.error('Widget containers not found!');
-    return;
-  }
-
-  const setStatus = (message) => {
-    contentContainer.innerHTML = `<p style="margin: 0; color: #666;">${message}</p>`;
-    widgetContainer.style.display = 'block';
-  };
-
-  const escapeHtml = (value) => String(value ?? '')
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-
-  const shopDomain = window.Shopify?.shop;
-  if (!shopDomain) {
-    console.error('Shopify.shop not available');
-    setStatus('We could not identify this store yet.');
-    return;
-  }
-  
-  fetch('/cart.js')
-    .then(res => res.json())
-    .then(cart => {
-      console.log('Cart:', cart);
-      
-      if (cart.item_count === 0) {
-        setStatus('Add a product to your cart to see suggestions.');
-        return;
-      }
-
-      const productIds = cart.items.map(item => item.product_id);
-      const skus = cart.items.map(item => item.sku).filter(Boolean);
-      
-      console.log('Product IDs:', productIds);
-      console.log('SKUs:', skus);
-
-      const params = new URLSearchParams({ ids: productIds.join(','), skus: skus.join(',') });
-      const apiUrl = `${PROXY_PATH}?${params}`;
-      console.log('Fetching:', apiUrl);
-
-      return fetch(apiUrl);
-    })
-    .then(res => {
-      if (!res) return null;
-      if (!res.ok) {
-        console.error('API Error:', res.status);
-        return res.json().then(data => {
-          console.log('API Response:', data);
-          return null;
-        });
-      }
-      return res.json();
-    })
-    .then(data => {
-      if (!data) {
-        setStatus('Recommendations are temporarily unavailable.');
-        return;
-      }
-      
-      console.log('AI Response:', data);
-
-      const recommendations = Array.isArray(data.products)
-        ? data.products
-        : data.product
-          ? [{ product: data.product, confidence: data.confidence }]
-          : [];
-
-      if (recommendations.length > 0) {
-        const html = recommendations.map((recommendation) => {
-          const product = recommendation.product;
-          const confidence = recommendation.confidence
-            ? (recommendation.confidence * 100).toFixed(0)
-            : '?';
-          const productUrl = escapeHtml(product.url);
-
-          return `
-            <article style="display: flex; gap: 12px; align-items: center; width: 100%;">
-              <img src="${escapeHtml(product.image || 'https://via.placeholder.com/60')}"
-                   alt="${escapeHtml(product.title)}"
-                   style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;"
-                   onerror="this.src='https://via.placeholder.com/60'">
-              <div style="flex-grow: 1;">
-                <a href="${productUrl}" style="font-weight: bold; text-decoration: none; color: black;">
-                  ${escapeHtml(product.title)}
-                </a>
-                <p style="margin: 0; color: #666;">${escapeHtml(product.price)} ${escapeHtml(product.currency)}</p>
-                <small style="color: #999;">${confidence}% customers also bought</small>
+"use strict";(()=>{const x="/apps/ai/recommend",_="smartcart-rcm:v2",w="smartcart-rcm:card-size",g=["small","medium","large"],L=()=>{try{return JSON.parse(sessionStorage.getItem(_))||{byCart:{},lastShown:[]}}catch{return{byCart:{},lastShown:[]}}},T=r=>{try{const t=Object.keys(r.byCart);t.slice(0,Math.max(0,t.length-20)).forEach(e=>delete r.byCart[e]),sessionStorage.setItem(_,JSON.stringify(r))}catch{}},d=r=>String(r??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"),C=(r,t)=>{if(!r)return"";const e=r.includes("?")?"&":"?";return`${r}${e}width=${t}`},b=r=>String(r??"").split("/").pop();let f;const E=()=>(f===void 0&&(f=import("@shopify/events").catch(()=>null)),f),v=()=>fetch("/cart.js",{headers:{Accept:"application/json"}}).then(r=>r.json());class j{constructor(t){this.root=t,this.grid=t.querySelector(".smartcart-rcm__grid"),this.footer=t.querySelector(".smartcart-rcm__footer"),this.max=Number(t.dataset.maxProducts)||4,this.showAddToCart=t.dataset.showAddToCart!=="false",this.contextSku=t.dataset.contextSku||"",this.formatter=new Intl.NumberFormat(t.dataset.locale||void 0,{style:"currency",currency:t.dataset.currency||"USD"}),this.root.addEventListener("click",e=>this.onClick(e)),this.setupSizeSwitch()}setupSizeSwitch(){let t=null;try{t=localStorage.getItem(w)}catch{}this.applySize(g.includes(t)?t:this.root.dataset.size),this.root.querySelectorAll("[data-size-option]").forEach(e=>{e.addEventListener("click",()=>{const n=e.dataset.sizeOption;this.applySize(n);try{localStorage.setItem(w,n)}catch{}})})}applySize(t){const e=g.includes(t)?t:"medium";this.root.dataset.size=e,this.root.querySelectorAll("[data-size-option]").forEach(n=>{n.setAttribute("aria-pressed",String(n.dataset.sizeOption===e))})}async refresh(){const t=await v().catch(()=>null);if(!t)return;const e=[this.contextSku,...t.items.map(a=>a.sku)].filter(Boolean),n=[...new Set(e)].sort().join(","),c=L();c.byCart[n]?this.render(c.byCart[n]):this.root.classList.add("smartcart-rcm--loading");try{const a=new URLSearchParams({skus:[...new Set(e)].join(",")}),s=await fetch(`${x}?${a}`,{headers:{Accept:"application/json"}});if(!s.ok)throw new Error(`HTTP ${s.status}`);const i=await s.json(),l=Array.isArray(i.products)?i.products:[],o=new Set(i.cartKeys||[]),m=new Set(l.map(h=>h.product.sku)),u=(c.lastShown||[]).filter(h=>!m.has(h.product.sku)&&!o.has(h.product.sku)).slice(0,2),p=[...l.slice(0,this.max-u.length),...u].slice(0,this.max);c.byCart[n]=p,c.lastShown=p,T(c),this.render(p)}catch(a){console.warn("SmartCart RCM: could not load recommendations",a)}finally{this.root.classList.remove("smartcart-rcm--loading")}}render(t){if(!t.length){this.root.hidden=!0;return}const e=this.root.dataset,n=t.slice(0,this.max);this.grid.innerHTML=n.map(a=>{const{product:s}=a,i=Number(s.price),l=Number(s.compareAtPrice),o=l>i?Math.round((1-i/l)*100):0,m=d(s.url),u=this.reason(a),p=s.image?`<img src="${d(C(s.image,480))}" alt="${d(s.title)}" loading="lazy" width="480" height="640">`:"",h=this.showAddToCart&&s.variantId?`<button type="button" class="smartcart-rcm__button button" data-variant-id="${d(b(s.variantId))}"><span>${d(e.textAdd)}</span></button>`:"";return`
+          <article class="smartcart-rcm__card" role="listitem">
+            <a class="smartcart-rcm__media" href="${m}">
+              ${p}
+              ${o?`<span class="smartcart-rcm__badge">-${o}%</span>`:""}
+              ${u?`<span class="smartcart-rcm__reason">${d(u)}</span>`:""}
+            </a>
+            <div class="smartcart-rcm__body">
+              <a class="smartcart-rcm__title" href="${m}">${d(s.title)}</a>
+              <div class="smartcart-rcm__price">
+                <span class="smartcart-rcm__now${o?" smartcart-rcm__now--sale":""}">${d(this.formatter.format(i))}</span>
+                ${o?`<span class="smartcart-rcm__compare">${d(this.formatter.format(l))}</span>`:""}
               </div>
-              <a href="${productUrl}"
-                 style="padding: 8px 12px; background: black; color: white; text-decoration: none; border-radius: 4px;">
-                View
-              </a>
-            </article>
-          `;
-        }).join('');
-
-        contentContainer.innerHTML = html;
-        widgetContainer.style.display = 'block';
-        console.log('Widget displayed!');
-      } else {
-        console.log('ℹNo recommendation:', data.message);
-        setStatus("Oops, we don't have any products to suggest right now.");
-      }
-    })
-    .catch(err => {
-      console.error('Widget Error:', err);
-      setStatus('Recommendations are temporarily unavailable.');
-    });
-});
+              ${h}
+            </div>
+          </article>`}).join("");const c=n.filter(a=>a.product.variantId).slice(0,3);if(this.footer)if(this.showAddToCart&&c.length>=2){const a=c.reduce((o,m)=>o+Number(m.product.price),0),s=o=>o.replace("{count}",c.length).replace("{total}",this.formatter.format(a)),i=c.map(o=>o.product.image?`<img src="${d(C(o.product.image,120))}" alt="" width="48" height="64">`:"").join(""),l=c.map(o=>b(o.product.variantId)).join(",");this.footer.innerHTML=`
+            <div class="smartcart-rcm__bundle">
+              <div class="smartcart-rcm__bundle-thumbs">${i}</div>
+              <span class="smartcart-rcm__bundle-text">${d(s(e.textBundle))}</span>
+              <button type="button" class="smartcart-rcm__button smartcart-rcm__add-all button" data-variant-ids="${l}"><span>${d(s(e.textAddAll))}</span></button>
+            </div>`}else this.footer.innerHTML="";this.root.hidden=!1}reason(t){const e=this.root.dataset;return{best_seller:e.textBestSeller,recent_orders:e.textTrending,new_arrival:e.textNew,same_category:e.textSimilar}[t.source]||""}async onClick(t){const e=t.target.closest(".smartcart-rcm__button");if(!e||e.disabled)return;const n=e.querySelector("span"),c=n.textContent,{textAdded:a,textError:s}=this.root.dataset,i=(e.dataset.variantIds||e.dataset.variantId).split(",").map(Number);e.disabled=!0;try{await k(e,i),n.textContent=a}catch(l){console.warn("SmartCart RCM: add to cart failed",l),n.textContent=s}setTimeout(()=>{n.textContent=c,e.disabled=!1},2e3)}}async function k(r,t){const e=[...document.querySelectorAll("cart-items-component[data-section-id]")].map(a=>a.dataset.sectionId),n=await E(),c=n?.CartLinesUpdateEvent?.createPromise?.();c&&r.dispatchEvent(new n.CartLinesUpdateEvent({action:"add",context:"product",lines:t.map(a=>({merchandiseId:`gid://shopify/ProductVariant/${a}`,quantity:1})),promise:c.promise}));try{const a=await fetch("/cart/add.js",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({items:t.map(l=>({id:l,quantity:1})),sections:e.join(",")})}),s=await a.json();if(!a.ok||s.status)throw new Error(s.description||s.message||"Add failed");const i=await v();c?c.resolve({cart:n.CartLinesUpdateEvent.createCartFromAjaxResponse(i),detail:{items:i.items,source:"smartcart-rcm",itemCount:t.length,sections:s.sections,didError:!1}}):window.location.pathname==="/cart"&&window.location.reload(),c||S()}catch(a){throw c?.reject(a),a}}const A=[];let $;const S=()=>{clearTimeout($),$=setTimeout(()=>A.forEach(r=>r.refresh()),300)};async function y(){document.querySelectorAll(".smartcart-rcm").forEach(t=>{if(t.dataset.ready)return;t.dataset.ready="true";const e=new j(t);A.push(e),e.refresh()});const r=await E();r?.StandardEvents?.cartLinesUpdate&&document.addEventListener(r.StandardEvents.cartLinesUpdate,t=>{Promise.resolve(t.promise).catch(()=>{}).finally(S)}),window.addEventListener("pageshow",t=>{t.persisted&&S()})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",y):y(),document.addEventListener("shopify:section:load",y)})();

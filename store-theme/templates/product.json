@@ -375,7 +375,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "portrait",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -452,8 +452,8 @@
         "recommendation_type": "related",
         "layout_type": "grid",
         "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 4,
+        "max_products": 10,
+        "columns": 5,
         "mobile_columns": "2",
         "columns_gap": 12,
         "rows_gap": 24,
@@ -465,10 +465,51 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "ai_recommendations_product": {
+      "type": "_blocks",
+      "blocks": {
+        "smartcart_rcm_product_block": {
+          "type": "shopify://apps/smartcart-rcm/blocks/ai-recommendations/01a1988b-57d8-71f5-a4d5-4f5cfacab99e",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "smartcart_rcm_product_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
     }
   },
   "order": [
     "main",
+    "ai_recommendations_product",
     "product_recommendations_qggXJq"
   ]
 }

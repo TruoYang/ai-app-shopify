@@ -32,6 +32,16 @@ export const action = async ({ request }) => {
     return new Response();
   }
 
+  // Orders created from the CSV history are already stored as CSV orders.
+  const tags = String(payload?.tags ?? "").split(",").map((tag) => tag.trim());
+  if (tags.includes("csv-demo")) return new Response();
+
+  const customerId = payload?.customer?.admin_graphql_api_id
+    ?? (payload?.customer?.id ? `gid://shopify/Customer/${payload.customer.id}` : null);
+  const lines = JSON.stringify((payload?.line_items ?? [])
+    .filter((li) => typeof li?.sku === "string" && li.sku.trim())
+    .map((li) => ({ code: li.sku.trim(), quantity: li.quantity, price: Number(li.price ?? 0) })));
+
   // Need at least 2 items to learn associations.
   if (uniqueSkus.length >= 2) {
     // Idempotency: OrderHistory has @@unique([shop, orderId])
@@ -43,6 +53,8 @@ export const action = async ({ request }) => {
         productIds: JSON.stringify(uniqueSkus),
         source: "shopify",
         orderDate,
+        customerId,
+        lines,
       },
       create: {
         shop,
@@ -50,6 +62,8 @@ export const action = async ({ request }) => {
         productIds: JSON.stringify(uniqueSkus),
         source: "shopify",
         orderDate,
+        customerId,
+        lines,
       },
     });
   } else {
