@@ -25,8 +25,36 @@ import { authenticate } from "../shopify.server";
 import prisma from "../db.server";
 import { formatNumber } from "../format";
 import { getShopCatalog } from "../catalog.server";
+import { useT } from "../i18n";
 
 const PAGE_SIZE = 50;
+
+const VI = {
+  "Match products in shop": "Khớp sản phẩm trong shop",
+  "{matched} matched · {count} products in shop": "{matched} đã khớp · {count} sản phẩm trong shop",
+  "Search CSV products": "Tìm sản phẩm CSV",
+  "Name or code": "Tên hoặc mã",
+  Show: "Hiển thị",
+  "Not matched": "Chưa khớp",
+  Matched: "Đã khớp",
+  "{count} CSV products, most ordered first. Each shop product can be matched to one CSV product.":
+    "{count} sản phẩm CSV, nhiều đơn hàng nhất xếp trước. Mỗi sản phẩm trong shop chỉ khớp được với một sản phẩm CSV.",
+  "Change shop product": "Đổi sản phẩm shop",
+  "Choose shop product": "Chọn sản phẩm shop",
+  "{code} · {count} orders": "{code} · {count} đơn hàng",
+  Unlink: "Bỏ khớp",
+  "{key} (not in shop)": "{key} (không có trong shop)",
+  "Page {page} of {count}": "Trang {page}/{count}",
+  'Shop product for “{name}”': "Sản phẩm shop cho “{name}”",
+  "Search shop products": "Tìm sản phẩm trong shop",
+  "Name, SKU or type": "Tên, SKU hoặc loại",
+  "Choose {name}": "Chọn {name}",
+  "{key} · already matched to “{name}”": "{key} · đã khớp với “{name}”",
+  "CSV product not found": "Không tìm thấy sản phẩm CSV",
+  "Choose a shop product": "Hãy chọn một sản phẩm shop",
+  "That shop product is already matched to “{name}”. Unlink it first.":
+    "Sản phẩm shop này đã khớp với “{name}”. Hãy bỏ khớp trước.",
+};
 
 export const loader = async ({ request }) => {
   const { session, admin } = await authenticate.admin(request);
@@ -90,7 +118,11 @@ export const action = async ({ request }) => {
   const taken = await prisma.csvProduct.findFirst({ where: { shop, shopProductKey: productKey, NOT: { id } } });
   if (taken) {
     return Response.json(
-      { success: false, error: `That shop product is already matched to "${taken.name || taken.code}". Unlink it first.` },
+      {
+        success: false,
+        error: "That shop product is already matched to “{name}”. Unlink it first.",
+        errorVars: { name: taken.name || taken.code },
+      },
       { status: 409 },
     );
   }
@@ -99,6 +131,7 @@ export const action = async ({ request }) => {
 };
 
 function ProductPicker({ csvRow, products, matchedTo, onClose }) {
+  const t = useT(VI);
   const fetcher = useFetcher();
   const [search, setSearch] = useState("");
   const filtered = useMemo(() => {
@@ -114,13 +147,19 @@ function ProductPicker({ csvRow, products, matchedTo, onClose }) {
     <Modal
       open
       onClose={onClose}
-      title={`Shop product for "${csvRow.name || csvRow.code}"`}
-      secondaryActions={[{ content: "Cancel", onAction: onClose }]}
+      title={t("Shop product for “{name}”", { name: csvRow.name || csvRow.code })}
+      secondaryActions={[{ content: t("Cancel"), onAction: onClose }]}
     >
       <Modal.Section>
         <BlockStack gap="300">
-          <TextField label="Search shop products" value={search} onChange={setSearch} autoComplete="off" placeholder="Name, SKU or type" />
-          {fetcher.data?.error && <Banner tone="critical">{fetcher.data.error}</Banner>}
+          <TextField
+            label={t("Search shop products")}
+            value={search}
+            onChange={setSearch}
+            autoComplete="off"
+            placeholder={t("Name, SKU or type")}
+          />
+          {fetcher.data?.error && <Banner tone="critical">{t(fetcher.data.error, fetcher.data.errorVars)}</Banner>}
           <ResourceList
             items={filtered.slice(0, 100)}
             renderItem={(product) => {
@@ -134,12 +173,14 @@ function ProductPicker({ csvRow, products, matchedTo, onClose }) {
                     if (usedElsewhere || fetcher.state !== "idle") return;
                     fetcher.submit({ intent: "match", id: String(csvRow.id), productKey: product.key }, { method: "post" });
                   }}
-                  accessibilityLabel={`Choose ${product.title}`}
+                  accessibilityLabel={t("Choose {name}", { name: product.title })}
                 >
                   <BlockStack gap="050">
                     <Text as="span" fontWeight="semibold" tone={usedElsewhere ? "subdued" : undefined}>{product.title}</Text>
                     <Text as="span" tone="subdued">
-                      {usedElsewhere ? `${product.key} · already matched to "${owner.label}"` : `${product.key} · ${product.productType}`}
+                      {usedElsewhere
+                        ? t("{key} · already matched to “{name}”", { key: product.key, name: owner.label })
+                        : `${product.key} · ${product.productType}`}
                     </Text>
                   </BlockStack>
                 </ResourceItem>
@@ -154,6 +195,7 @@ function ProductPicker({ csvRow, products, matchedTo, onClose }) {
 
 export default function MatchPage() {
   const { rows, total, matchedTotal, page, pageCount, query, filter, products, matchedTo } = useLoaderData();
+  const t = useT(VI);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const unlinkFetcher = useFetcher();
@@ -170,30 +212,33 @@ export default function MatchPage() {
 
   return (
     <Page
-      title="Match products in shop"
-      subtitle={`${matchedTotal} matched · ${products.length} products in shop`}
-      backAction={{ content: "Data", onAction: () => navigate("/app/data") }}
+      title={t("Match products in shop")}
+      subtitle={t("{matched} matched · {count} products in shop", {
+        matched: formatNumber(matchedTotal),
+        count: formatNumber(products.length),
+      })}
+      backAction={{ content: t("Data"), onAction: () => navigate("/app/data") }}
     >
       <Card>
         <BlockStack gap="300">
           <InlineStack gap="300" blockAlign="end" wrap>
             <div style={{ flex: 1, minWidth: 220 }}>
               <TextField
-                label="Search CSV products"
+                label={t("Search CSV products")}
                 value={search}
                 onChange={setSearch}
                 onBlur={() => updateParams({ q: search.trim() })}
-                connectedRight={<Button onClick={() => updateParams({ q: search.trim() })}>Search</Button>}
+                connectedRight={<Button onClick={() => updateParams({ q: search.trim() })}>{t("Search")}</Button>}
                 autoComplete="off"
-                placeholder="Name or code"
+                placeholder={t("Name or code")}
               />
             </div>
             <Select
-              label="Show"
+              label={t("Show")}
               options={[
-                { value: "all", label: "All" },
-                { value: "unmatched", label: "Not matched" },
-                { value: "matched", label: "Matched" },
+                { value: "all", label: t("All") },
+                { value: "unmatched", label: t("Not matched") },
+                { value: "matched", label: t("Matched") },
               ]}
               value={filter}
               onChange={(value) => updateParams({ filter: value === "all" ? "" : value })}
@@ -201,7 +246,9 @@ export default function MatchPage() {
           </InlineStack>
 
           <Text as="p" tone="subdued">
-            {`${formatNumber(total)} CSV products, most ordered first. Each shop product can be matched to one CSV product.`}
+            {t("{count} CSV products, most ordered first. Each shop product can be matched to one CSV product.", {
+              count: formatNumber(total),
+            })}
           </Text>
 
           {rows.map((row) => {
@@ -210,13 +257,13 @@ export default function MatchPage() {
               <InlineStack key={row.id} gap="400" blockAlign="center" wrap={false}>
                 <div style={{ width: 210, flexShrink: 0 }}>
                   <Button onClick={() => setPicking(row)} variant={product ? "secondary" : "primary"} fullWidth>
-                    {product ? "Change shop product" : "Choose shop product"}
+                    {product ? t("Change shop product") : t("Choose shop product")}
                   </Button>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <BlockStack gap="050">
                     <Text as="span" fontWeight="semibold" truncate>{row.name || row.code}</Text>
-                    <Text as="span" tone="subdued">{`${row.code} · ${formatNumber(row.orderCount)} orders`}</Text>
+                    <Text as="span" tone="subdued">{t("{code} · {count} orders", { code: row.code, count: formatNumber(row.orderCount) })}</Text>
                   </BlockStack>
                 </div>
                 <div style={{ width: 300, flexShrink: 0 }}>
@@ -230,14 +277,14 @@ export default function MatchPage() {
                           tone="critical"
                           onClick={() => unlinkFetcher.submit({ intent: "unmatch", id: String(row.id) }, { method: "post" })}
                         >
-                          Unlink
+                          {t("Unlink")}
                         </Button>
                       </BlockStack>
                     </InlineStack>
                   ) : row.shopProductKey ? (
-                    <Badge tone="warning">{`${row.shopProductKey} (not in shop)`}</Badge>
+                    <Badge tone="warning">{t("{key} (not in shop)", { key: row.shopProductKey })}</Badge>
                   ) : (
-                    <Badge>Not matched</Badge>
+                    <Badge>{t("Not matched")}</Badge>
                   )}
                 </div>
               </InlineStack>
@@ -250,7 +297,7 @@ export default function MatchPage() {
               onPrevious={() => updateParams({ page: String(page - 1) })}
               hasNext={page < pageCount}
               onNext={() => updateParams({ page: String(page + 1) })}
-              label={`Page ${page} of ${pageCount}`}
+              label={t("Page {page} of {count}", { page: formatNumber(page), count: formatNumber(pageCount) })}
             />
           </InlineStack>
         </BlockStack>

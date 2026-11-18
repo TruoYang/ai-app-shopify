@@ -1,0 +1,4 @@
+{
+  "name": "SmartCart bundle discount",
+  "description": "Discounts a suggested product when the products of its rule are in the cart."
+}

@@ -9,6 +9,10 @@
 //   adding C shows D and still B), unless they are now in the cart.
 // - Add to cart dispatches Shopify's standard CartLinesUpdateEvent when the theme
 //   supports it (Horizon), so the cart drawer and cart count update in place.
+// - Measurement (Phase 5): an anonymous visitor id (localStorage) decides the A/B group on the
+//   server. Impressions (when the widget is on screen), clicks and adds are sent in batches to
+//   /apps/ai/event. The cart gets the visitor id as an attribute and widget lines get a hidden
+//   property, so the orders/paid webhook can attribute purchases.
 
 (() => {
   const PROXY_PATH = '/apps/ai/recommend';
@@ -18,6 +22,85 @@
   const SIZE_KEY = 'smartcart-rcm:card-size';
   const SIZES = ['small', 'medium', 'large'];
   const BUNDLE_SIZE = 3;
+  const EVENT_PATH = '/apps/ai/event';
+  const VISITOR_KEY = 'smartcart-rcm:vid';
+  const CART_ATTR = '_smartcart_visitor';
+  const LINE_PROPERTY = '_smartcart_rcm';
+
+  const visitorId = (() => {
+    try {
+      let id = localStorage.getItem(VISITOR_KEY);
+      if (!id) {
+        id = (crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`).replaceAll('.', '');
+        localStorage.setItem(VISITOR_KEY, id);
+      }
+      return id;
+    } catch {
+      return '';
+    }
+  })();
+
+  // Events are queued and sent together (sendBeacon survives page navigation).
+  let queue = [];
+  let flushTimer;
+  const flush = () => {
+    clearTimeout(flushTimer);
+    if (!queue.length || !visitorId) return;
+    const body = JSON.stringify({ vid: visitorId, events: queue.splice(0, 25) });
+    if (!navigator.sendBeacon?.(EVENT_PATH, body)) {
+      fetch(EVENT_PATH, { method: 'POST', body, keepalive: true }).catch(() => {});
+    }
+    if (queue.length) flush();
+  };
+  const track = (event) => {
+    queue.push(event);
+    clearTimeout(flushTimer);
+    flushTimer = setTimeout(flush, 1000);
+  };
+  addEventListener('pagehide', flush);
+  document.addEventListener('visibilitychange', () => document.visibilityState === 'hidden' && flush());
+
+  // Clicked suggestions are remembered for CLICK_WINDOW: a product opened from the widget and
+  // bought within that time counts as sold through the widget (like an affiliate click).
+  const CLICKS_KEY = 'smartcart-rcm:clicks';
+  const CLICK_ATTR = '_smartcart_clicked';
+  const CLICK_WINDOW = 864e5; // 24 hours
+  const recentClicks = (add) => {
+    let list = [];
+    try {
+      list = JSON.parse(localStorage.getItem(CLICKS_KEY)) || [];
+    } catch {
+      // Storage disabled: only this click is kept.
+    }
+    const now = Date.now();
+    list = list.filter((click) => now - click.t < CLICK_WINDOW && click.p !== add);
+    if (add) list.unshift({ p: add, t: now });
+    list = list.slice(0, 20);
+    try {
+      localStorage.setItem(CLICKS_KEY, JSON.stringify(list));
+    } catch {
+      // Not remembered across pages.
+    }
+    return list.map((click) => click.p).join(',');
+  };
+
+  // Ties the cart (and so the order) to this visitor and their recent clicks.
+  const saveCartAttributes = (cart, clicked) => {
+    const attributes = cart?.attributes || {};
+    if (!visitorId || (attributes[CART_ATTR] === visitorId && (attributes[CLICK_ATTR] || '') === clicked)) return;
+    fetch('/cart/update.js', {
+      method: 'POST',
+      keepalive: true,
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ attributes: { [CART_ATTR]: visitorId, [CLICK_ATTR]: clicked } }),
+    }).catch(() => {});
+  };
+  let cartTagged = false;
+  const tagCart = (cart) => {
+    if (cartTagged) return;
+    cartTagged = true;
+    saveCartAttributes(cart, recentClicks());
+  };
 
   const readCache = () => {
     try {
@@ -71,6 +154,18 @@
       this.max = Number(root.dataset.maxProducts) || 4;
       this.showAddToCart = root.dataset.showAddToCart !== 'false';
       this.contextSku = root.dataset.contextSku || '';
+      this.placement = this.contextSku ? 'product' : (location.pathname.startsWith('/cart') ? 'cart' : 'home');
+      this.shown = [];
+      this.seen = '';
+      this.visible = false;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+          this.visible = entry.isIntersecting;
+          this.impression();
+        }, { threshold: 0.3 }).observe(root);
+      } else {
+        this.visible = true;
+      }
       this.formatter = new Intl.NumberFormat(root.dataset.locale || undefined, {
         style: 'currency',
         currency: root.dataset.currency || 'USD',
@@ -123,7 +218,7 @@
       else this.root.classList.add('smartcart-rcm--loading');
 
       try {
-        const params = new URLSearchParams({ skus: [...new Set(skus)].join(',') });
+        const params = new URLSearchParams({ skus: [...new Set(skus)].join(','), vid: visitorId });
         const response = await fetch(`${PROXY_PATH}?${params}`, { headers: { Accept: 'application/json' } });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
@@ -142,6 +237,7 @@
         cache.lastShown = merged;
         writeCache(cache);
         this.render(merged);
+        if (merged.length) tagCart(cart);
       } catch (error) {
         console.warn('SmartCart RCM: could not load recommendations', error);
       } finally {
@@ -156,13 +252,17 @@
       }
       const text = this.root.dataset;
       const shown = entries.slice(0, this.max);
-      this.grid.innerHTML = shown.map((entry) => {
+      this.shown = shown;
+      this.grid.innerHTML = shown.map((entry, index) => {
         const { product } = entry;
         const price = Number(product.price);
         const compareAt = Number(product.compareAtPrice);
         const discount = compareAt > price ? Math.round((1 - price / compareAt) * 100) : 0;
         const url = escapeHtml(product.url);
         const reason = this.reason(entry);
+        // Rules with a merchant discount: the Discount Function applies it at checkout.
+        const deal = Number(entry.discountPercent) > 0 && text.textTogether
+          ? text.textTogether.replace('{percent}', Math.round(Number(entry.discountPercent))) : '';
         const image = product.image
           ? `<img src="${escapeHtml(imageUrl(product.image, 480))}" alt="${escapeHtml(product.title)}" loading="lazy" width="480" height="640">`
           : '';
@@ -170,11 +270,11 @@
           ? `<button type="button" class="smartcart-rcm__button button" data-variant-id="${escapeHtml(numericId(product.variantId))}"><span>${escapeHtml(text.textAdd)}</span></button>`
           : '';
         return `
-          <article class="smartcart-rcm__card" role="listitem">
+          <article class="smartcart-rcm__card" role="listitem" data-index="${index}">
             <a class="smartcart-rcm__media" href="${url}">
               ${image}
               ${discount ? `<span class="smartcart-rcm__badge">-${discount}%</span>` : ''}
-              ${reason ? `<span class="smartcart-rcm__reason">${escapeHtml(reason)}</span>` : ''}
+              ${deal ? `<span class="smartcart-rcm__reason smartcart-rcm__reason--deal">${escapeHtml(deal)}</span>` : reason ? `<span class="smartcart-rcm__reason">${escapeHtml(reason)}</span>` : ''}
             </a>
             <div class="smartcart-rcm__body">
               <a class="smartcart-rcm__title" href="${url}">${escapeHtml(product.title)}</a>
@@ -207,6 +307,20 @@
         }
       }
       this.root.hidden = false;
+      this.impression();
+    }
+
+    // One impression per distinct list per page view, only once the widget is on screen.
+    impression() {
+      const items = this.shown.map((entry) => [entry.product.sku, entry.source || 'rule']);
+      const signature = items.map((item) => item[0]).join(',');
+      if (!this.visible || this.root.hidden || !items.length || signature === this.seen) return;
+      this.seen = signature;
+      track({ type: 'impression', placement: this.placement, items });
+    }
+
+    trackEntry(type, entry) {
+      if (entry) track({ type, placement: this.placement, productKey: entry.product.sku, reason: entry.source || 'rule' });
     }
 
     // Why this product is suggested, shown on the image.
@@ -221,16 +335,26 @@
     }
 
     async onClick(event) {
+      const link = event.target.closest('a');
+      if (link) {
+        const entry = this.shown[link.closest('[data-index]')?.dataset.index];
+        this.trackEntry('click', entry);
+        if (entry) saveCartAttributes(null, recentClicks(numericId(entry.product.id)));
+        flush();
+        return;
+      }
       const button = event.target.closest('.smartcart-rcm__button');
       if (!button || button.disabled) return;
       const label = button.querySelector('span');
       const original = label.textContent;
       const { textAdded, textError } = this.root.dataset;
       const ids = (button.dataset.variantIds || button.dataset.variantId).split(',').map(Number);
+      const entries = ids.map((id) => this.shown.find((entry) => Number(numericId(entry.product.variantId)) === id));
       button.disabled = true;
 
       try {
-        await addToCart(button, ids);
+        await addToCart(button, ids, entries.map((entry) => entry?.source || 'rule'));
+        entries.forEach((entry) => this.trackEntry('add_to_cart', entry));
         label.textContent = textAdded;
       } catch (error) {
         console.warn('SmartCart RCM: add to cart failed', error);
@@ -243,7 +367,7 @@
     }
   }
 
-  async function addToCart(source, variantIds) {
+  async function addToCart(source, variantIds, reasons = []) {
     // Ask for the theme's cart sections so the drawer can re-render without a reload.
     const sections = [...document.querySelectorAll('cart-items-component[data-section-id]')]
       .map((element) => element.dataset.sectionId);
@@ -263,7 +387,11 @@
       const response = await fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ items: variantIds.map((id) => ({ id, quantity: 1 })), sections: sections.join(',') }),
+        body: JSON.stringify({
+          // The hidden line property marks the line as added from the widget (purchase attribution).
+          items: variantIds.map((id, index) => ({ id, quantity: 1, properties: { [LINE_PROPERTY]: reasons[index] || 'rule' } })),
+          sections: sections.join(','),
+        }),
       });
       const result = await response.json();
       if (!response.ok || result.status) throw new Error(result.description || result.message || 'Add failed');

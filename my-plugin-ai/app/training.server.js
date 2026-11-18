@@ -5,11 +5,13 @@
 import { trainModelFromDb } from "./ai-logic";
 import prisma from "./db.server";
 import { getShopCatalog, toProductKey } from "./catalog.server";
-import { buildTrainingDataset, getTrainingWindow, loadTrainingOrders, mapCsvOrders } from "./training-data.server";
+import { buildTrainingDataset, csvOrderIdOf, getTrainingWindow, loadTrainingOrders, mapCsvOrders } from "./training-data.server";
 import { PYTHON_STRATEGIES, trainWithPython } from "./python-trainer.server";
+import { syncDiscountsSafely } from "./discount.server";
 
 // Only merchant-authored rules (source "merchant") survive a retrain; model rules are replaced.
 const MODEL_SOURCE = "model";
+const MAX_MODEL_RULES = 50_000;
 
 /**
  * Returns a JSON Response with { success, stats } (or { success: false, error }).
@@ -46,12 +48,14 @@ export async function runTraining({ shop, adminForSync = null, authState = "sche
           const response = await adminForSync.graphql(
             `
               query getPaidOrders($after: String) {
-                orders(first: 100, after: $after, query: "status:any -tag:csv-demo") {
+                orders(first: 100, after: $after, query: "status:any") {
                   edges {
                     cursor
                     node {
                       id
                       processedAt
+                      tags
+                      note
                       customer { id }
                       lineItems(first: 50) {
                         edges {
@@ -96,8 +100,9 @@ export async function runTraining({ shop, adminForSync = null, authState = "sche
         
         // console.log(`Shopify orders fetched: ${shopifyOrders.length}`);
         
-        // Save orders from Shopify to database. Orders tagged csv-demo were created from the
-        // CSV history (scripts/demo/push-demo-orders.mjs) and are already stored as CSV orders.
+        // Save orders from Shopify to database. Orders tagged csv-demo were created from the CSV
+        // history (scripts/demo/push-demo-orders.mjs); csvOrderId links them to that CSV order so
+        // training uses this Shopify copy and skips the CSV one.
         shopifyFetchedCount = shopifyOrdersFromApi.length;
 
         for (const order of shopifyOrdersFromApi) {
@@ -116,6 +121,7 @@ export async function runTraining({ shop, adminForSync = null, authState = "sche
             productIds: JSON.stringify(uniqueSkus),
             orderDate: order.processedAt ? new Date(order.processedAt) : null,
             customerId: order.customer?.id ?? null,
+            csvOrderId: csvOrderIdOf(order.tags, order.note),
             lines: JSON.stringify(order.lineItems.edges
               .filter((edge) => edge.node.sku?.trim())
               .map((edge) => ({
@@ -248,7 +254,11 @@ export async function runTraining({ shop, adminForSync = null, authState = "sche
         .map((rule) => [ruleKey(rule), rule]),
     );
 
+    // The storefront loads every active rule, so keep at most MAX_MODEL_RULES (same cap as
+    // ml/train.py): all single-item rules first, then the strongest two-item rules.
     const rules = Array.from(mergedRulesMap.values())
+      .sort((a, b) => a.cartSize - b.cartSize || b.confidence - a.confidence || b.support - a.support)
+      .slice(0, MAX_MODEL_RULES)
       .filter((rule) => !merchantKeys.has(ruleKey(rule)))
       .map((rule) => {
         const edited = editedModelRules.get(ruleKey(rule));
@@ -273,13 +283,16 @@ export async function runTraining({ shop, adminForSync = null, authState = "sche
       create: { shop, lastTrainedAt: new Date(), lastTrainSummary: JSON.stringify({ strategy: usedStrategy, rules: rules.length, strategyError }) },
     });
 
+    // Merchant discounts survive training; refresh the checkout discount's rule list.
+    if (adminForSync) await syncDiscountsSafely(shop, adminForSync);
+
     // 5. List stats
     const cart1Rules = rules.filter(r => r.cartSize === 1).length;
     const cart2Rules = rules.filter(r => r.cartSize === 2).length;
 
     return Response.json({
       success: true,
-      message: "Training thành công!",
+      message: "Training finished",
       stats: {
         ordersProcessed: csvOrders.length + shopifyOrders.length,
         totalRules: rules.length,

@@ -1,0 +1,11 @@
+flowchart LR
+  O[("20,728 orders<br/>UCI Online Retail")] --> S["Time split"]
+  S --> TR["Oldest 80%<br/>training orders"]
+  S --> TE["Newest 20%<br/>test orders"]
+  TR --> M["Train 6 models<br/>Popularity · Apriori<br/>FP-Growth · Item-kNN<br/>DEC · Hybrid"]
+  TE --> C["Sample 1,000 baskets<br/>x 3 random seeds"]
+  C --> H["Split each basket:<br/>half = cart (max 5),<br/>rest = hidden items"]
+  M --> R["Recommend top 10<br/>for each cart"]
+  H --> R
+  R --> E["Compare with hidden items:<br/>HitRate · Precision · Recall<br/>NDCG · MRR · Coverage"]
+  E --> OUT["results.json / results.csv<br/>charts (mean ± std)"]

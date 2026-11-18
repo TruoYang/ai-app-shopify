@@ -1,0 +1,23 @@
+flowchart TB
+  subgraph Live["Khách hàng thật"]
+    direction TB
+    V["Widget<br/>mã khách ẩn danh (trình duyệt)"] -- "SKU trong giỏ + mã khách" --> R["API gợi ý"]
+    R -- "hash(mã khách) → nhóm" --> G{"Nhóm A/B"}
+    G -- "AI" --> AI["Luật đã huấn luyện<br/>+ gợi ý bù"]
+    G -- "Đối chứng" --> BS["Chỉ sản phẩm bán chạy"]
+    V -- "xem · bấm · thêm giỏ" --> E["API sự kiện<br/>/apps/ai/event"]
+    V -- "thuộc tính giỏ + thuộc tính ẩn của dòng" --> O["Đơn hàng"]
+    O -- "webhook orders/paid" --> PU["Sự kiện mua<br/>giá trị đơn · doanh thu từ gợi ý"]
+  end
+
+  subgraph Sim["Mô phỏng replay"]
+    direction TB
+    H[("Đơn hàng giữ lại<br/>sau cửa sổ huấn luyện")] --> S["Mỗi đơn = một lượt ghé<br/>nửa = giỏ, còn lại = món mua thật"]
+    S -- "chia ngẫu nhiên 50/50" --> RF["Cùng mã gợi ý thật"]
+    RF --> SM["Mô hình khách hàng<br/>bấm / thêm giỏ"]
+  end
+
+  E --> DB[("RecommendationEvent<br/>thật / mô phỏng")]
+  PU --> DB
+  SM --> DB
+  DB --> D["Dashboard Insights<br/>CTR · tỷ lệ thêm giỏ · doanh thu<br/>z-test hai tỷ lệ · khoảng tin cậy 95%"]

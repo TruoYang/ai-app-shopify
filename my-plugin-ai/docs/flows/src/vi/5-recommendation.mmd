@@ -1,0 +1,24 @@
+sequenceDiagram
+  actor S as Khách hàng
+  participant W as Widget (theme)
+  participant P as Shopify App Proxy
+  participant A as Server app
+  participant C as Cache danh mục / Admin API
+  participant D as Luật (SQLite)
+
+  S->>W: mở trang chủ, trang sản phẩm hoặc giỏ hàng
+  W->>W: hiện ngay kết quả cũ của giỏ này (sessionStorage)
+  W->>P: GET /apps/ai/recommend?skus=SKU trong giỏ
+  P->>A: request có chữ ký kèm shop
+  A->>C: mã sản phẩm, giá, ảnh (cache 10 phút)
+  A->>D: luật đang bật (cache 30 giây)
+  A->>A: luật kết hợp trước (A + B thành C)
+  A->>A: luật theo từng món, số lượng theo độ lớn giỏ (5 / 3 / 2 / 1)
+  A->>A: bù thêm: cùng loại, đơn gần đây, bán chạy
+  A->>A: ưu tiên của chủ shop (cân bằng, doanh thu, số lượng)
+  A-->>P: JSON sản phẩm
+  P-->>W: JSON sản phẩm
+  W->>W: giữ 1-2 gợi ý cũ, hiển thị thẻ sản phẩm
+  S->>W: Thêm vào giỏ / Thêm cả bộ
+  W->>W: POST /cart/add.js, CartLinesUpdateEvent
+  Note over W: cart drawer cập nhật, widget làm mới

@@ -20,8 +20,91 @@ import {
 import { authenticate } from "../shopify.server";
 import prisma from "../db.server";
 import { formatNumber, formatDateTime } from "../format";
+import { useT } from "../i18n";
 import { importCsvOrders } from "../csv-import.server";
 import { guessDateFormat, guessRoles, parseDate, previewCsv, REQUIRED_ROLES, ROLES } from "../csv-format";
+
+const VI = {
+  Ignore: "Bỏ qua",
+  "Order ID (required)": "Mã đơn hàng (bắt buộc)",
+  "Product code / SKU (required)": "Mã sản phẩm / SKU (bắt buộc)",
+  "Product name": "Tên sản phẩm",
+  Quantity: "Số lượng",
+  "Order date": "Ngày đặt hàng",
+  Price: "Giá",
+  Customer: "Khách hàng",
+  "Day/Month/Year (31/12/2024)": "Ngày/Tháng/Năm (31/12/2024)",
+  "Month/Day/Year (12/31/2024)": "Tháng/Ngày/Năm (12/31/2024)",
+  "Year-Month-Day (2024-12-31)": "Năm-Tháng-Ngày (2024-12-31)",
+  "All orders": "Tất cả đơn hàng",
+  "Last month": "1 tháng gần nhất",
+  "Last 3 months": "3 tháng gần nhất",
+  "Last 6 months": "6 tháng gần nhất",
+  "Last 12 months": "12 tháng gần nhất",
+  "Last 2 years": "2 năm gần nhất",
+  "Custom dates": "Tự chọn ngày",
+  "Apriori: built-in baseline (HitRate@10 0.745)": "Apriori: thuật toán gốc có sẵn (HitRate@10 0.745)",
+  "FP-Growth: most accurate (HitRate@10 0.782)": "FP-Growth: chính xác nhất (HitRate@10 0.782)",
+  "Hybrid FP-Growth + kNN + DEC: always answers, widest coverage (0.774)":
+    "Hybrid FP-Growth + kNN + DEC: luôn có gợi ý, phủ rộng nhất (0.774)",
+  "Item-kNN: fast, wide coverage (0.726)": "Item-kNN: nhanh, phủ rộng (0.726)",
+  "DEC deep clustering: similar-style products (0.679)": "DEC deep clustering: sản phẩm cùng phong cách (0.679)",
+  "Balanced: most likely to be bought together": "Cân bằng: hay được mua cùng nhau nhất",
+  "Revenue: prefer higher priced products": "Doanh thu: ưu tiên sản phẩm giá cao hơn",
+  "Quantity: prefer best sellers": "Số lượng: ưu tiên sản phẩm bán chạy",
+  "Interaction: prefer suggestions shoppers click and add (best sellers until there is data)":
+    "Tương tác: ưu tiên gợi ý được khách bấm và thêm vào giỏ hàng (dùng sản phẩm bán chạy khi chưa có dữ liệu)",
+  "Only when I press Train": "Chỉ khi tôi bấm Train",
+  "Every week": "Hằng tuần",
+  "Every month": "Hằng tháng",
+  "Choose a CSV file first.": "Hãy chọn file CSV trước.",
+  "Choose a column for: {roles}": "Hãy chọn cột cho: {roles}",
+  "Could not find columns in this file.": "Không tìm thấy cột nào trong file này.",
+  "cannot read": "không đọc được",
+  "Order history from CSV": "Lịch sử đơn hàng từ CSV",
+  "{count} CSV orders": "{count} đơn hàng CSV",
+  "{matched}/{total} products matched": "{matched}/{total} sản phẩm đã khớp",
+  "Upload past orders from any system. Then tell us what each column contains: the order ID and product code are required, the rest is optional.":
+    "Tải lên đơn hàng cũ từ bất kỳ hệ thống nào. Sau đó cho biết mỗi cột chứa gì: mã đơn hàng và mã sản phẩm là bắt buộc, còn lại không bắt buộc.",
+  "Choose CSV file": "Chọn file CSV",
+  "or drop it here": "hoặc kéo thả vào đây",
+  "Preview (first {count} rows). Choose what each column is:": "Xem trước ({count} dòng đầu). Chọn ý nghĩa của từng cột:",
+  "(no name)": "(không tên)",
+  "Role of {column}": "Vai trò của cột {column}",
+  "Date format": "Định dạng ngày",
+  "\"{raw}\" is read as {parsed}": "“{raw}” được hiểu là {parsed}",
+  "Existing CSV orders": "Đơn hàng CSV hiện có",
+  "Replace them with this file": "Thay bằng file này",
+  "Keep them and add this file": "Giữ lại và thêm file này",
+  "Import orders": "Nhập đơn hàng",
+  "Import finished": "Đã nhập xong",
+  "{orders} orders from {rows} rows ({skipped} rows skipped: returns, cancellations or missing values).":
+    "{orders} đơn hàng từ {rows} dòng (bỏ qua {skipped} dòng: trả hàng, đơn hủy hoặc thiếu dữ liệu).",
+  "Next, match the CSV products to products in your shop.": "Tiếp theo, hãy khớp sản phẩm CSV với sản phẩm trong shop của bạn.",
+  "Import failed": "Nhập thất bại",
+  "Match CSV products to shop products": "Khớp sản phẩm CSV với sản phẩm trong shop",
+  "Recommendations can only use CSV products that are linked to a product in this shop.":
+    "Gợi ý chỉ dùng được những sản phẩm CSV đã liên kết với một sản phẩm trong shop này.",
+  "Match products in shop": "Khớp sản phẩm trong shop",
+  Training: "Train",
+  "Last trained {date}": "Train lần cuối {date}",
+  " with {strategy}, {count} rules": " bằng {strategy}, {count} luật",
+  " (Python failed, the built-in Apriori was used)": " (Python lỗi, đã dùng Apriori có sẵn)",
+  Algorithm: "Thuật toán",
+  Prioritise: "Ưu tiên",
+  "Retrain automatically": "Tự động train lại",
+  "Old orders may not match current trends. Only orders inside this window are used when the model is trained":
+    "Đơn hàng cũ có thể không còn hợp xu hướng hiện tại. Khi train, chỉ dùng các đơn hàng trong khoảng thời gian train này",
+  " (stored orders range from {min} to {max}).": " (đơn hàng đã lưu từ {min} đến {max}).",
+  "Orders used": "Đơn hàng được dùng",
+  From: "Từ",
+  To: "Đến",
+  "Saved. Train the model again to apply it.": "Đã lưu. Hãy train lại model để áp dụng.",
+  "Recent imports": "Lần nhập gần đây",
+  "{count} orders · {mode} · {date}": "{count} đơn hàng · {mode} · {date}",
+  replace: "thay thế",
+  append: "thêm vào",
+};
 
 const ROLE_LABELS = {
   ignore: "Ignore",
@@ -61,7 +144,7 @@ const RANK_OPTIONS = [
   { value: "balanced", label: "Balanced: most likely to be bought together" },
   { value: "revenue", label: "Revenue: prefer higher priced products" },
   { value: "quantity", label: "Quantity: prefer best sellers" },
-  { value: "interaction", label: "Interaction: prefer most clicked (best sellers until click data exists)" },
+  { value: "interaction", label: "Interaction: prefer suggestions shoppers click and add (best sellers until there is data)" },
 ];
 const SCHEDULE_OPTIONS = [
   { value: "none", label: "Only when I press Train" },
@@ -135,7 +218,7 @@ export const action = async ({ request }) => {
   const missing = REQUIRED_ROLES.filter((role) => !columnMap[role]);
   if (missing.length) {
     return Response.json(
-      { success: false, error: `Choose a column for: ${missing.map((role) => ROLE_LABELS[role]).join(", ")}` },
+      { success: false, error: "Choose a column for: {roles}", missingRoles: missing },
       { status: 400 },
     );
   }
@@ -159,6 +242,19 @@ export const action = async ({ request }) => {
 
 export default function DataPage() {
   const { imports, csvProducts, matched, csvOrders, settings, orderDates } = useLoaderData();
+  const t = useT(VI);
+  const options = useMemo(() => {
+    const translateOptions = (list) => list.map((option) => ({ ...option, label: t(option.label) }));
+    return {
+      role: translateOptions(ROLE_OPTIONS),
+      dateFormat: translateOptions(DATE_FORMATS),
+      window: translateOptions(WINDOW_OPTIONS),
+      strategy: translateOptions(STRATEGY_OPTIONS),
+      rank: translateOptions(RANK_OPTIONS),
+      schedule: translateOptions(SCHEDULE_OPTIONS),
+    };
+  }, [t]);
+  const roleList = (list) => list.map((role) => t(ROLE_LABELS[role])).join(", ");
   const fetcher = useFetcher();
   const settingsFetcher = useFetcher();
   const [trainWindow, setTrainWindow] = useState(settings.window);
@@ -185,7 +281,7 @@ export default function DataPage() {
     try {
       const text = await chosen.slice(0, PREVIEW_BYTES).text();
       const parsed = previewCsv(text, 10);
-      if (parsed.headers.length < 2) throw new Error("Could not find columns in this file.");
+      if (parsed.headers.length < 2) throw new Error(t("Could not find columns in this file."));
       const guessed = guessRoles(parsed.headers, parsed.rows);
       const dateHeader = Object.keys(guessed).find((header) => guessed[header] === "date");
       const dateIndex = parsed.headers.indexOf(dateHeader);
@@ -219,8 +315,8 @@ export default function DataPage() {
     if (!preview || !columnMap.date) return null;
     const raw = preview.rows[0]?.[preview.headers.indexOf(columnMap.date)];
     const parsed = parseDate(raw, dateFormat);
-    return { raw, parsed: parsed ? parsed.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "cannot read" };
-  }, [preview, columnMap.date, dateFormat]);
+    return { raw, parsed: parsed ? parsed.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : t("cannot read") };
+  }, [preview, columnMap.date, dateFormat, t]);
 
   const submit = () => {
     const formData = new FormData();
@@ -233,20 +329,19 @@ export default function DataPage() {
   };
 
   return (
-    <Page title="Data" backAction={{ content: "Recommendations", url: "/app" }}>
+    <Page title={t("Data")} backAction={{ content: t("Recommendations"), url: "/app" }}>
       <BlockStack gap="400">
         <Card>
           <BlockStack gap="300">
             <InlineStack align="space-between" blockAlign="center">
-              <Text as="h2" variant="headingMd">Order history from CSV</Text>
+              <Text as="h2" variant="headingMd">{t("Order history from CSV")}</Text>
               <InlineStack gap="200">
-                <Badge>{`${formatNumber(csvOrders)} CSV orders`}</Badge>
-                <Badge tone={matched > 0 ? "success" : "attention"}>{`${matched}/${csvProducts} products matched`}</Badge>
+                <Badge>{t("{count} CSV orders", { count: formatNumber(csvOrders) })}</Badge>
+                <Badge tone={matched > 0 ? "success" : "attention"}>{t("{matched}/{total} products matched", { matched, total: csvProducts })}</Badge>
               </InlineStack>
             </InlineStack>
             <Text as="p" tone="subdued">
-              Upload past orders from any system. Then tell us what each column contains: the
-              order ID and product code are required, the rest is optional.
+              {t("Upload past orders from any system. Then tell us what each column contains: the order ID and product code are required, the rest is optional.")}
             </Text>
 
             <DropZone accept=".csv,text/csv,text/plain" type="file" allowMultiple={false} onDrop={handleDrop}>
@@ -255,7 +350,7 @@ export default function DataPage() {
                   <Text as="p" alignment="center">{`${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)`}</Text>
                 </Box>
               ) : (
-                <DropZone.FileUpload actionTitle="Choose CSV file" actionHint="or drop it here" />
+                <DropZone.FileUpload actionTitle={t("Choose CSV file")} actionHint={t("or drop it here")} />
               )}
             </DropZone>
             {readError && <Banner tone="critical">{readError}</Banner>}
@@ -263,7 +358,7 @@ export default function DataPage() {
             {preview && (
               <BlockStack gap="300">
                 <Text as="h3" variant="headingSm">
-                  {`Preview (first ${preview.rows.length} rows). Choose what each column is:`}
+                  {t("Preview (first {count} rows). Choose what each column is:", { count: preview.rows.length })}
                 </Text>
                 <div style={{ overflowX: "auto" }}>
                   <table style={{ borderCollapse: "collapse", minWidth: "100%" }}>
@@ -272,11 +367,11 @@ export default function DataPage() {
                         {preview.headers.map((header) => (
                           <th key={header} style={{ padding: 8, textAlign: "left", verticalAlign: "bottom", minWidth: 170 }}>
                             <BlockStack gap="100">
-                              <Text as="span" fontWeight="semibold">{header || "(no name)"}</Text>
+                              <Text as="span" fontWeight="semibold">{header || t("(no name)")}</Text>
                               <Select
-                                label={`Role of ${header}`}
+                                label={t("Role of {column}", { column: header })}
                                 labelHidden
-                                options={ROLE_OPTIONS}
+                                options={options.role}
                                 value={roles[header] ?? "ignore"}
                                 onChange={(value) => setRole(header, value)}
                               />
@@ -305,56 +400,61 @@ export default function DataPage() {
                 <InlineStack gap="400" blockAlign="end" wrap>
                   {columnMap.date && (
                     <Select
-                      label="Date format"
-                      options={DATE_FORMATS}
+                      label={t("Date format")}
+                      options={options.dateFormat}
                       value={dateFormat}
                       onChange={setDateFormat}
-                      helpText={dateExample ? `"${dateExample.raw}" is read as ${dateExample.parsed}` : undefined}
+                      helpText={dateExample ? t("\"{raw}\" is read as {parsed}", { raw: dateExample.raw, parsed: dateExample.parsed }) : undefined}
                     />
                   )}
                   <Select
-                    label="Existing CSV orders"
+                    label={t("Existing CSV orders")}
                     options={[
-                      { value: "replace", label: "Replace them with this file" },
-                      { value: "append", label: "Keep them and add this file" },
+                      { value: "replace", label: t("Replace them with this file") },
+                      { value: "append", label: t("Keep them and add this file") },
                     ]}
                     value={mode}
                     onChange={setMode}
                   />
                   <Button variant="primary" onClick={submit} loading={importing} disabled={missing.length > 0}>
-                    Import orders
+                    {t("Import orders")}
                   </Button>
                 </InlineStack>
                 {missing.length > 0 && (
                   <Text as="p" tone="critical">
-                    {`Choose a column for: ${missing.map((role) => ROLE_LABELS[role]).join(", ")}`}
+                    {t("Choose a column for: {roles}", { roles: roleList(missing) })}
                   </Text>
                 )}
               </BlockStack>
             )}
 
             {result?.success && (
-              <Banner tone="success" title="Import finished">
+              <Banner tone="success" title={t("Import finished")}>
                 <p>
-                  {`${formatNumber(result.result.orderCount)} orders from ${formatNumber(result.result.rowCount)} rows ` +
-                    `(${formatNumber(result.result.skippedRows)} rows skipped: returns, cancellations or missing values). `}
-                  Next, match the CSV products to products in your shop.
+                  {t("{orders} orders from {rows} rows ({skipped} rows skipped: returns, cancellations or missing values).", {
+                    orders: formatNumber(result.result.orderCount),
+                    rows: formatNumber(result.result.rowCount),
+                    skipped: formatNumber(result.result.skippedRows),
+                  })}{" "}
+                  {t("Next, match the CSV products to products in your shop.")}
                 </p>
               </Banner>
             )}
-            {result && !result.success && <Banner tone="critical" title="Import failed">{result.error}</Banner>}
+            {result && !result.success && <Banner tone="critical" title={t("Import failed")}>
+              {result.missingRoles ? t(result.error, { roles: roleList(result.missingRoles) }) : t(result.error)}
+            </Banner>}
           </BlockStack>
         </Card>
 
         <Card>
           <BlockStack gap="300">
-            <Text as="h2" variant="headingMd">Match CSV products to shop products</Text>
+            <Text as="h2" variant="headingMd">{t("Match CSV products to shop products")}</Text>
             <Text as="p" tone="subdued">
-              Recommendations can only use CSV products that are linked to a product in this shop.
+              {t("Recommendations can only use CSV products that are linked to a product in this shop.")}
             </Text>
             <InlineStack>
               <Button disabled={csvProducts === 0} onClick={() => navigate("/app/data/match")}>
-                Match products in shop
+                {t("Match products in shop")}
               </Button>
             </InlineStack>
           </BlockStack>
@@ -362,29 +462,34 @@ export default function DataPage() {
 
         <Card>
           <BlockStack gap="300">
-            <Text as="h2" variant="headingMd">Training</Text>
+            <Text as="h2" variant="headingMd">{t("Training")}</Text>
             {settings.lastTrainedAt && (
               <Text as="p" tone="subdued">
-                {`Last trained ${formatDateTime(settings.lastTrainedAt)}` +
-                  (settings.lastTrainSummary ? ` with ${settings.lastTrainSummary.strategy}, ${formatNumber(settings.lastTrainSummary.rules)} rules` : "") +
-                  (settings.lastTrainSummary?.strategyError ? " (Python failed, the built-in Apriori was used)" : "")}
+                {t("Last trained {date}", { date: formatDateTime(settings.lastTrainedAt) }) +
+                  (settings.lastTrainSummary
+                    ? t(" with {strategy}, {count} rules", {
+                      strategy: settings.lastTrainSummary.strategy,
+                      count: formatNumber(settings.lastTrainSummary.rules),
+                    })
+                    : "") +
+                  (settings.lastTrainSummary?.strategyError ? t(" (Python failed, the built-in Apriori was used)") : "")}
               </Text>
             )}
             <InlineStack gap="300" wrap>
-              <Select label="Algorithm" options={STRATEGY_OPTIONS} value={strategy} onChange={setStrategy} />
-              <Select label="Prioritise" options={RANK_OPTIONS} value={rankBy} onChange={setRankBy} />
-              <Select label="Retrain automatically" options={SCHEDULE_OPTIONS} value={retrainSchedule} onChange={setRetrainSchedule} />
+              <Select label={t("Algorithm")} options={options.strategy} value={strategy} onChange={setStrategy} />
+              <Select label={t("Prioritise")} options={options.rank} value={rankBy} onChange={setRankBy} />
+              <Select label={t("Retrain automatically")} options={options.schedule} value={retrainSchedule} onChange={setRetrainSchedule} />
             </InlineStack>
             <Text as="p" tone="subdued">
-              {"Old orders may not match current trends. Only orders inside this window are used when the model is trained" +
-                (orderDates.min ? ` (stored orders range from ${orderDates.min} to ${orderDates.max}).` : ".")}
+              {t("Old orders may not match current trends. Only orders inside this window are used when the model is trained") +
+                (orderDates.min ? t(" (stored orders range from {min} to {max}).", { min: orderDates.min, max: orderDates.max }) : ".")}
             </Text>
             <InlineStack gap="300" blockAlign="end" wrap>
-              <Select label="Orders used" options={WINDOW_OPTIONS} value={trainWindow} onChange={setTrainWindow} />
+              <Select label={t("Orders used")} options={options.window} value={trainWindow} onChange={setTrainWindow} />
               {trainWindow === "custom" && (
                 <>
-                  <TextField label="From" type="date" value={trainFrom} onChange={setTrainFrom} autoComplete="off" />
-                  <TextField label="To" type="date" value={trainTo} onChange={setTrainTo} autoComplete="off" />
+                  <TextField label={t("From")} type="date" value={trainFrom} onChange={setTrainFrom} autoComplete="off" />
+                  <TextField label={t("To")} type="date" value={trainTo} onChange={setTrainTo} autoComplete="off" />
                 </>
               )}
               <Button
@@ -394,22 +499,22 @@ export default function DataPage() {
                   { method: "post" },
                 )}
               >
-                Save
+                {t("Save")}
               </Button>
             </InlineStack>
-            {settingsFetcher.data?.success && <Text as="p" tone="success">Saved. Train the model again to apply it.</Text>}
+            {settingsFetcher.data?.success && <Text as="p" tone="success">{t("Saved. Train the model again to apply it.")}</Text>}
           </BlockStack>
         </Card>
 
         {imports.length > 0 && (
           <Card>
             <BlockStack gap="200">
-              <Text as="h2" variant="headingMd">Recent imports</Text>
+              <Text as="h2" variant="headingMd">{t("Recent imports")}</Text>
               {imports.map((item) => (
                 <InlineStack key={item.id} align="space-between">
                   <Text as="span">{item.fileName}</Text>
                   <Text as="span" tone="subdued">
-                    {`${formatNumber(item.orderCount)} orders · ${item.mode} · ${formatDateTime(item.createdAt)}`}
+                    {t("{count} orders · {mode} · {date}", { count: formatNumber(item.orderCount), mode: t(item.mode), date: formatDateTime(item.createdAt) })}
                   </Text>
                 </InlineStack>
               ))}

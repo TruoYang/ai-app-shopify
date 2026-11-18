@@ -1,0 +1,24 @@
+{
+  "widget": {
+    "heading_default": "Gợi ý cho bạn",
+    "heading_product": "Thường được mua cùng",
+    "heading_cart": "Hoàn thiện set đồ",
+    "add_to_cart": "Thêm vào giỏ",
+    "added": "Đã thêm",
+    "error": "Không thêm được",
+    "card_size": "Kích thước thẻ",
+    "size_large": "Thẻ lớn",
+    "size_medium": "Thẻ vừa",
+    "size_small": "Thẻ nhỏ",
+    "subtitle_default": "Chọn lọc từ những món khách hàng đang yêu thích",
+    "subtitle_product": "Khách mua sản phẩm này cũng chọn thêm",
+    "subtitle_cart": "Chọn theo những món đã có trong giỏ của bạn",
+    "reason_best_seller": "Bán chạy",
+    "reason_trending": "Đang hot",
+    "reason_new": "Hàng mới",
+    "reason_similar": "Phong cách tương tự",
+    "bundle": "Hoàn thiện set đồ: {count} món, tổng {total}",
+    "add_all": "Thêm cả {count} món vào giỏ",
+    "together_discount": "-{percent}% khi mua cùng"
+  }
+}

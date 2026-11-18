@@ -1,5 +1,7 @@
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
+import { csvOrderIdOf } from "../training-data.server";
+import { recordPurchase } from "../events.server";
 
 export const action = async ({ request }) => {
   const { payload, topic, shop } = await authenticate.webhook(request);
@@ -32,9 +34,15 @@ export const action = async ({ request }) => {
     return new Response();
   }
 
-  // Orders created from the CSV history are already stored as CSV orders.
-  const tags = String(payload?.tags ?? "").split(",").map((tag) => tag.trim());
-  if (tags.includes("csv-demo")) return new Response();
+  // Purchase event for the dashboard / A/B test when the cart came through the widget.
+  try {
+    await recordPurchase(shop, payload, orderId);
+  } catch (error) {
+    console.error("orders/paid: could not record the purchase event", error);
+  }
+
+  // Orders created from the CSV history are linked to their CSV order (training skips that copy).
+  const csvOrderId = csvOrderIdOf(payload?.tags, payload?.note);
 
   const customerId = payload?.customer?.admin_graphql_api_id
     ?? (payload?.customer?.id ? `gid://shopify/Customer/${payload.customer.id}` : null);
@@ -55,6 +63,7 @@ export const action = async ({ request }) => {
         orderDate,
         customerId,
         lines,
+        csvOrderId,
       },
       create: {
         shop,
@@ -64,6 +73,7 @@ export const action = async ({ request }) => {
         orderDate,
         customerId,
         lines,
+        csvOrderId,
       },
     });
   } else {

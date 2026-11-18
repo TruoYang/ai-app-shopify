@@ -1,0 +1,17 @@
+flowchart TB
+  T1["Train button<br/>(Home page)"] --> S
+  T2["Scheduler<br/>weekly / monthly, hourly check"] --> S
+  S["Sync Shopify orders<br/>(Admin GraphQL API)"] --> S2[("OrderHistory<br/>source shopify, customer,<br/>lines, csvOrderId")]
+  S2 --> L["Load orders inside the training window<br/>(all, last N months, or date range)"]
+  L --> M["CSV orders: product codes to shop products<br/>via matches; skip CSV orders that also<br/>exist on Shopify (Shopify copy wins)"]
+  M --> K["Variant SKUs to product keys<br/>(AUR-TOP-8558-M to AUR-TOP-8558)"]
+  K --> Q{"Merchant's algorithm"}
+  Q -- "FP-Growth / Item-kNN<br/>DEC / Hybrid" --> P["Python trainer ml/train.py<br/>dataset JSON in, rules JSON out"]
+  Q -- "Apriori" --> J["Built-in Apriori (JavaScript)"]
+  P -- "Python missing or failed" --> J
+  P --> R["Rules: cart products to suggestion,<br/>confidence, support"]
+  J --> R
+  R --> C["Keep at most 50,000 rules:<br/>single-item first, then strongest pairs"]
+  C --> X["Keep merchant rules and merchant edits<br/>(disabled, discount, priority)"]
+  X --> W[("Replace model rules in one transaction<br/>RecommendationRule")]
+  W --> Z[("ShopSettings<br/>last trained, summary")]

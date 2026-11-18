@@ -1,6 +1,6 @@
 # Báo cáo tiến độ: SmartCart RCM (ứng dụng gợi ý sản phẩm cho Shopify)
 
-Cập nhật: 05/11/2026
+Cập nhật: 17/11/2026
 
 ## 1. Tóm tắt
 
@@ -12,9 +12,11 @@ Cập nhật: 05/11/2026
 | Trang quản lý luật dạng thẻ sản phẩm, có bộ lọc | Xong |
 | Thuật toán mới (FP-Growth, item-kNN, DEC, Hybrid) + đánh giá offline | Xong |
 | Tự động train lại theo tuần/tháng, ưu tiên xếp hạng cho chủ shop | Xong |
-| Đo lường online (sự kiện, dashboard, A/B test) | Chưa làm (Phase 5) |
-| Song ngữ, mã giảm giá thật, deploy 24/7 | Chưa làm (Phase 6) |
-| Sơ đồ quy trình cho báo cáo | Chưa làm (Phase 7) |
+| Đo lường online (sự kiện, dashboard Insights, A/B test + mô phỏng replay) | Xong |
+| Admin song ngữ Việt/Anh, widget tiếng Việt, webhook GDPR, bảo mật API | Xong (Phase 6, phần 1) |
+| Mã giảm giá thật ở checkout (Shopify Discount Function) | Xong, chờ kiểm tra trên store |
+| Tên sản phẩm tiếng Việt trên store, deploy 24/7 | Chưa làm |
+| Sơ đồ quy trình cho báo cáo (Anh + Việt, `docs/flows/`) | Xong |
 
 ## 2. Shop demo (`my-favsion.myshopify.com`)
 
@@ -108,14 +110,83 @@ Chi tiết, biểu đồ và các giới hạn của đánh giá: `docs/eval/REA
 - **Ưu tiên xếp hạng**: doanh thu, số lượng bán hoặc tương tác.
 - **Tự động train lại**: hàng tuần hoặc hàng tháng.
 
-## 6. Việc tiếp theo
+## 6. Đo lường online và A/B test
 
-1. **Phase 5**: ghi nhận sự kiện widget (xem, bấm, thêm giỏ, mua) để đánh giá online. Dashboard cho chủ shop. A/B test giữa hai thuật toán.
-2. **Phase 6**: admin song ngữ Việt/Anh và bản dịch tiếng Việt cho storefront; mã giảm giá thật ở checkout (Discount Function); bảo mật, webhook GDPR; deploy 24/7.
-3. **Phase 7**: sơ đồ kiến trúc và các luồng (train, gợi ý, import CSV, tự động train), bản tiếng Anh và tiếng Việt.
-4. Dữ liệu thương hiệu Việt Nam (YODY, Aristino, Canifa): đang chờ tác giả bộ dữ liệu VN_Fashion_data duyệt quyền truy cập.
+**Ghi nhận sự kiện:**
+- Widget ghi lại các lần xem, bấm và thêm giỏ.
+- Webhook `orders/paid` ghi lại đơn hàng đến từ widget.
+- Mỗi trình duyệt chỉ có một mã ẩn danh, không dùng dữ liệu cá nhân.
 
-## 7. Cách demo
+**A/B test:**
+- Một phần khách (10–50%, chủ shop chọn) chỉ thấy sản phẩm bán chạy (nhóm đối chứng). Số còn lại thấy gợi ý AI.
+- Mỗi khách luôn ở một nhóm cố định.
+- Hai nhóm được so sánh bằng z-test hai tỷ lệ.
+
+**Trang Insights mới trong admin:**
+- Tỷ lệ bấm, tỷ lệ thêm giỏ và doanh thu từ gợi ý.
+- Kết quả A/B kèm khoảng tin cậy 95% và số khách cần thiết.
+- Thống kê theo loại gợi ý và sản phẩm được thêm giỏ nhiều nhất.
+
+**Mô phỏng replay** (vì shop demo chưa có khách thật):
+- Model chỉ được train trên đơn đến 25/10/2011.
+- 2.000 đơn sau ngày đó (model chưa từng thấy) được chạy lại như lượt khách ghé, qua đúng mã gợi ý thật.
+- Khách ảo được chia ngẫu nhiên 50/50 vào hai nhóm.
+
+| | Nhóm AI | Nhóm bán chạy |
+| --- | --- | --- |
+| Khách đã bấm gợi ý | 37–40% | 23–27% |
+| Khách đã thêm gợi ý vào giỏ | 26–29% | 12–14% |
+| Doanh thu từ gợi ý / khách | 17,5–19,2 $ | 8,0–9,3 $ |
+
+| Doanh thu tăng thêm / khách (so với không có widget) | 5,4–6,0 $ | 2,6–3,2 $ |
+
+- **Gợi ý AI tăng gấp khoảng 2 lần tỷ lệ thêm giỏ**, với p < 0,0001 ở cả 4 lần chạy.
+- **Doanh thu tăng thêm nhờ AI:** khoảng +2,8 $ mỗi khách so với chỉ hiện sản phẩm bán chạy (p < 0,0001 ở cả 4 lần chạy). Mức này bằng khoảng 0,4% giá trị đơn, hợp lý với một widget bán kèm.
+- **Hai loại doanh thu trên trang Insights:**
+  - "Doanh thu từ gợi ý": mọi món bán qua widget, kể cả món bấm xem rồi mua trong 24 giờ, giống cách tính affiliate.
+  - "Doanh thu tăng thêm nhờ app": chỉ tính phần AI mang lại thêm so với nhóm đối chứng.
+- **Kiểm tra A/A** (hai nhóm cùng nhận gợi ý AI): chỉ 1/20 lần báo khác biệt, đúng mức sai 5% kỳ vọng. Nghĩa là quy trình đo không tự tạo ra khác biệt.
+- **Giới hạn:** hành vi khách là mô phỏng nên con số tuyệt đối chỉ mang tính minh họa. Muốn có kết quả thật cần khoảng 4.400 khách mỗi nhóm.
+
+Chi tiết: `docs/eval/AB_TEST.md`. Sơ đồ: `docs/flows/img/7-measurement.vi.png`.
+
+## 7. Song ngữ và bảo mật (Phase 6, phần 1)
+
+**Admin song ngữ Việt/Anh:**
+- Cả 5 trang admin và menu đều có hai ngôn ngữ.
+- Mặc định theo ngôn ngữ của Shopify Admin. Chủ shop có thể chọn cố định ở trang chủ của app.
+- Các thành phần Polaris (nút, phân trang…) cũng đổi theo.
+
+**Widget tiếng Việt:** khi store hiển thị tiếng Việt, tiêu đề, nút và nhãn của widget chuyển sang tiếng Việt.
+
+**Quyền riêng tư (GDPR):** app nhận đủ 3 webhook bắt buộc của Shopify.
+- `customers/data_request`: báo cáo dữ liệu đang lưu về khách.
+- `customers/redact`: gỡ liên kết khách khỏi đơn hàng.
+- `shop/redact`: xóa toàn bộ dữ liệu của shop 48 giờ sau khi gỡ app.
+
+**Bảo mật:**
+- API gợi ý công khai (dùng để test) bị tắt ở môi trường production.
+- Hai route cũ không dùng nữa đã được xóa.
+- Widget chỉ gọi app qua App Proxy có chữ ký của Shopify.
+
+**Giảm giá khi mua cùng (Discount Function):**
+- Chủ shop đặt "Discount %" cho một luật ở trang Rules, ví dụ: mua áo A thì quần C được giảm 10%.
+- Khi giỏ hàng có đủ sản phẩm điều kiện và sản phẩm gợi ý, Shopify tự giảm giá sản phẩm gợi ý ở giỏ hàng và checkout.
+- Cách hoạt động:
+  - App tạo một mã giảm giá tự động tên "SmartCart bundle discount".
+  - Các luật có giảm giá được ghi vào cấu hình của mã này.
+  - Cấu hình tự cập nhật mỗi khi luật thay đổi hoặc sau khi train.
+- Function chạy trên hạ tầng Shopify (WebAssembly), không gọi về server của app, nên checkout không bị chậm.
+- Nếu nhiều luật cùng giảm một sản phẩm, mức giảm cao nhất được áp dụng.
+- Widget hiện nhãn "-10% khi mua cùng" trên gợi ý có giảm giá.
+- Đã kiểm thử 7 tình huống bằng bộ test chính thức của Shopify Functions, tất cả đều qua.
+
+## 8. Việc tiếp theo
+
+1. **Phase 6, phần 2**: tên sản phẩm tiếng Việt trên store; deploy 24/7 (Postgres). Danh sách đầy đủ: `docs/LATER.md`.
+2. Dữ liệu thương hiệu Việt Nam (YODY, Aristino, Canifa): đang chờ tác giả bộ dữ liệu VN_Fashion_data duyệt quyền truy cập.
+
+## 9. Cách demo
 
 ```powershell
 cd C:\Users\giang\ai-app-shopify\my-plugin-ai
@@ -123,10 +194,11 @@ shopify.cmd app dev --store my-favsion.myshopify.com --store-password stylise
 ```
 
 - Storefront: https://my-favsion.myshopify.com (mật khẩu `stylise`). Mở một sản phẩm, thêm vào giỏ và xem widget.
-- Admin app: Apps → SmartCart RCM, gồm 3 trang:
-  - **Trang chủ:** Train.
+- Admin app: Apps → SmartCart RCM, gồm 4 trang:
+  - **Trang chủ:** Train, chọn ngôn ngữ (Tự động / English / Tiếng Việt).
   - **Rules:** xem và lọc luật.
   - **Data:** import CSV, khớp sản phẩm, cài đặt train.
+  - **Insights:** số liệu widget, A/B test, nút "Run replay".
 - Admin shop: **Orders** (300 đơn) và **Customers** (274 khách).
 - Kịch bản gợi ý cho storefront:
   1. Mở một áo nữ trong *Asia Edit*.

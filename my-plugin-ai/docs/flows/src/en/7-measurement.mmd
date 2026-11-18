@@ -1,0 +1,23 @@
+flowchart TB
+  subgraph Live["Live shoppers"]
+    direction TB
+    V["Widget<br/>anonymous visitor id (browser)"] -- "cart SKUs + visitor id" --> R["Recommendation API"]
+    R -- "hash(visitor id) → group" --> G{"A/B group"}
+    G -- "AI" --> AI["Trained rules<br/>+ fallbacks"]
+    G -- "Control" --> BS["Best sellers only"]
+    V -- "impression · click · add to cart" --> E["Event API<br/>/apps/ai/event"]
+    V -- "cart attribute + hidden line property" --> O["Order"]
+    O -- "orders/paid webhook" --> PU["Purchase event<br/>order value · revenue from suggestions"]
+  end
+
+  subgraph Sim["Replay simulation"]
+    direction TB
+    H[("Held-out orders<br/>after the training window")] --> S["Each order = one visit<br/>half = cart, rest = real purchases"]
+    S -- "random 50/50 group" --> RF["Same recommendation code"]
+    RF --> SM["Shopper model<br/>clicks / adds"]
+  end
+
+  E --> DB[("RecommendationEvent<br/>live / simulated")]
+  PU --> DB
+  SM --> DB
+  DB --> D["Insights dashboard<br/>CTR · add-to-cart rate · revenue<br/>two-proportion z-test · 95% interval"]

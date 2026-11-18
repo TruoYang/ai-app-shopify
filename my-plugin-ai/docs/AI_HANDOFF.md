@@ -1,555 +1,184 @@
-# AI Handoff - Shopify Product Recommendation App
+# AI Handoff: SmartCart RCM
 
-Last updated: 2026-10-22
+Last updated: 2026-11-17
 
-## 1. Project Overview
+Read this first in a new AI conversation, then `docs/ROADMAP.md` and `docs/PROGRESS_REPORT.md`.
+System diagrams: `docs/flows/README.md` (English) and `docs/flows/README.vi.md` (Vietnamese).
 
-This is a Shopify embedded app and Theme App Extension for product recommendations.
+## 1. What the project is
 
-Main business flow:
+A Shopify embedded app plus a theme app extension that recommends products from order history. It is a graduation thesis project.
 
-```text
-Historical orders / CSV
-    -> OrderHistory database records
-    -> association-rule training
-    -> RecommendationRule records
-    -> current cart SKU input
-    -> recommendation API
-    -> storefront widget
-```
+- **App:** SmartCart RCM, handle `smartcart-rcm`.
+- **Demo store:** `my-favsion.myshopify.com`, a fashion store with Horizon theme.
+- **Scope:** one shop at a time. No cross-shop data.
 
-The app is intended for one merchant/shop at a time. It is not a marketplace and should not compare products or prices across unrelated shops.
-
-The planned product comparison feature is for comparing two different products inside the same shop, for example:
+**Main flow:**
 
 ```text
-Blue jacket vs red jacket
-- price
-- colors
-- sizes
-- material
-- extracted features from description
-- stock
-- product attributes
+CSV orders + Shopify orders -> OrderHistory
+  -> training (Python FP-Growth / Item-kNN / DEC / Hybrid, JS Apriori fallback)
+  -> RecommendationRule (max 50,000)
+  -> App Proxy /apps/ai/recommend
+  -> storefront widget (home, product, cart)
 ```
 
-## 2. Important Project Locations
+**User preferences:**
 
-### Backend and recommendation logic
+- The user writes Vietnamese; reply in Vietnamese.
+- Docs and code comments are in English. Vietnamese copies exist where asked.
+- Admin UI is planned to be bilingual VI/EN.
+- Write docs short and simple.
 
-- `app/ai-logic.js`
-  - Current rule-mining implementation.
-  - `trainModelFromDb()` trains from database orders.
-  - `getRecommendations()` is a small local helper.
+## 2. Status
 
-- `app/routes/api.train.jsx`
-  - Admin training endpoint.
-  - Fetches Shopify orders when an Admin API object is available.
-  - Reads CSV/imported orders from `OrderHistory`.
-  - Trains rules and stores them in `RecommendationRule`.
+| Phase | Content | Status |
+|---|---|---|
+| 1 | Realistic demo shop: 452 products, 1,854 SKUs, real images, 12 collections, menu | Done |
+| 2 | Core widget: App Proxy, per-item quota, keep 1–2 earlier suggestions, cache, fallbacks, Add to cart / Add all, size switch | Done |
+| 3 | CSV import with column-role preview and a 1-1 product matching page | Done |
+| 4 | ML strategies and offline evaluation (`docs/eval/`) | Done |
+| — | Rules page, demo orders/customers, widget redesign | Done |
+| 7 | Flow diagrams EN + VI (`docs/flows/`) | Done |
+| 5 | Event tracking, Insights dashboard, A/B test (live + replay simulation), `docs/eval/AB_TEST.md` | Done |
+| 6a | VI/EN admin (`app/i18n.js`), widget `locales/vi.json`, GDPR webhooks, test API off in production | Done |
+| 6b | Discount Function (`extensions/smartcart-discount`, `app/discount.server.js`) | Done, not yet tried on the store |
+| 6c | Vietnamese product titles on the storefront, Postgres + deploy | Later (`docs/LATER.md`) |
 
-- `app/routes/api.recommend.jsx`
-  - Storefront recommendation endpoint.
-  - Receives `shop`, `ids`, and `skus` query parameters.
-  - Uses active rules for the current shop only.
-  - Caches compiled rules for 30 seconds.
-  - Matches all antecedent SKUs against the cart.
-  - Scores candidates using confidence, support, cart-match ratio, and priority.
-  - Returns up to three products in `products` and keeps the first result in `product` for backward compatibility.
+Offline evaluation result: FP-Growth HitRate@10 0.782 vs 0.745 for the Apriori baseline (1,000 carts × 3 seeds).
+Replay A/B: AI vs best sellers, add-to-cart rate about 28% vs 13% (p < 0.0001). An A/A check gave 1 significant run of 20.
 
-### Admin UI
+## 3. Key files (in `my-plugin-ai/`)
 
-- `app/routes/app._index.jsx`
-  - Home page.
-  - `Train AI Model` button.
-  - `Choose rules` modal.
-  - Rule catalog search and product dropdowns.
-  - Enable/disable/delete rules.
-  - Set or update discount percentage for any rule, including model-generated rules.
+### Server logic (`app/`)
 
-- `app/routes/app.rules.jsx`
-  - Older full rules page.
-  - Has loader/action for listing, creating, and deleting rules.
-  - The primary workflow is now the home-page modal, so do not rely on a `/app/rules` navigation link.
+| File | Role |
+|---|---|
+| `recommendations.server.js` | `recommendForCart()`: combined rules → per-item rules (quota 5/3/2/1) → fallbacks (same category, recent orders, best seller, new arrival) → rankBy bonus. Returns `{products, cartKeys}`. |
+| `catalog.server.js` | Shop catalog (cached 10 min). Product key = common prefix of variant SKUs, so sizes count as one product. |
+| `training.server.js` | `runTraining({shop, adminForSync})`: syncs Shopify orders, picks the strategy, caps rules at 50,000, keeps merchant rules/edits, saves `ShopSettings.lastTrainSummary`. |
+| `training-data.server.js` | Date window, loads orders, skips CSV orders already on Shopify (`csvOrderId`), maps CSV codes to shop products. |
+| `python-trainer.server.js` | Spawns `ml/train.py`. Interpreter: `ML_PYTHON` env or `ml/.venv`. |
+| `ai-logic.js` | JS Apriori, used as the fallback. |
+| `scheduler.server.js` | Hourly check for weekly / monthly retrain. `DISABLE_SCHEDULER=1` turns it off. |
+| `csv-format.js`, `csv-import.server.js` | Column roles, delimiter/date detection, streaming import. |
+| `format.js` | Fixed-locale number/date formatting (avoids hydration mismatch). |
+| `discount.server.js` | `syncDiscounts()`: active rules with discountPercent → product-id list in the metafield `$app:smartcart/discount-rules` of the automatic discount "SmartCart bundle discount" (created on first use). Called after every rule change and after training. Config capped at ~9.5 KB. |
+| `i18n.js`, `language.server.js` | Admin translations. English text is the key: each page has `const VI = {...}` and `const t = useT(VI)`. Language = ShopSettings.language (auto/en/vi); auto follows Shopify's `?locale`. |
+| `events.server.js` | Widget events (validated, group recomputed on the server), purchase attribution from orders/paid, A/B settings cache, interaction scores for the "interaction" priority. |
+| `ab-stats.js` | z-test, 95% interval, sample size, visitor hash split, seeded random. |
+| `insights.server.js` | Aggregates events per group / reason / product for the dashboard. |
+| `replay.server.js` | Replay A/B simulation on held-out orders (`aaTest` for an A/A check). |
 
-- `app/routes/app.jsx`
-  - Embedded app layout and authentication.
-  - Navigation currently exposes the Recommendations page.
+### Routes (`app/routes/`)
 
-### Storefront extension
+- `app.jsx`: layout with AppProvider (App Bridge) and Polaris. Nav: Recommendations, Rules, Data.
+- `app._index.jsx`: home with Train button and status.
+- `app.rules.jsx`: rules as product cards, with filters, Execute/Reset and sort.
+- `app.data.jsx`: CSV import and training settings (algorithm, priority, schedule, window).
+- `app.data_.match.jsx`: CSV → shop product matching (low-traffic page).
+- `app.insights.jsx`: Insights dashboard, A/B settings, replay button.
+- `apps.ai.event.jsx`: App Proxy POST endpoint for widget events.
+- `app.language.jsx`: saves the admin language.
+- `webhooks.compliance.jsx`: GDPR webhooks (data request, customer redact, shop redact).
+- `apps.ai.recommend.jsx`: App Proxy endpoint used by the widget.
+- `api.train.jsx`: authenticated training endpoint.
+- `webhooks.orders.paid.jsx`: stores new orders with `customerId`, `lines`, `csvOrderId`.
+- Legacy: `api.recommend.jsx` is a CORS test endpoint, disabled when NODE_ENV=production.
 
-- `extensions/ai-widget/blocks/ai-recommendations.liquid`
-  - Current Theme App Block.
-  - Renders the recommendation widget shell.
-  - Uses `target: "section"`.
-  - Adds the widget JavaScript asset.
+### Widget
 
-- `extensions/ai-widget/assets/recommendations.js`
-  - Reads `/cart.js`.
-  - Sends cart SKUs to `/api/recommend`.
-  - Displays loading, empty-cart, no-result, error, and recommendation states.
-  - Supports the API `products` array and legacy `product` response.
-  - Contains a temporary development Cloudflare URL in `DEV_URL`.
-  - This URL changes whenever `shopify app dev` creates a new tunnel.
+- **Source:** `widget-src/recommendations.js`. Do not edit the built file.
+- **Build:** `npm run build:widget` writes `extensions/ai-widget/assets/recommendations.js`. App block JS must stay under 10 KB.
+- **Other files:**
+  - `extensions/ai-widget/blocks/ai-recommendations.liquid` (settings: heading, max_products, card_size, show_size_switch, show_add_to_cart)
+  - `recommendations.css`
+  - `locales/en.default.json`
+- **Block type:** `shopify://apps/smartcart-rcm/blocks/ai-recommendations/01a1988b-57d8-71f5-a4d5-4f5cfacab99e`.
+- **App Proxy** (`shopify.app.toml`): prefix `apps`, subpath `ai`, url `https://shopify.dev/apps/ai`. The CLI rewrites the host during dev.
 
-- `extensions/ai-widget/snippets/ai-recommendations.liquid`
-  - Legacy manual snippet.
-  - Do not render this at the same time as the app block.
-  - A theme warning `OrphanedSnippet` is expected while this file remains unused.
+### Discount Function (`extensions/smartcart-discount`)
 
-### Database
+- Target `cart.lines.discounts.generate.run`, vanilla JS compiled to WASM by the CLI.
+- Rule applies when every `when` product and the suggested product are in the cart; best percent per product, max 90%.
+- Tests: `node tests/make-fixtures.mjs` then `npx vitest run` inside the extension folder (7 cases).
+- Needs the `read_discounts,write_discounts` scopes.
 
-- `prisma/schema.prisma`
-  - `Session`: Shopify sessions.
-  - `OrderHistory`: CSV and Shopify order transactions.
-  - `RecommendationRule`: generated and merchant rules.
+### Database (`prisma/schema.prisma`, SQLite `prisma/dev.sqlite`)
 
-Current `RecommendationRule` fields include:
+**Models:**
 
-```text
-shop
-cartProducts       JSON string of antecedent SKUs
-cartSize
-suggestProduct
-confidence
-support
-source            model or merchant
-status            active or disabled
-priority
-discountPercent
-updatedAt
-```
+- `Session`
+- `RecommendationEvent` (type, visitorId, variant, productKey, reason, items, value, recValue, simulated)
+- `RecommendationRule` (shop, cartProducts, cartSize, suggestProduct, confidence, support, source model/merchant, status, priority, discountPercent)
+- `OrderHistory` (customerId, lines, csvOrderId)
+- `CsvImport`
+- `CsvProduct`
+- `ShopSettings` (train window, strategy, rankBy, retrainSchedule, lastTrainedAt, lastTrainSummary, abEnabled, abControlShare, abStartedAt, lastReplaySummary)
 
-Migrations include:
+**Latest migration:** `20261117163436_add_admin_language`.
 
-- `20251213203025_init_local`
-- `20251215113630_add_order_history`
-- `20261021233117_add_rule_controls`
+### ML (`ml/`)
 
-## 3. Current Algorithm
+- **Files:**
+  - `data.py`, `recommenders.py` (Popularity, Apriori, FP-Growth, ItemKNN, Hybrid RRF k=60)
+  - `dec.py` (PyTorch)
+  - `evaluate.py`, `train.py` (`--max-rules 50000`)
+- **Dependencies:** `requirements.txt` (numpy, pandas, scikit-learn, mlxtend, torch CPU, matplotlib).
 
-The project does not currently use K-Means or Random Forest.
+### Scripts
 
-The current method is custom association-rule mining, approximately an Apriori-like implementation.
+- `scripts/catalog/` builds and seeds the demo catalog (Fashion Product Images + Tstars-VTON).
+- `scripts/demo/seed-demo-orders.mjs` imports the UCI CSV and matches products. `push-demo-orders.mjs` creates Shopify customers/orders.
+  - Run both with `node --import ./scripts/lib/register-app-imports.mjs <script> --shop my-favsion.myshopify.com`.
+- `scripts/demo/run-replay.mjs` runs the replay A/B from the command line.
+- `scripts/docs/render-diagrams.mjs` (`npm run docs:diagrams`) renders Mermaid sources to PNG. It uses local Chrome.
 
-`trainModelFromDb()`:
-
-1. Parses the product SKU array in each order.
-2. Deduplicates and sorts items.
-3. Skips orders with fewer than two products or more than `maxItemsPerOrder`.
-4. Counts singleton, pair, and triple itemsets.
-5. Creates directional rules by removing one item from an itemset.
-6. Calculates confidence:
-
-```text
-confidence(A -> B) = support(A and B) / support(A)
-```
-
-For a triple, the implementation can produce rules such as:
-
-```text
-A + B -> C
-```
-
-The current training algorithm is not yet FP-Growth, Eclat, PrefixSpan, supervised ML, or deep learning.
-
-Recent improvements are serving/ranking improvements, not a new training algorithm:
-
-- Rule cache
-- Top-K candidate aggregation
-- Candidate scoring
-- Shop isolation
-- Priority support
-- Active/disabled status
-- Merchant overrides
-
-## 4. Current Data and Demo State
-
-A sample CSV was imported into the local SQLite database:
-
-```text
-Orders imported: 18,338
-Generated rules: about 51,083
-```
-
-The CSV dataset uses StockCode values. Shopify product variants must have matching SKUs for the recommendation API to find the product.
-
-The current local database is normally:
-
-```text
-my-plugin-ai/prisma/dev.sqlite
-```
-
-The local `.env` contains a non-secret database setting:
-
-```env
-DATABASE_URL="file:./dev.sqlite"
-```
-
-Never commit or write Shopify API secrets into this handoff file.
-
-## 5. How to Install and Run
-
-### Requirements
-
-The project package specifies:
-
-```text
-Node >= 20.19 < 22
-or Node >= 22.12
-```
-
-Node 24 also satisfies the second condition, although Node 22 LTS is the safer project choice.
-
-### First setup
-
-PowerShell previously blocked `npm.ps1` and `shopify.ps1`. The current machine used this policy fix once:
+## 4. Setup on a new machine
 
 ```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+cd my-plugin-ai
+npm install
+npx prisma generate
+npx prisma migrate deploy
+python -m venv ml\.venv
+ml\.venv\Scripts\pip install -r ml\requirements.txt
+npm run dev
 ```
 
-Alternatively, use `.cmd` commands without changing policy:
+**Data that is not in git:**
 
-```powershell
-npm.cmd
-shopify.cmd
-```
+- `prisma/dev.sqlite`
+- `data/` (CSV, catalog JSON, images)
+- `.env`
 
-Install dependencies:
+Copy them through a private channel.
 
-```powershell
-cd C:\Users\giang\ai-app-shopify\my-plugin-ai
-npm.cmd ci
-npm.cmd run setup
-```
+**Run `shopify app dev` on only one machine at a time.**
 
-`npm.cmd run setup` runs:
+## 5. Rules and cautions
+
+- **Never commit** `prisma/dev.sqlite` (contains the shop access token) or `.env` (contains `HF_TOKEN`). Never paste tokens in chat.
+- **Images and sources:**
+  - Tstars images are CC BY-NC-ND: no modification, keep attribution.
+  - Do not scrape Pinterest or Shopee.
+- **Demo data:**
+  - The data is simulated: real UCI basket structure mapped onto the shop's own products. Say this in reports.
+  - Demo customers use synthetic names and `@example.com` emails. Orders are created without sending emails.
+- **Dev store:** order creation is rate-limited to about 5 orders per minute.
+- **Windows:** `npm run build` may fail with Prisma EPERM while the dev server runs; stop the dev server first.
+- **Commands the user runs themselves:** `shopify app deploy` (needed after widget changes) and killing processes.
+
+## 6. Next work
+
+See `docs/LATER.md`: manual checks still to do, Discount Function, Vietnamese product titles (`titleVi` in the catalog; needs `write_translations` / `write_locales` scopes), Postgres + deploy.
+
+New UI text: add it to the page's `VI` map and wrap it in `t()`.
+
+## 7. Prompt for a new conversation
 
 ```text
-prisma generate
-prisma migrate deploy
-```
-
-### Start development
-
-Always run from the app directory, not the workspace parent:
-
-```powershell
-cd C:\Users\giang\ai-app-shopify\my-plugin-ai
-shopify.cmd app dev
-```
-
-Keep this terminal open.
-
-Shopify CLI may ask for:
-
-- Shopify Partner login
-- Development store selection
-- Storefront password
-
-The storefront password is not the Partner password or API secret. It is managed at:
-
-```text
-Online Store -> Preferences -> Password protection
-```
-
-When ready, CLI prints:
-
-```text
-Ready, watching for changes in your app
-```
-
-It also prints:
-
-- App Preview URL
-- Theme Editor URL
-- Local React Router URL
-- Temporary Cloudflare URL
-
-The Cloudflare URL is ephemeral. It may change or stop resolving when the dev process ends. Update `DEV_URL` in `extensions/ai-widget/assets/recommendations.js` when testing the storefront after a new tunnel is created.
-
-### Stop development
-
-In the same terminal:
-
-```text
-Ctrl + C
-```
-
-## 6. How to Test as Admin
-
-1. Run `shopify.cmd app dev`.
-2. Open the App Preview URL from the CLI.
-3. Use `Train AI Model` to train rules.
-4. Use `Choose rules` to open the modal.
-5. The modal supports:
-   - Searching products by name or SKU.
-   - Selecting product A as a cart trigger.
-   - Optionally selecting product B as a second cart trigger.
-   - Selecting the recommended product C.
-   - Setting priority.
-   - Setting discount percentage.
-   - Enabling/disabling rules.
-   - Deleting rules.
-   - Updating discount for model-generated rules.
-
-Rule semantics:
-
-```text
-Cart trigger A -> recommendation C
-Cart trigger A + B -> recommendation C
-```
-
-`Search product catalog` only filters the dropdown options. It is not itself a rule condition.
-
-## 7. How to Test as Customer
-
-The customer storefront is:
-
-```text
-https://my-ai-shop-test.myshopify.com
-```
-
-Cart URL:
-
-```text
-https://my-ai-shop-test.myshopify.com/cart
-```
-
-Steps:
-
-1. Ensure `shopify app dev` is still running.
-2. Ensure the `AI recommendations` app block is enabled in the theme.
-3. Add products with matching SKUs to the cart.
-4. Open `/cart`.
-5. Refresh with `Ctrl + F5`.
-6. Inspect browser DevTools Console if the widget shows an error.
-
-The widget displays visible status messages for loading, empty cart, no recommendation, and API errors.
-
-Do not add both the legacy `AI Recommendations Widget` from the old app and the current `AI recommendations` block. The old app is `my plugin ai`; the current project app is `SmartCart RCM` (handle `smartcart-rcm`, formerly `plugin-app-fix1`).
-
-## 8. Known Warnings and Caveats
-
-### OrphanedSnippet
-
-Theme Check may show:
-
-```text
-OrphanedSnippet
-```
-
-This refers to the old unused snippet under `extensions/ai-widget/snippets`. It is not the current app block.
-
-### Unused Frame warning
-
-Build may warn that `Frame` is imported but unused in `app/routes/app.jsx`. This does not block the build and can be cleaned later.
-
-### Prisma EPERM
-
-Running full `npm run build` while the dev server is active can fail because Prisma's Windows query engine file is locked. To validate routes without regenerating Prisma:
-
-```powershell
-cd C:\Users\giang\ai-app-shopify\my-plugin-ai
-.\node_modules\.bin\react-router.cmd build
-```
-
-To run full build, stop the dev server first.
-
-### Authentication and training
-
-The current training route still contains prototype behavior around authentication and demo CSV data. It can fall back to unauthenticated admin access in the current dev setup. This must be tightened before production:
-
-- Always derive shop from authenticated session.
-- Do not trust `shop` query parameter for destructive operations.
-- Remove cross-shop demo fallback in production.
-- Do not allow unauthenticated users to trigger training or delete rules.
-
-### Training is synchronous
-
-Current training runs inside one HTTP request:
-
-```text
-Fetch Shopify orders -> store orders -> mine rules -> replace rules -> response
-```
-
-This is acceptable for the prototype but not production-scale.
-
-## 9. Planned Graduation Project Roadmap
-
-### A. Better recommendation algorithms
-
-Keep the current implementation as a baseline and add:
-
-1. Apriori baseline with full metrics.
-2. FP-Growth for faster frequent-itemset mining.
-3. Eclat as an alternative vertical-format miner.
-4. Popularity fallback.
-5. Item-to-item similarity using Jaccard or cosine similarity.
-6. Weighted rules using recency, order value, or margin.
-7. Sequential mining for purchase order/time behavior.
-8. Hybrid ranking.
-
-Useful metrics:
-
-```text
-support
-confidence
-lift
-leverage
-conviction
-Precision@K
-Recall@K
-HitRate@K
-NDCG@K
-coverage
-add-to-cart rate
-purchase conversion rate
-```
-
-### B. Strategy profiles
-
-The merchant should select a business objective, not an algorithm name:
-
-```text
-High precision
-Broad coverage
-Cart expansion
-Recent behavior
-High revenue
-New product discovery
-```
-
-Each profile can map internally to different algorithms and ranking weights.
-
-### C. Training jobs and schedules
-
-Add models such as:
-
-```text
-TrainingJob
-- shop
-- status
-- requestedBy
-- startedAt
-- finishedAt
-- error
-- modelVersion
-```
-
-```text
-RecommendationModel
-- shop
-- version
-- status: draft/active/archived
-- strategyProfile
-- metrics
-- createdAt
-```
-
-Training should become:
-
-```text
-Manual/weekly/monthly trigger
-    -> queued job
-    -> worker
-    -> draft model
-    -> evaluate
-    -> atomically publish active model
-```
-
-Never delete active rules before the replacement model is fully trained and validated.
-
-### D. Discount implementation
-
-`discountPercent` is currently stored and returned as metadata only.
-
-To apply a real discount at checkout, add a Shopify Discount Function. It should validate:
-
-- Cart contains A and optionally B.
-- Discount percentage.
-- Valid time window.
-- Product/variant scope.
-- Discount stacking rules.
-- Currency and market behavior.
-
-### E. Product suppression
-
-For a same-shop customer preference feature, add per-session or per-customer feedback:
-
-```text
-ProductFeedback
-- shop
-- sessionId/customerId
-- productId
-- event: view/skip/dismiss/not_interested
-- createdAt
-- expiresAt
-```
-
-Do not globally hide a product family merely because one customer skipped one item. Use category/tags/attributes/embedding similarity, TTL, and reset.
-
-### F. Compare two products in the same shop
-
-This is different from cross-shop marketplace comparison.
-
-Add:
-
-```text
-ProductCatalog
-- shop
-- productId
-- variantId
-- sku
-- title
-- barcode
-- vendor
-- category
-- price
-- availability
-```
-
-Extract normalized attributes from descriptions:
-
-```text
-HTML description
-    -> clean HTML
-    -> split text
-    -> normalize attributes
-    -> ProductAttribute records
-    -> comparison table
-```
-
-Compare:
-
-- Price
-- Sale price
-- Availability
-- Color
-- Size
-- Material
-- Features
-- Rating and review count
-- Extracted description attributes
-
-## 10. Recommended Next Implementation Order
-
-1. Tighten training authentication and remove hard-coded shop fallback.
-2. Add model/rule versioning and atomic publish.
-3. Move training to a background job.
-4. Add FP-Growth and compare against current baseline.
-5. Add lift and offline evaluation metrics.
-6. Implement strategy profiles.
-7. Implement Shopify Discount Function.
-8. Add recommendation event tracking.
-9. Add customer suppression/reset.
-10. Build same-shop product comparison.
-
-## 11. Handoff Prompt
-
-Use this prompt in a new AI conversation:
-
-```text
-Read docs/AI_HANDOFF.md first. Continue this Shopify recommendation app from its current repository state. Do not reset existing changes. Preserve the current API response compatibility and shop isolation. Before editing, inspect the current files and state one local hypothesis plus a focused validation. Implement the next roadmap item with minimal scoped changes, then build/test it.
+Read docs/AI_HANDOFF.md first, then docs/ROADMAP.md and docs/PROGRESS_REPORT.md.
+Continue SmartCart RCM from the current repository state. Do not reset existing changes.
+Reply in Vietnamese. Keep docs short and simple.
 ```

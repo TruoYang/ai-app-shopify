@@ -1,0 +1,18 @@
+flowchart TB
+  subgraph Sources["Bộ dữ liệu công khai"]
+    KAGL["Fashion Product Images<br/>(Kaggle, Marqo/KAGL)"]
+    TSTARS["Tstars-VTON<br/>(Taobao / Tmall)"]
+    UCI["CSV UCI Online Retail<br/>541.909 dòng đơn hàng"]
+  end
+
+  KAGL --> BuildK["build-fashion-catalog<br/>chọn 233 sản phẩm, đặt tên,<br/>size, giá, mô tả"]
+  TSTARS --> BuildT["build-tstars-catalog<br/>chọn 219 sản phẩm,<br/>nhận diện màu từ ảnh"]
+  BuildK --> Seed["seed-shopify-catalog<br/>upload ảnh, tạo sản phẩm,<br/>publish, bộ sưu tập, menu"]
+  BuildT --> Seed
+  Seed --> Products["Shop Shopify<br/>452 sản phẩm · 12 bộ sưu tập"]
+
+  UCI --> Demo["seed-demo-orders<br/>import CSV, khớp 452 sản phẩm CSV<br/>với sản phẩm shop (1-1)"]
+  Products --> Demo
+  Demo --> History[("OrderHistory<br/>20.728 đơn CSV")]
+  History --> Push["push-demo-orders<br/>tạo khách + đơn, tag csv-demo,<br/>giữ ngày gốc, không gửi email"]
+  Push --> ShopOrders["Shop Shopify<br/>300 đơn hàng · 274 khách hàng"]

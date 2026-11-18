@@ -6,6 +6,7 @@
 
 import prisma from "./db.server";
 import { getShopCatalog, toProductKey } from "./catalog.server";
+import { getInteractionScores } from "./events.server";
 
 const RULE_CACHE_TTL_MS = 30_000;
 const MAX_RECOMMENDATIONS = 8;
@@ -120,7 +121,8 @@ const fallbackResult = (product, reason, forItem = null) => ({
 
 // Fills `chosen` up to `target` items: same product type as the cart, then products from
 // the latest orders, then best sellers, then the newest products.
-async function addFallbacks({ shop, catalog, cartKeys, cartSet, chosen, target }) {
+// `popularOnly` (A/B control group) uses best sellers and new arrivals only.
+async function addFallbacks({ shop, catalog, cartKeys, cartSet, chosen, target, popularOnly = false }) {
     const add = (product, reason, forItem) => {
         if (chosen.size >= target || !product?.available) return;
         if (chosen.has(product.key) || cartSet.has(product.key)) return;
@@ -132,13 +134,13 @@ async function addFallbacks({ shop, catalog, cartKeys, cartSet, chosen, target }
     const byPopularity = (a, b) => (rank.get(a.key) ?? Infinity) - (rank.get(b.key) ?? Infinity) ||
         String(b.createdAt).localeCompare(String(a.createdAt));
 
-    for (const key of cartKeys) {
+    for (const key of popularOnly ? [] : cartKeys) {
         const type = catalog.products.get(key)?.productType;
         if (!type) continue;
         all.filter((product) => product.productType === type).sort(byPopularity).slice(0, 2)
             .forEach((product) => add(product, "same_category", key));
     }
-    recent.forEach((key) => add(catalog.products.get(key), "recent_orders"));
+    if (!popularOnly) recent.forEach((key) => add(catalog.products.get(key), "recent_orders"));
     bestSellers.forEach((key) => add(catalog.products.get(key), "best_seller"));
     all.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
         .forEach((product) => add(product, "new_arrival"));
@@ -158,14 +160,22 @@ async function getRankBy(shop) {
 
 /**
  * Extra score (0..RANK_BONUS) per suggested product for the merchant's priority:
- * revenue favours higher prices, quantity favours best sellers. "interaction" uses best
- * sellers until widget click tracking exists (Phase 5). "balanced" adds nothing.
+ * revenue favours higher prices, quantity favours best sellers, interaction favours products
+ * shoppers clicked and added from the widget (best sellers while there is no event yet).
+ * "balanced" adds nothing.
  */
 async function makeRankBonus(shop, catalog, rankBy) {
     if (rankBy === "balanced") return () => 0;
     if (rankBy === "revenue") {
         const maxPrice = Math.max(...[...catalog.products.values()].map((product) => product.price), 1);
         return (key) => RANK_BONUS * ((catalog.products.get(key)?.price ?? 0) / maxPrice);
+    }
+    if (rankBy === "interaction") {
+        const scores = await getInteractionScores(shop);
+        if (scores.size > 0) {
+            const top = Math.max(...scores.values());
+            return (key) => RANK_BONUS * ((scores.get(key) ?? 0) / top);
+        }
     }
     const { bestSellers } = await getOrderSignals(shop, catalog);
     const rank = new Map(bestSellers.map((key, index) => [key, index]));
@@ -202,9 +212,10 @@ const toResult = (product, rule, forItem) => ({
 /**
  * Returns { status, body } for the cart SKUs of one shop.
  * `admin` is an Admin API client for that shop.
+ * `variant` is the A/B group: "ai" (trained rules + fallbacks) or "control" (best sellers).
+ * An empty cart (home page) gets fallbacks only: recent orders, best sellers, new arrivals.
  */
-// An empty cart (home page) gets fallbacks only: recent orders, best sellers, new arrivals.
-export async function recommendForCart({ shop, admin, cartSkus }) {
+export async function recommendForCart({ shop, admin, cartSkus, variant = "ai", quiet = false }) {
     const catalog = await getShopCatalog(shop, admin);
     const rules = await getShopRules(shop, catalog);
     const cartKeys = [...new Set(cartSkus.map((sku) => toProductKey(catalog, sku)))];
@@ -223,15 +234,17 @@ export async function recommendForCart({ shop, admin, cartSkus }) {
         return true;
     };
 
+    const control = variant === "control";
+
     // Combined rules first: they describe the cart as a whole.
     let combinedTaken = 0;
-    for (const rule of rankRules(rules.combined, bonus)) {
+    for (const rule of control ? [] : rankRules(rules.combined, bonus)) {
         if (combinedTaken >= quota) break;
         if (rule.cart.every((key) => cartSet.has(key)) && take(rule, rule.cart.join("+"))) combinedTaken++;
     }
 
     // Then each cart item gets its own suggestions, in cart order.
-    for (const key of cartKeys) {
+    for (const key of control ? [] : cartKeys) {
         let taken = 0;
         for (const rule of rankRules(rules.single.get(key) ?? [], bonus)) {
             if (taken >= quota) break;
@@ -239,13 +252,15 @@ export async function recommendForCart({ shop, admin, cartSkus }) {
         }
     }
 
-    const target = cartKeys.length === 0 ? MAX_RECOMMENDATIONS : MIN_RECOMMENDATIONS;
+    const target = cartKeys.length === 0 || control ? MAX_RECOMMENDATIONS : MIN_RECOMMENDATIONS;
     if (chosen.size < target) {
-        await addFallbacks({ shop, catalog, cartKeys, cartSet, chosen, target });
+        await addFallbacks({ shop, catalog, cartKeys, cartSet, chosen, target, popularOnly: control });
     }
 
     const products = [...chosen.values()].slice(0, MAX_RECOMMENDATIONS);
-    console.log(`Recommend ${shop}: cart=${cartKeys.join(",")} rules=${rules.count} -> ${products.length}`);
+    if (!quiet) {
+        console.log(`Recommend ${shop} [${variant}]: cart=${cartKeys.join(",")} rules=${rules.count} -> ${products.length}`);
+    }
 
     if (products.length === 0) {
         return {
@@ -254,6 +269,7 @@ export async function recommendForCart({ shop, admin, cartSkus }) {
                 message: "No recommendation found for this cart",
                 cartKeys,
                 products: [],
+                variant,
                 debug: { rulesCount: rules.count },
             },
         };
@@ -268,6 +284,7 @@ export async function recommendForCart({ shop, admin, cartSkus }) {
             products,
             // Product keys of the cart, so the widget can drop kept suggestions already in it.
             cartKeys,
+            variant,
         },
     };
 }

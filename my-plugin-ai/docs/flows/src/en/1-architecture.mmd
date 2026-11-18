@@ -1,0 +1,42 @@
+flowchart TB
+  Merchant(["Merchant"])
+  Shopper(["Shopper"])
+
+  subgraph Shopify["Shopify platform"]
+    direction LR
+    Admin["Shopify Admin"]
+    Store["Online Store (Horizon theme)<br/>+ recommendation widget"]
+    Proxy["App Proxy<br/>/apps/ai/recommend"]
+    API["Admin GraphQL API<br/>+ order webhooks"]
+  end
+
+  subgraph App["SmartCart RCM server (Node.js, React Router)"]
+    direction LR
+    UI["Embedded admin UI<br/>Home · Rules · Data"]
+    Import["CSV import<br/>+ product matching"]
+    Train["Training service<br/>+ weekly / monthly scheduler"]
+    Rec["Recommendation API<br/>(reads the product catalog)"]
+    Hook["Order webhook handler"]
+  end
+
+  subgraph Data["Data and machine learning"]
+    direction LR
+    DB[("SQLite (Prisma)<br/>orders · rules · CSV matches · settings")]
+    ML["Python ML trainer<br/>FP-Growth · Item-kNN · DEC · Hybrid"]
+  end
+
+  Merchant --> Admin
+  Shopper --> Store
+  Admin -- "App Bridge session token" --> UI
+  Store -- "cart SKUs" --> Proxy
+  Proxy -- "signed request" --> Rec
+  UI --> Import
+  UI -- "Train" --> Train
+  Train <-- "sync orders" --> API
+  Rec --> API
+  API -- "orders/paid" --> Hook
+  Import --> DB
+  Train <-- "dataset / rules JSON" --> ML
+  Train --> DB
+  Rec --> DB
+  Hook --> DB

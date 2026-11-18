@@ -1,0 +1,42 @@
+flowchart TB
+  Merchant(["Chủ shop"])
+  Shopper(["Khách hàng"])
+
+  subgraph Shopify["Nền tảng Shopify"]
+    direction LR
+    Admin["Shopify Admin"]
+    Store["Cửa hàng online (theme Horizon)<br/>+ widget gợi ý"]
+    Proxy["App Proxy<br/>/apps/ai/recommend"]
+    API["Admin GraphQL API<br/>+ webhook đơn hàng"]
+  end
+
+  subgraph App["Server SmartCart RCM (Node.js, React Router)"]
+    direction LR
+    UI["Giao diện quản trị nhúng<br/>Trang chủ · Rules · Data"]
+    Import["Import CSV<br/>+ khớp sản phẩm"]
+    Train["Dịch vụ huấn luyện<br/>+ lịch hàng tuần / hàng tháng"]
+    Rec["API gợi ý<br/>(đọc danh mục sản phẩm)"]
+    Hook["Xử lý webhook đơn hàng"]
+  end
+
+  subgraph Data["Dữ liệu và học máy"]
+    direction LR
+    DB[("SQLite (Prisma)<br/>đơn hàng · luật · bảng khớp CSV · cài đặt")]
+    ML["Bộ huấn luyện Python<br/>FP-Growth · Item-kNN · DEC · Hybrid"]
+  end
+
+  Merchant --> Admin
+  Shopper --> Store
+  Admin -- "token phiên App Bridge" --> UI
+  Store -- "SKU trong giỏ" --> Proxy
+  Proxy -- "request có chữ ký" --> Rec
+  UI --> Import
+  UI -- "Train" --> Train
+  Train <-- "đồng bộ đơn hàng" --> API
+  Rec --> API
+  API -- "orders/paid" --> Hook
+  Import --> DB
+  Train <-- "dữ liệu / luật JSON" --> ML
+  Train --> DB
+  Rec --> DB
+  Hook --> DB

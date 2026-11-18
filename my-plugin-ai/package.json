@@ -22,7 +22,11 @@
     "catalog:build": "node scripts/catalog/build-fashion-catalog.mjs",
     "catalog:images": "node scripts/catalog/download-catalog-images.mjs",
     "catalog:seed": "node scripts/catalog/seed-shopify-catalog.mjs",
-    "build:widget": "esbuild widget-src/recommendations.js --minify --target=es2020 --outfile=extensions/ai-widget/assets/recommendations.js"
+    "build:widget": "esbuild widget-src/recommendations.js --minify --target=es2020 --outfile=extensions/ai-widget/assets/recommendations.js",
+    "docs:diagrams": "node scripts/docs/render-diagrams.mjs",
+    "start:prod": "prisma migrate deploy --schema prisma/postgres/schema.prisma && react-router-serve ./build/server/index.js",
+    "db:pg-schema": "node scripts/db/make-postgres-schema.mjs",
+    "db:copy-to-postgres": "node --import ./scripts/lib/register-app-imports.mjs scripts/db/copy-to-postgres.mjs"
   },
   "type": "module",
   "engines": {
@@ -48,6 +52,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.2",
     "@shopify/api-codegen-preset": "^1.2.0",
     "@shopify/polaris-types": "^1.0.1",
     "@types/eslint": "^9.6.1",
@@ -65,6 +70,7 @@
     "graphql-config": "^5.1.1",
     "hyparquet": "^1.32.0",
     "jpeg-js": "^0.4.4",
+    "pg": "^8.23.1",
     "pngjs": "^7.0.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",

@@ -1,0 +1,13 @@
+flowchart TB
+  A["Merchant chooses a CSV file<br/>(Data page)"] --> B["Browser preview: first 256 KB<br/>detect delimiter, show 10 rows"]
+  B --> C["Guess column roles from headers<br/>(English, Vietnamese, Shopify export)<br/>and the date format"]
+  C --> D{"Merchant checks roles<br/>order ID + product code set?"}
+  D -- "no" --> C
+  D -- "yes, replace or append" --> E["Server streams the whole file<br/>(csv-parse)"]
+  E --> F["Group lines into orders<br/>skip returns and zero quantities"]
+  F --> G[("OrderHistory<br/>source csv_import,<br/>customerId, lines, date")]
+  F --> H[("CsvProduct<br/>code, name, order count")]
+  H --> I["Matching page: CSV products,<br/>most ordered first"]
+  I --> J["Merchant picks the shop product<br/>for each CSV product (one to one)"]
+  J --> K[("CsvProduct.shopProductKey")]
+  K --> L["Training maps CSV codes<br/>to shop products"]

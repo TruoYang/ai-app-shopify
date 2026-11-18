@@ -1,0 +1,17 @@
+flowchart TB
+  T1["Nút Train<br/>(trang chủ app)"] --> S
+  T2["Bộ lập lịch<br/>hàng tuần / hàng tháng, kiểm tra mỗi giờ"] --> S
+  S["Đồng bộ đơn hàng Shopify<br/>(Admin GraphQL API)"] --> S2[("OrderHistory<br/>nguồn shopify, khách hàng,<br/>dòng sản phẩm, csvOrderId")]
+  S2 --> L["Lấy đơn trong khoảng thời gian huấn luyện<br/>(tất cả, N tháng gần nhất, hoặc từ ngày đến ngày)"]
+  L --> M["Đơn CSV: đổi mã CSV sang sản phẩm shop<br/>theo bảng khớp; bỏ đơn CSV đã có bản<br/>trên Shopify (ưu tiên bản Shopify)"]
+  M --> K["SKU theo size thành mã sản phẩm gốc<br/>(AUR-TOP-8558-M thành AUR-TOP-8558)"]
+  K --> Q{"Thuật toán chủ shop chọn"}
+  Q -- "FP-Growth / Item-kNN<br/>DEC / Hybrid" --> P["Bộ huấn luyện Python ml/train.py<br/>nhận dữ liệu JSON, trả luật JSON"]
+  Q -- "Apriori" --> J["Apriori có sẵn (JavaScript)"]
+  P -- "thiếu Python hoặc lỗi" --> J
+  P --> R["Luật: sản phẩm trong giỏ thành gợi ý,<br/>độ tin cậy, support"]
+  J --> R
+  R --> C["Giữ tối đa 50.000 luật:<br/>luật 1 sản phẩm trước, rồi các cặp mạnh nhất"]
+  C --> X["Giữ luật và chỉnh sửa của chủ shop<br/>(tắt luật, giảm giá, ưu tiên)"]
+  X --> W[("Thay luật của mô hình trong một giao dịch<br/>RecommendationRule")]
+  W --> Z[("ShopSettings<br/>lần huấn luyện gần nhất, tóm tắt")]

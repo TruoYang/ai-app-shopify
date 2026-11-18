@@ -12,9 +12,23 @@ automatically_update_urls_on_dev = true
 [webhooks]
 api_version = "2026-01"
 
+# orders/paid: stores new orders for training and attributes purchases to the widget (Phase 5).
+[[webhooks.subscriptions]]
+topics = [ "orders/paid" ]
+uri = "/webhooks/orders/paid"
+
+[[webhooks.subscriptions]]
+topics = [ "app/uninstalled" ]
+uri = "/webhooks/app/uninstalled"
+
+# Mandatory privacy webhooks (app/routes/webhooks.compliance.jsx).
+[[webhooks.subscriptions]]
+compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
+uri = "/webhooks/compliance"
+
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_orders,write_orders,read_customers,write_customers,read_products,write_products,read_publications,write_publications,read_online_store_navigation,write_online_store_navigation"
+scopes = "read_orders,write_orders,read_customers,write_customers,read_products,write_products,read_publications,write_publications,read_online_store_navigation,write_online_store_navigation,read_discounts,write_discounts"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]

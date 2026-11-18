@@ -16,14 +16,23 @@ export async function getTrainingWindow(shop, now = new Date()) {
 }
 
 // Orders of one source inside the window. With a window set, undated orders are left out.
+// CSV orders that were also created on Shopify are left out: the Shopify copy is used instead.
 export async function loadTrainingOrders(shop, source, window) {
   const dateFilter = window.from || window.to
     ? { orderDate: { ...(window.from ? { gte: window.from } : {}), ...(window.to ? { lte: window.to } : {}) } }
     : {};
-  return prisma.orderHistory.findMany({
+  const orders = await prisma.orderHistory.findMany({
     where: { shop, source, ...dateFilter },
     select: { orderId: true, orderDate: true, productIds: true },
   });
+  if (source !== "csv_import") return orders;
+  const onShopify = await prisma.orderHistory.findMany({
+    where: { shop, source: "shopify", csvOrderId: { not: null } },
+    select: { csvOrderId: true },
+  });
+  if (onShopify.length === 0) return orders;
+  const replaced = new Set(onShopify.map((row) => row.csvOrderId));
+  return orders.filter((order) => !replaced.has(order.orderId));
 }
 
 /**
@@ -76,4 +85,13 @@ export async function buildTrainingDataset(shop, toKey = (sku) => sku) {
   });
 
   return { shop, window, exportedAt: new Date().toISOString(), orders };
+}
+
+// Shopify orders created from a CSV order carry the tag "csv-demo" and the note
+// "Imported from CSV order <invoice> ...". Returns the CSV row's orderId, or null.
+export function csvOrderIdOf(tags, note) {
+  const tagList = Array.isArray(tags) ? tags : String(tags ?? "").split(",").map((tag) => tag.trim());
+  if (!tagList.includes("csv-demo")) return null;
+  const match = /CSV order (\S+?)[\s.(]/.exec(`${note ?? ""} `);
+  return match ? `csv_${match[1]}` : null;
 }

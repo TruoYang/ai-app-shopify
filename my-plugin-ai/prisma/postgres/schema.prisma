@@ -1,0 +1,144 @@
+// GENERATED from prisma/schema.prisma by scripts/db/make-postgres-schema.mjs. Do not edit.
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Note that some adapters may set a maximum length for the String type by default, please ensure your strings are long
+// enough when changing adapters.
+// See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
+
+// Adding here:
+model RecommendationRule {
+  id            Int       @id @default(autoincrement())
+  shop          String    // Shop domain
+  cartProducts  String    // JSON array: ["productId1", "productId2"]
+  cartSize      Int       // Số sản phẩm trong cart (1 hoặc 2)
+  suggestProduct String   // Product ID gợi ý
+  confidence    Float     // Confidence (0-1)
+  support       Int       // Số orders có rule này
+  source        String    @default("model") // "model" or "merchant"
+  status        String    @default("active") // "active" or "disabled"
+  priority      Int       @default(0)
+  discountPercent Float?
+  updatedAt     DateTime  @updatedAt
+
+  @@index([shop, status, cartSize])
+}
+
+// Order history for training (imported from CSV + real Shopify orders)
+model OrderHistory {
+  id            Int       @id @default(autoincrement())
+  shop          String    // Shop domain
+  orderId       String    // Invoice/Order ID (from CSV or Shopify)
+  productIds    String    // JSON array of product IDs in this order
+  source        String    @default("shopify") // "csv_import" or "shopify"
+  orderDate     DateTime? // Original order date
+  customerId    String?   // Customer ID from the CSV, or the Shopify customer GID
+  lines         String?   // JSON array: [{ code, quantity, price }] (price per unit, as in the source)
+  csvOrderId    String?   // Shopify orders created from a CSV order: that CSV row's orderId ("csv_<id>"),
+                          // so training uses the Shopify copy and skips the CSV duplicate
+  createdAt     DateTime  @default(now())
+
+  @@unique([shop, orderId])
+  @@index([shop])
+  @@index([shop, customerId])
+}
+
+// One uploaded CSV file of historical orders and the column roles chosen for it.
+model CsvImport {
+  id            Int       @id @default(autoincrement())
+  shop          String
+  fileName      String
+  columnMap     String    // JSON: { orderId: "InvoiceNo", productCode: "StockCode", ... }
+  mode          String    // "replace" or "append"
+  rowCount      Int       @default(0)
+  orderCount    Int       @default(0)
+  skippedRows   Int       @default(0)
+  createdAt     DateTime  @default(now())
+
+  @@index([shop])
+}
+
+// A product as it appears in imported CSV files, and the shop product it stands for.
+// shopProductKey is a product key from app/catalog.server.js; each shop product is
+// matched to at most one CSV product.
+model CsvProduct {
+  id             Int       @id @default(autoincrement())
+  shop           String
+  code           String    // product code / SKU column in the CSV
+  name           String?
+  orderCount     Int       @default(0)
+  shopProductKey String?
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([shop, code])
+  @@unique([shop, shopProductKey])
+  @@index([shop, orderCount])
+}
+
+// Per-shop settings for training.
+model ShopSettings {
+  shop              String    @id
+  trainFrom         DateTime? // only orders on or after this date are used
+  trainTo           DateTime? // only orders on or before this date are used
+  trainLastMonths   Int?      // alternative to trainFrom: rolling window
+  strategy          String    @default("apriori")  // apriori | fpgrowth | itemknn | dec
+  rankBy            String    @default("balanced") // balanced | revenue | quantity | interaction
+  retrainSchedule   String    @default("none")     // none | weekly | monthly
+  lastTrainedAt     DateTime?
+  lastTrainSummary  String?   // JSON stats of the last training run
+  abEnabled         Boolean   @default(false) // A/B test: AI suggestions vs best sellers (control)
+  abControlShare    Int       @default(50)    // percent of visitors in the control group
+  abStartedAt       DateTime? // start of the current experiment; also salts the visitor split
+  lastReplaySummary String?   // JSON summary of the last replay simulation
+  language          String    @default("auto") // admin UI language: auto | en | vi
+  adminLocale       String?   // last locale Shopify Admin passed to the app (used by "auto")
+  updatedAt         DateTime  @updatedAt
+}
+
+// Widget events for online measurement (Phase 5). Simulated rows come from the replay
+// simulator and are kept apart from live shopper data in the dashboard.
+model RecommendationEvent {
+  id         Int      @id @default(autoincrement())
+  shop       String
+  type       String   // impression | click | add_to_cart | purchase
+  visitorId  String
+  variant    String   @default("ai") // ai | control
+  placement  String?  // cart | product | home
+  productKey String?  // click / add_to_cart: the suggested product
+  reason     String?  // rule | same_category | recent_orders | best_seller | new_arrival
+  items      String?  // impression: JSON [[productKey, reason], ...]; purchase: JSON { added, clicked }
+  value      Float?   // purchase: order total
+  recValue   Float?   // purchase: revenue sold through the widget (added with it + clicked in it within 24 h)
+  orderId    String?
+  simulated  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([shop, simulated, createdAt])
+  @@index([shop, type, productKey])
+}

@@ -1,0 +1,18 @@
+flowchart TB
+  subgraph Sources["Public datasets"]
+    KAGL["Fashion Product Images<br/>(Kaggle, Marqo/KAGL)"]
+    TSTARS["Tstars-VTON<br/>(Taobao / Tmall)"]
+    UCI["UCI Online Retail CSV<br/>541,909 order lines"]
+  end
+
+  KAGL --> BuildK["build-fashion-catalog<br/>pick 233 products, titles,<br/>sizes, prices, descriptions"]
+  TSTARS --> BuildT["build-tstars-catalog<br/>pick 219 products,<br/>detect colour from image"]
+  BuildK --> Seed["seed-shopify-catalog<br/>upload images, productSet,<br/>publish, collections, menu"]
+  BuildT --> Seed
+  Seed --> Products["Shopify store<br/>452 products · 12 collections"]
+
+  UCI --> Demo["seed-demo-orders<br/>import CSV, match 452 CSV products<br/>to shop products (1-1)"]
+  Products --> Demo
+  Demo --> History[("OrderHistory<br/>20,728 CSV orders")]
+  History --> Push["push-demo-orders<br/>customers + orders, tag csv-demo,<br/>original dates, no emails"]
+  Push --> ShopOrders["Shopify store<br/>300 orders · 274 customers"]

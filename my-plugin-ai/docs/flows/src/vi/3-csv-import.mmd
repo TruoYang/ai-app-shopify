@@ -1,0 +1,13 @@
+flowchart TB
+  A["Chủ shop chọn file CSV<br/>(trang Data)"] --> B["Xem trước trên trình duyệt: 256 KB đầu<br/>nhận dấu phân cách, hiện 10 dòng"]
+  B --> C["Đoán vai trò cột theo tên cột<br/>(tiếng Anh, tiếng Việt, export Shopify)<br/>và định dạng ngày"]
+  C --> D{"Chủ shop kiểm tra vai trò<br/>đã có mã đơn + mã sản phẩm?"}
+  D -- "chưa" --> C
+  D -- "rồi, ghi đè hoặc cộng dồn" --> E["Server đọc toàn bộ file<br/>theo luồng (csv-parse)"]
+  E --> F["Gom dòng thành đơn hàng<br/>bỏ dòng trả hàng, số lượng 0"]
+  F --> G[("OrderHistory<br/>nguồn csv_import,<br/>customerId, lines, ngày")]
+  F --> H[("CsvProduct<br/>mã, tên, số đơn")]
+  H --> I["Trang khớp sản phẩm: sản phẩm CSV,<br/>bán nhiều nhất lên đầu"]
+  I --> J["Chủ shop chọn sản phẩm shop<br/>cho từng sản phẩm CSV (1-1)"]
+  J --> K[("CsvProduct.shopProductKey")]
+  K --> L["Khi huấn luyện, mã CSV<br/>được đổi sang sản phẩm shop"]

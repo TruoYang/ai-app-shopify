@@ -1,0 +1,6 @@
+# Production server (Docker): FP-Growth, Apriori, Item-kNN. No PyTorch, so DEC / Hybrid are not
+# available there and training falls back to the built-in JS Apriori for them.
+numpy>=2.1
+pandas>=2.2
+scikit-learn>=1.5
+mlxtend>=0.23

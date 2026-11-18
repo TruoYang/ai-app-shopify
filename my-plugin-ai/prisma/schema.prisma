@@ -59,6 +59,8 @@ model OrderHistory {
   orderDate     DateTime? // Original order date
   customerId    String?   // Customer ID from the CSV, or the Shopify customer GID
   lines         String?   // JSON array: [{ code, quantity, price }] (price per unit, as in the source)
+  csvOrderId    String?   // Shopify orders created from a CSV order: that CSV row's orderId ("csv_<id>"),
+                          // so training uses the Shopify copy and skips the CSV duplicate
   createdAt     DateTime  @default(now())
 
   @@unique([shop, orderId])
@@ -109,5 +111,33 @@ model ShopSettings {
   retrainSchedule   String    @default("none")     // none | weekly | monthly
   lastTrainedAt     DateTime?
   lastTrainSummary  String?   // JSON stats of the last training run
+  abEnabled         Boolean   @default(false) // A/B test: AI suggestions vs best sellers (control)
+  abControlShare    Int       @default(50)    // percent of visitors in the control group
+  abStartedAt       DateTime? // start of the current experiment; also salts the visitor split
+  lastReplaySummary String?   // JSON summary of the last replay simulation
+  language          String    @default("auto") // admin UI language: auto | en | vi
+  adminLocale       String?   // last locale Shopify Admin passed to the app (used by "auto")
   updatedAt         DateTime  @updatedAt
+}
+
+// Widget events for online measurement (Phase 5). Simulated rows come from the replay
+// simulator and are kept apart from live shopper data in the dashboard.
+model RecommendationEvent {
+  id         Int      @id @default(autoincrement())
+  shop       String
+  type       String   // impression | click | add_to_cart | purchase
+  visitorId  String
+  variant    String   @default("ai") // ai | control
+  placement  String?  // cart | product | home
+  productKey String?  // click / add_to_cart: the suggested product
+  reason     String?  // rule | same_category | recent_orders | best_seller | new_arrival
+  items      String?  // impression: JSON [[productKey, reason], ...]; purchase: JSON { added, clicked }
+  value      Float?   // purchase: order total
+  recValue   Float?   // purchase: revenue sold through the widget (added with it + clicked in it within 24 h)
+  orderId    String?
+  simulated  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([shop, simulated, createdAt])
+  @@index([shop, type, productKey])
 }

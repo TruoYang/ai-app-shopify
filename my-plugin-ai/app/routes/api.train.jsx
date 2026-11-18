@@ -1,5 +1,6 @@
 // API to train recommendation model from orders in database
 
+import process from "node:process";
 import { authenticate, unauthenticated } from "../shopify.server";
 import { runTraining } from "../training.server";
 

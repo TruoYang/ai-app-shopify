@@ -1,0 +1,24 @@
+sequenceDiagram
+  actor S as Shopper
+  participant W as Widget (theme)
+  participant P as Shopify App Proxy
+  participant A as App server
+  participant C as Catalog cache / Admin API
+  participant D as Rules (SQLite)
+
+  S->>W: open home, product or cart page
+  W->>W: show last result for this cart (sessionStorage)
+  W->>P: GET /apps/ai/recommend?skus=cart SKUs
+  P->>A: signed request with shop
+  A->>C: product keys, prices, images (cached 10 min)
+  A->>D: active rules (cached 30 s)
+  A->>A: combined rules first (A + B to C)
+  A->>A: per-item rules, quota by cart size (5 / 3 / 2 / 1)
+  A->>A: fill up: same category, recent orders, best sellers
+  A->>A: merchant priority (balanced, revenue, quantity)
+  A-->>P: JSON products
+  P-->>W: JSON products
+  W->>W: keep 1-2 earlier suggestions, render cards
+  S->>W: Add to cart / Add all
+  W->>W: POST /cart/add.js, CartLinesUpdateEvent
+  Note over W: cart drawer updates, widget refreshes

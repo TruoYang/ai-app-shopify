@@ -1,0 +1,11 @@
+flowchart LR
+  O[("20.728 đơn hàng<br/>UCI Online Retail")] --> S["Chia theo thời gian"]
+  S --> TR["80% đơn cũ nhất<br/>để huấn luyện"]
+  S --> TE["20% đơn mới nhất<br/>để kiểm thử"]
+  TR --> M["Huấn luyện 6 mô hình<br/>Popularity · Apriori<br/>FP-Growth · Item-kNN<br/>DEC · Hybrid"]
+  TE --> C["Lấy mẫu 1.000 giỏ hàng<br/>x 3 lần ngẫu nhiên"]
+  C --> H["Chia mỗi giỏ:<br/>một nửa = giỏ hiện tại (tối đa 5),<br/>còn lại = món bị ẩn"]
+  M --> R["Gợi ý top 10<br/>cho mỗi giỏ"]
+  H --> R
+  R --> E["So với món bị ẩn:<br/>HitRate · Precision · Recall<br/>NDCG · MRR · Độ phủ"]
+  E --> OUT["results.json / results.csv<br/>biểu đồ (trung bình ± độ lệch chuẩn)"]
