@@ -87,7 +87,7 @@ const VI = {
     "Gợi ý chỉ dùng được những sản phẩm CSV đã liên kết với một sản phẩm trong shop này.",
   "Match products in shop": "Khớp sản phẩm trong shop",
   Training: "Train",
-  "Last trained {date}": "Train lần cuối {date}",
+  "Last trained {date}": "Học luật lần cuối {date}",
   " with {strategy}, {count} rules": " bằng {strategy}, {count} luật",
   " (Python failed, the built-in Apriori was used)": " (Python lỗi, đã dùng Apriori có sẵn)",
   Algorithm: "Thuật toán",

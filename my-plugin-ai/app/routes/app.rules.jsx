@@ -85,7 +85,7 @@ const VI = {
   suggests: "gợi ý",
   active: "đang bật",
   disabled: "đã tắt",
-  "Your rule": "Luật do bạn tạo",
+  "Your rule": "Luật tạo thủ công",
   "{percent}% of orders with the cart also bought it · {support} orders": "{percent}% đơn có giỏ này cũng mua sản phẩm này · {support} đơn",
   Disable: "Tắt",
   Enable: "Bật",
