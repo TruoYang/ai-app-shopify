@@ -29,7 +29,7 @@ const VI = {
   "Saved, but the checkout discount was not updated: {error}": "Đã lưu, nhưng chưa cập nhật được giảm giá ở checkout: {error}",
   // Page and summary
   "Recommendation rules": "Luật gợi ý",
-  "{model} from the model · {merchant} yours · {disabled} disabled": "{model} luật từ mô hình · {merchant} luật do bạn tạo · {disabled} đã tắt",
+  "{model} from the model · {merchant} yours · {disabled} disabled": "{model} luật từ mô hình · {merchant} luật tạo thủ công · {disabled} đã tắt",
   "{count} rules match. Click a product to open it in the store.": "{count} luật phù hợp. Bấm vào sản phẩm để mở trong cửa hàng.",
   "No rules match. Train the model on the home page or add your own rule above.":
     "Không có luật nào phù hợp. Hãy huấn luyện mô hình ở trang chủ hoặc tự thêm luật ở trên.",
